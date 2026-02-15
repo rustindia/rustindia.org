@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap");
+@import "tailwindcss";
+@source "..";
+@source inline("bg-black/20 bg-black/25 bg-black/30 bg-black/35 bg-rust-500/20 border border-rust-200/25 border-rust-200/40 border-rust-300/50 border-white/10 border-white/15 border-white/20 cta-button cta-ghost cta-primary cta-secondary drop-shadow-2xl drop-shadow-xl flex flex-col flex-wrap focus:border-rust-300 focus:outline-none font-bold font-display font-semibold gap-2 gap-3 gap-4 gap-6 grain-overlay grid group h-28 h-56 hero-glass hidden hover:bg-rust-500/30 is-active items-center items-end justify-between justify-center justify-end leading-[1.05] leading-none leading-relaxed lg:grid-cols-[1fr_0.95fr] lg:grid-cols-3 max-w-2xl max-w-4xl max-w-full mb-5 mb-6 md:grid-cols-1 md:grid-cols-2 md:p-10 md:p-7 md:pb-20 md:pb-24 md:pt-12 md:px-5 md:text-2xl md:text-6xl md:text-lg mt-1 mt-2 mt-3 mt-4 mt-5 mt-6 mt-8 nav-shell object-contain p-4 p-6 pb-10 pb-14 pb-16 placeholder:text-rust-100/65 pt-1 pt-4 pt-8 pulse-card px-3 px-4 px-5 py-1 py-1.5 py-2 py-3 reveal-card rounded-[2rem] rounded-2xl rounded-3xl rounded-full section-shell shadow-2xl shadow-black/35 sm:flex-row sm:grid-cols-3 soft-divider sr-only sticky text-2xl text-3xl text-4xl text-base text-left text-rust-100 text-rust-100/80 text-rust-100/85 text-rust-100/90 text-rust-100/95 text-rust-200 text-rust-50 text-sm text-xl text-xs ticker top-0 tracking-[0.18em] tracking-[0.26em] tracking-[0.2em] tracking-tight tracking-wider tracking-widest uppercase w-auto w-full xl:grid-cols-[1.15fr_0.85fr] xl:text-7xl z-30");
+
+@theme {
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "DM Sans", "Segoe UI", sans-serif;
+
+  --color-rust-50: #fbf4ec;
+  --color-rust-100: #f0ddca;
+  --color-rust-200: #dfb894;
+  --color-rust-300: #c9956e;
+  --color-rust-400: #ad744f;
+  --color-rust-500: #8d5433;
+  --color-rust-700: #7a1f06;
+  --color-rust-900: #1f0d09;
+  --color-slag: #100f11;
+  --color-iron: #222125;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  line-height: 1.45;
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 14% -18%, rgb(170 118 84 / 0.16), transparent 46%),
+    radial-gradient(circle at 88% 5%, rgb(80 109 128 / 0.14), transparent 44%),
+    linear-gradient(162deg, #0a0c10 0%, #10151a 44%, #121417 100%);
+  color: var(--color-rust-50);
+}
+
+::selection {
+  background: rgb(201 149 110 / 0.32);
+}
+
+a,
+button,
+input {
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid rgb(255 162 105 / 0.95);
+  outline-offset: 2px;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: radial-gradient(rgb(255 255 255 / 0.4) 0.8px, transparent 0.8px);
+  background-size: 3px 3px;
+}
+
+.section-shell {
+  width: min(1180px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.nav-shell {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background:
+    linear-gradient(145deg, rgb(30 26 24 / 0.88), rgb(15 18 22 / 0.84)),
+    rgb(14 13 14 / 0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 35px rgb(0 0 0 / 0.24);
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.8rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-1px);
+}
+
+.cta-primary {
+  background: var(--color-rust-400);
+  color: #151515;
+  box-shadow: 0 10px 20px rgb(141 84 51 / 0.28);
+}
+
+.cta-primary:hover {
+  background: var(--color-rust-300);
+}
+
+.cta-secondary {
+  border: 1px solid rgb(255 255 255 / 0.3);
+  background: rgb(255 255 255 / 0.08);
+  color: var(--color-rust-50);
+}
+
+.cta-secondary:hover {
+  background: rgb(255 255 255 / 0.15);
+}
+
+.cta-ghost {
+  border: 1px solid rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.05);
+  color: var(--color-rust-100);
+}
+
+.cta-ghost:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.hero-glass {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.17);
+  background:
+    linear-gradient(160deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.025)),
+    linear-gradient(145deg, rgb(173 116 79 / 0.08), transparent 42%);
+  backdrop-filter: blur(8px);
+}
+
+.reveal-card {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+.reveal-card:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.reveal-card:nth-child(3) {
+  animation-delay: 1.3s;
+}
+
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker > span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker 15s linear infinite;
+}
+
+.soft-divider {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(to right, transparent 0%, rgb(255 255 255 / 0.2) 35%, transparent 100%);
+}
+
+.pulse-card {
+  border: 1px solid rgb(223 184 148 / 0.26);
+  background: rgb(141 84 51 / 0.09);
+}
+
+.pulse-card:hover {
+  border-color: rgb(223 184 148 / 0.4);
+  background: rgb(141 84 51 / 0.14);
+}
+
+.pulse-card.is-active {
+  border-color: rgb(223 184 148 / 0.48);
+  background: rgb(141 84 51 / 0.18);
+}
+
+.countdown-value {
+  font-size: clamp(2rem, 3.1vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-signal {
+  position: absolute;
+  top: 1.3rem;
+  right: 1.3rem;
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(12 14 16 / 0.35);
+}
+
+.hero-signal__core {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: radial-gradient(circle at 35% 35%, rgb(238 195 164 / 0.92), rgb(141 84 51 / 0.96));
+  transform: translate(var(--signal-x, 0px), var(--signal-y, 0px));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.hero-signal__core::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: inherit;
+  border: 1px solid rgb(223 184 148 / 0.22);
+  animation: signal-pulse 3.2s ease-in-out infinite;
+}
+
+.hero-signal__core:hover {
+  filter: brightness(1.08);
+}
+
+.hero-signal__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(240 221 202 / 0.82);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    width: calc(100% - 1.25rem);
+  }
+
+  .cta-button {
+    padding: 0.72rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .hero-signal {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-card,
+  .ticker > span {
+    animation: none;
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes signal-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.65;
+  }
+  60% {
+    transform: scale(1.16);
+    opacity: 0.08;
+  }
+}

@@ -1,0 +1,136 @@
+---
+import ferrisBadge from "../assets/ferris/ferris-badge.svg";
+import ferrisThink from "../assets/ferris/ferris-think.svg";
+
+const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
+const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThink.src;
+---
+
+<section class="section-shell pt-8 pb-14 md:pt-12 md:pb-24">
+  <div class="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
+    <article data-hero-panel class="hero-glass rounded-[2rem] p-6 shadow-2xl shadow-black/35 md:p-10">
+      <div class="hero-signal">
+        <button type="button" class="hero-signal__core" data-signal-toggle aria-label="Cycle conference signal"></button>
+        <p class="hero-signal__label" data-signal-label>CFP Open</p>
+      </div>
+
+      <div class="mb-5 flex flex-wrap items-center gap-2 text-sm">
+        <span class="rounded-full border border-rust-200/40 bg-rust-500/20 px-4 py-1.5 font-semibold text-rust-100">
+          Rust India Conference 2026
+        </span>
+        <span class="rounded-full border border-white/20 bg-black/25 px-4 py-1.5 text-rust-100">
+          Saturday, 18 April
+        </span>
+        <span class="rounded-full border border-white/20 bg-black/25 px-4 py-1.5 text-rust-100">
+          Bangalore
+        </span>
+      </div>
+
+      <p class="font-display text-xs uppercase tracking-[0.26em] text-rust-200">System Programming Meets Community</p>
+      <h1 class="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] text-rust-50 md:text-6xl xl:text-7xl">
+        Build fearless software with Rust India.
+      </h1>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-rust-100/90 md:text-lg">
+        Join maintainers, engineering teams, and curious builders for a full day of practical Rust talks, sharp
+        hallway conversations, and real production stories. CFP is open now and tickets are opening soon.
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#cfp" class="cta-button cta-primary">Submit CFP</a>
+        <a href="#mailing-list" class="cta-button cta-secondary">Get Ticket Updates</a>
+        <a href="#sponsors" class="cta-button cta-ghost border-rust-300/50 bg-rust-500/20 hover:bg-rust-500/30">
+          Sponsor Rust India
+        </a>
+      </div>
+
+      <div class="mt-8 grid gap-3 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/15 bg-black/30 px-4 py-3">
+          <p class="text-xs uppercase tracking-widest text-rust-200">Countdown</p>
+          <p data-countdown class="countdown-value mt-1 font-display font-semibold text-rust-50">Loading...</p>
+        </div>
+        <div class="rounded-2xl border border-white/15 bg-black/30 px-4 py-3">
+          <p class="text-xs uppercase tracking-widest text-rust-200">CFP Status</p>
+          <p class="mt-1 font-display text-2xl font-semibold text-rust-50">Open</p>
+        </div>
+        <div class="rounded-2xl border border-white/15 bg-black/30 px-4 py-3">
+          <p class="text-xs uppercase tracking-widest text-rust-200">Tickets</p>
+          <p class="mt-1 font-display text-2xl font-semibold text-rust-50">Opening Soon</p>
+        </div>
+      </div>
+    </article>
+
+    <aside class="grid gap-6">
+      <article class="hero-glass reveal-card rounded-[2rem] p-6">
+        <p class="text-xs uppercase tracking-[0.2em] text-rust-200">Ferris Signal</p>
+        <h2 class="mt-2 font-display text-3xl font-semibold text-rust-50">Community mode is active</h2>
+        <p class="mt-2 text-rust-100/85">
+          Meet Rustaceans from startups, product teams, infra groups, and open-source communities across India.
+        </p>
+        <div class="mt-5 flex justify-center rounded-2xl border border-white/10 bg-black/25 p-4">
+          <img src={ferrisBadgeSrc} alt="Ferris badge art" class="h-56 w-auto max-w-full object-contain drop-shadow-2xl" />
+        </div>
+      </article>
+
+      <article class="hero-glass reveal-card rounded-[2rem] p-6">
+        <p class="text-xs uppercase tracking-[0.2em] text-rust-200">Why This Event Works</p>
+        <ul class="mt-3 grid gap-2 text-rust-100">
+          <li>Production-grade talks with actionable takeaways</li>
+          <li>High-signal networking and contributor meetups</li>
+          <li>Focused on modern Rust tooling and DX</li>
+        </ul>
+        <div class="mt-4 flex items-end justify-end">
+          <img src={ferrisThinkSrc} alt="Ferris thinking art" class="h-28 w-auto max-w-full object-contain drop-shadow-xl" />
+        </div>
+      </article>
+    </aside>
+  </div>
+
+  <div class="ticker mt-6 rounded-2xl border border-rust-200/25 bg-black/35 py-2 font-display text-rust-100">
+    <span>CFP OPEN NOW | BANGALORE | SATURDAY APRIL 18, 2026 | TICKETS OPENING SOON | </span>
+  </div>
+</section>
+
+<script>
+  const targetDate = new Date("2026-04-18T09:00:00+05:30").getTime();
+  const countdownNode = document.querySelector("[data-countdown]");
+  const heroPanel = document.querySelector("[data-hero-panel]");
+  const signalButton = document.querySelector("[data-signal-toggle]");
+  const signalLabel = document.querySelector("[data-signal-label]");
+
+  if (countdownNode) {
+    const render = () => {
+      const now = Date.now();
+      const distance = Math.max(0, targetDate - now);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      countdownNode.textContent = `${days}d ${hours}h ${minutes}m`;
+    };
+
+    render();
+    setInterval(render, 60000);
+  }
+
+  if (heroPanel && signalButton && signalLabel) {
+    const states = ["CFP Open", "Tickets Soon", "Sponsor Slots"];
+    let current = 0;
+
+    signalButton.addEventListener("click", () => {
+      current = (current + 1) % states.length;
+      signalLabel.textContent = states[current];
+    });
+
+    heroPanel.addEventListener("pointermove", (event) => {
+      const bounds = heroPanel.getBoundingClientRect();
+      const nx = ((event.clientX - bounds.left) / bounds.width - 0.5) * 8;
+      const ny = ((event.clientY - bounds.top) / bounds.height - 0.5) * 8;
+      signalButton.style.setProperty("--signal-x", `${nx.toFixed(2)}px`);
+      signalButton.style.setProperty("--signal-y", `${ny.toFixed(2)}px`);
+    });
+
+    heroPanel.addEventListener("pointerleave", () => {
+      signalButton.style.setProperty("--signal-x", "0px");
+      signalButton.style.setProperty("--signal-y", "0px");
+    });
+  }
+</script>
