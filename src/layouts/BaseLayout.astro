@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ferrisBadge from "../assets/ferris/ferris-badge.svg";
 
 interface Props {
   title?: string;
@@ -10,6 +11,8 @@ const {
   title = "Rust India Community",
   description = "Rust India Conference in Bangalore - April 18, 2026."
 } = Astro.props;
+
+const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
 ---
 
 <!doctype html>
@@ -21,7 +24,69 @@ const {
     <title>{title}</title>
   </head>
   <body>
+    <div class="space-backdrop" aria-hidden="true">
+      <div class="space-grid"></div>
+      <div class="space-orb space-orb-a" data-parallax="12"></div>
+      <div class="space-orb space-orb-b" data-parallax="-16"></div>
+      <div class="space-orb space-orb-c" data-parallax="8"></div>
+    </div>
     <div class="grain-overlay" aria-hidden="true"></div>
     <slot />
+    <script is:inline define:vars={{ ferrisBadgeSrc }}>
+      const parallaxNodes = document.querySelectorAll("[data-parallax]");
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!prefersReducedMotion && parallaxNodes.length) {
+        window.addEventListener("pointermove", (event) => {
+          const nx = event.clientX / window.innerWidth - 0.5;
+          const ny = event.clientY / window.innerHeight - 0.5;
+
+          parallaxNodes.forEach((node) => {
+            const depth = Number(node.getAttribute("data-parallax")) || 0;
+            const tx = nx * depth;
+            const ty = ny * depth;
+            node.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
+          });
+        });
+      }
+
+      const finePointer = window.matchMedia("(pointer: fine)").matches;
+      if (finePointer) {
+        document.documentElement.classList.add("ferris-cursor-enabled");
+
+        const cursor = document.createElement("div");
+        cursor.className = "ferris-cursor";
+        cursor.innerHTML = `<img src="${ferrisBadgeSrc}" alt="" aria-hidden="true" />`;
+
+        const stampLayer = document.createElement("div");
+        stampLayer.className = "ferris-stamp-layer";
+        document.body.append(stampLayer, cursor);
+
+        window.addEventListener("pointermove", (event) => {
+          cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
+        });
+
+        window.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0) return;
+
+          const stamp = document.createElement("img");
+          stamp.className = "ferris-stamp";
+          stamp.src = ferrisBadgeSrc;
+          stamp.alt = "";
+          stamp.setAttribute("aria-hidden", "true");
+          stamp.style.left = `${event.clientX}px`;
+          stamp.style.top = `${event.clientY}px`;
+
+          const scale = 0.15 + Math.random() * 0.12;
+          const rotate = -18 + Math.random() * 36;
+          stamp.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(2)}) rotate(${rotate.toFixed(1)}deg)`;
+
+          stampLayer.appendChild(stamp);
+          if (stampLayer.childElementCount > 80) {
+            stampLayer.removeChild(stampLayer.firstElementChild);
+          }
+        });
+      }
+    </script>
   </body>
 </html>

@@ -8,12 +8,7 @@ const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThi
 
 <section class="section-shell pt-8 pb-14 md:pt-12 md:pb-24">
   <div class="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-    <article data-hero-panel class="hero-glass rounded-[2rem] p-6 shadow-2xl shadow-black/35 md:p-10">
-      <div class="hero-signal">
-        <button type="button" class="hero-signal__core" data-signal-toggle aria-label="Cycle conference signal"></button>
-        <p class="hero-signal__label" data-signal-label>CFP Open</p>
-      </div>
-
+    <article class="hero-glass rounded-[2rem] p-6 shadow-2xl shadow-black/35 md:p-10">
       <div class="mb-5 flex flex-wrap items-center gap-2 text-sm">
         <span class="rounded-full border border-rust-200/40 bg-rust-500/20 px-4 py-1.5 font-semibold text-rust-100">
           Rust India Conference 2026
@@ -93,9 +88,6 @@ const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThi
 <script>
   const targetDate = new Date("2026-04-18T09:00:00+05:30").getTime();
   const countdownNode = document.querySelector("[data-countdown]");
-  const heroPanel = document.querySelector("[data-hero-panel]");
-  const signalButton = document.querySelector("[data-signal-toggle]");
-  const signalLabel = document.querySelector("[data-signal-label]");
 
   if (countdownNode) {
     const render = () => {
@@ -109,28 +101,5 @@ const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThi
 
     render();
     setInterval(render, 60000);
-  }
-
-  if (heroPanel && signalButton && signalLabel) {
-    const states = ["CFP Open", "Tickets Soon", "Sponsor Slots"];
-    let current = 0;
-
-    signalButton.addEventListener("click", () => {
-      current = (current + 1) % states.length;
-      signalLabel.textContent = states[current];
-    });
-
-    heroPanel.addEventListener("pointermove", (event) => {
-      const bounds = heroPanel.getBoundingClientRect();
-      const nx = ((event.clientX - bounds.left) / bounds.width - 0.5) * 8;
-      const ny = ((event.clientY - bounds.top) / bounds.height - 0.5) * 8;
-      signalButton.style.setProperty("--signal-x", `${nx.toFixed(2)}px`);
-      signalButton.style.setProperty("--signal-y", `${ny.toFixed(2)}px`);
-    });
-
-    heroPanel.addEventListener("pointerleave", () => {
-      signalButton.style.setProperty("--signal-x", "0px");
-      signalButton.style.setProperty("--signal-y", "0px");
-    });
   }
 </script>
