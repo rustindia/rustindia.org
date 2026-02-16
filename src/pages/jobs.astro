@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const jobs = [
+  {
+    title: "Senior Rust Backend Engineer",
+    company: "Sample Infra Labs",
+    location: "Bangalore",
+    type: "Full-time",
+    focus: "Distributed Systems",
+    link: "https://example.com/jobs/rust-backend"
+  },
+  {
+    title: "Rust Developer Experience Engineer",
+    company: "Sample Tooling Co",
+    location: "Remote (India)",
+    type: "Full-time",
+    focus: "Developer Tooling",
+    link: "https://example.com/jobs/rust-devex"
+  },
+  {
+    title: "Systems Engineer (Rust)",
+    company: "Sample Payments Stack",
+    location: "Hyderabad",
+    type: "Full-time",
+    focus: "Reliability",
+    link: "https://example.com/jobs/rust-systems"
+  },
+  {
+    title: "Rust + WASM Engineer",
+    company: "Sample Product Studio",
+    location: "Pune",
+    type: "Contract",
+    focus: "WebAssembly",
+    link: "https://example.com/jobs/rust-wasm"
+  },
+  {
+    title: "Embedded Rust Engineer",
+    company: "Sample Robotics Works",
+    location: "Chennai",
+    type: "Full-time",
+    focus: "Embedded",
+    link: "https://example.com/jobs/rust-embedded"
+  }
+];
+---
+
+<BaseLayout title="Rust Jobs in India | Rust India" description="Rust jobs board for roles shared by Rust India community and sponsor teams.">
+  <SiteHeader />
+
+  <main class="pt-1">
+    <section class="section-shell pt-8 pb-14 md:pt-12 md:pb-24">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <article class="hero-glass rounded-[2rem] p-7 md:p-10 lg:col-span-8">
+          <p class="section-kicker">Rust India Jobs Board</p>
+          <h1 class="mt-4 max-w-4xl font-display text-4xl font-semibold leading-tight text-rust-50 md:text-6xl">
+            Rust hiring roles from community teams across India.
+          </h1>
+          <p class="mt-4 max-w-3xl text-lg text-rust-100/90">
+            This board features curated sample listings to show the format for conference and community hiring spots.
+            Replace these entries with live openings as teams submit roles.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="mailto:sponsors@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Listing"
+              class="cta-button cta-primary"
+            >
+              Post A Rust Role
+            </a>
+            <a href="/#sponsors" class="cta-button cta-secondary">Sponsor Hiring Spotlight</a>
+          </div>
+        </article>
+
+        <article class="hero-glass rounded-[2rem] p-7 md:p-8 lg:col-span-4">
+          <p class="section-kicker">Current Board Status</p>
+          <div class="mt-5 grid gap-3 text-rust-100/95">
+            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
+              <p class="text-xs uppercase tracking-wider text-rust-200">Listings</p>
+              <p class="mt-1 font-display text-2xl text-rust-50">5 Sample Roles</p>
+            </div>
+            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
+              <p class="text-xs uppercase tracking-wider text-rust-200">Coverage</p>
+              <p class="mt-1 font-display text-2xl text-rust-50">India + Remote</p>
+            </div>
+            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
+              <p class="text-xs uppercase tracking-wider text-rust-200">Update Model</p>
+              <p class="mt-1 font-display text-2xl text-rust-50">Curated Manually</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell pb-20 md:pb-32">
+      <div class="grid gap-3">
+        {jobs.map((job) => (
+          <article class="pulse-card rounded-2xl p-5">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p class="font-display text-2xl text-rust-50">{job.title}</p>
+                <p class="mt-1 text-rust-100/90">
+                  {job.company} | {job.location}
+                </p>
+              </div>
+              <a href={job.link} class="cta-button cta-secondary" target="_blank" rel="noreferrer">
+                View Role
+              </a>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2 text-sm text-rust-100/95">
+              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">{job.type}</span>
+              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">{job.focus}</span>
+              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Sample Listing</span>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <article class="hero-glass rounded-[2rem] p-7 md:p-8 mt-8">
+        <p class="section-kicker">For Hiring Teams</p>
+        <h2 class="mt-4 font-display text-3xl font-semibold text-rust-50">Share your Rust opening with the community</h2>
+        <p class="mt-3 text-rust-100/90">
+          Send role title, location, employment type, and application URL. We will publish curated roles that are
+          relevant for Rust engineers in India.
+        </p>
+        <a
+          href="mailto:sponsors@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Submission"
+          class="cta-button cta-primary mt-7"
+        >
+          Submit Job Information
+        </a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="section-shell pb-10 text-sm text-rust-100/80">
+    <hr class="soft-divider mb-6" />
+    <p>
+      Rust India Community | Bangalore | April 18, 2026 | Built with Astro 5 + Tailwind CSS | Website by Swarnim |
+      swarnimarun.com
+    </p>
+  </footer>
+</BaseLayout>
