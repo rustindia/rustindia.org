@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import ferrisBadge from "../assets/ferris/ferris-badge.svg";
 
 interface Props {
   title?: string;
@@ -9,10 +8,8 @@ interface Props {
 
 const {
   title = "Rust India Community",
-  description = "Rust India Conference in Bangalore - April 18, 2026."
+  description = "Rust India Conference in Bengaluru - April 18, 2026."
 } = Astro.props;
-
-const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
 ---
 
 <!doctype html>
@@ -28,67 +25,77 @@ const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBad
       <div class="space-grid"></div>
       <div class="metro-lines" data-parallax="6"></div>
       <div class="city-nodes" data-parallax="-5"></div>
+      <div class="ring-road" data-parallax="9"></div>
       <div class="urban-skyline" data-parallax="3"></div>
+      <div class="signal-haze" data-parallax="-7"></div>
       <div class="space-orb space-orb-a" data-parallax="12"></div>
       <div class="space-orb space-orb-b" data-parallax="-16"></div>
       <div class="space-orb space-orb-c" data-parallax="8"></div>
     </div>
     <div class="grain-overlay" aria-hidden="true"></div>
     <slot />
-    <script is:inline define:vars={{ ferrisBadgeSrc }}>
-      const parallaxNodes = document.querySelectorAll("[data-parallax]");
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    <script is:inline>
+      const parallaxNodes = Array.from(document.querySelectorAll("[data-parallax]"));
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-      if (!prefersReducedMotion && parallaxNodes.length) {
-        window.addEventListener("pointermove", (event) => {
-          const nx = event.clientX / window.innerWidth - 0.5;
-          const ny = event.clientY / window.innerHeight - 0.5;
+      if (!prefersReducedMotion.matches && parallaxNodes.length) {
+        const finePointer = window.matchMedia("(pointer: fine)").matches;
+        const controller = new AbortController();
+        const signal = controller.signal;
+        const state = {
+          targetX: 0,
+          targetY: 0,
+          currentX: 0,
+          currentY: 0,
+          scrollRatio: 0
+        };
+        let frameId = 0;
+
+        const updateScroll = () => {
+          const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+          state.scrollRatio = window.scrollY / maxScroll - 0.5;
+        };
+
+        if (finePointer) {
+          window.addEventListener(
+            "pointermove",
+            (event) => {
+              state.targetX = event.clientX / window.innerWidth - 0.5;
+              state.targetY = event.clientY / window.innerHeight - 0.5;
+            },
+            { passive: true, signal }
+          );
+        }
+
+        window.addEventListener("scroll", updateScroll, { passive: true, signal });
+        updateScroll();
+
+        const animate = (time) => {
+          state.currentX += (state.targetX - state.currentX) * 0.08;
+          state.currentY += (state.targetY - state.currentY) * 0.08;
 
           parallaxNodes.forEach((node) => {
             const depth = Number(node.getAttribute("data-parallax")) || 0;
-            const tx = nx * depth;
-            const ty = ny * depth;
+            const driftX = Math.sin(time * 0.00012 + depth) * depth * 0.08;
+            const driftY = Math.cos(time * 0.0001 + depth) * depth * 0.07;
+            const tx = state.currentX * depth * 1.8 + driftX;
+            const ty = state.currentY * depth * 1.5 + state.scrollRatio * depth * -2 + driftY;
             node.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
           });
-        });
-      }
 
-      const finePointer = window.matchMedia("(pointer: fine)").matches;
-      if (finePointer) {
-        document.documentElement.classList.add("ferris-cursor-enabled");
+          frameId = window.requestAnimationFrame(animate);
+        };
 
-        const cursor = document.createElement("div");
-        cursor.className = "ferris-cursor";
-        cursor.innerHTML = `<img src="${ferrisBadgeSrc}" alt="" aria-hidden="true" />`;
+        frameId = window.requestAnimationFrame(animate);
 
-        const stampLayer = document.createElement("div");
-        stampLayer.className = "ferris-stamp-layer";
-        document.body.append(stampLayer, cursor);
-
-        window.addEventListener("pointermove", (event) => {
-          cursor.style.transform = `translate(${event.clientX}px, ${event.clientY}px)`;
-        });
-
-        window.addEventListener("pointerdown", (event) => {
-          if (event.button !== 0) return;
-
-          const stamp = document.createElement("img");
-          stamp.className = "ferris-stamp";
-          stamp.src = ferrisBadgeSrc;
-          stamp.alt = "";
-          stamp.setAttribute("aria-hidden", "true");
-          stamp.style.left = `${event.clientX}px`;
-          stamp.style.top = `${event.clientY}px`;
-
-          const scale = 0.15 + Math.random() * 0.12;
-          const rotate = -18 + Math.random() * 36;
-          stamp.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(2)}) rotate(${rotate.toFixed(1)}deg)`;
-
-          stampLayer.appendChild(stamp);
-          if (stampLayer.childElementCount > 80) {
-            stampLayer.removeChild(stampLayer.firstElementChild);
-          }
-        });
+        window.addEventListener(
+          "pagehide",
+          () => {
+            window.cancelAnimationFrame(frameId);
+            controller.abort();
+          },
+          { once: true }
+        );
       }
     </script>
   </body>
