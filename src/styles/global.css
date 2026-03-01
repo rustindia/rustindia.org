@@ -226,10 +226,16 @@ input:focus-visible {
   border-radius: 999px;
   font-size: 0.94rem;
   font-weight: 600;
+  background: transparent;
+  color: var(--color-rust-50);
+  border: 1px solid rgb(197 214 232 / 0.2);
 }
 
 .cta-button:hover {
   transform: translateY(-1px);
+  background: var(--color-rust-400);
+  color: #111820;
+  box-shadow: 0 10px 18px rgb(232 155 75 / 0.3);
 }
 
 .sponsor-cta {
