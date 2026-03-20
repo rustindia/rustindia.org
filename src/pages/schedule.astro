@@ -1,0 +1,223 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+---
+
+<BaseLayout
+  title="Schedule | Rust India 2026"
+  description="Rust India 2026 schedule preview for the Bengaluru conference weekend on April 17 and April 18, 2026."
+>
+  <SiteHeader currentPath="/schedule" />
+
+  <main class="site-main">
+    <section class="page-hero section-shell">
+      <div class="page-hero__inner">
+        <div class="page-hero__copy">
+          <p class="section-label">Schedule</p>
+          <h1 class="page-hero__title">A conference flow built for real conversations.</h1>
+          <p class="page-hero__lede">
+            Rust India keeps the public schedule simple: a Friday evening community welcome and a focused single-track
+            Saturday in Bengaluru. Speaker names and exact slots will be announced soon.
+          </p>
+
+          <div class="page-hero__actions">
+            <a href="#mailing-updates" class="btn btn-primary">Get Schedule Updates</a>
+            <a href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/" class="btn btn-secondary" target="_blank" rel="noreferrer">Submit CFP</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="schedule-preview section-shell">
+      <div class="split-band__panel frame-panel">
+        <div class="schedule-shell__intro">
+          <p class="agenda-shell__eyebrow">Plan Your Weekend</p>
+          <h2 class="agenda-shell__title">Friday welcome, Saturday conference.</h2>
+          <p>
+            The tabs below outline the flow that the final speaker schedule will map onto. This keeps travel,
+            registration, sponsor time, and talks easy to follow.
+          </p>
+
+          <div class="schedule-shell__switches">
+            <button type="button" class="schedule-shell__switch is-active" data-page-schedule-switch="friday">
+              Friday Welcome
+              <span>April 17, 2026</span>
+            </button>
+            <button type="button" class="schedule-shell__switch" data-page-schedule-switch="saturday">
+              Saturday Conference
+              <span>April 18, 2026</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="agenda-list" data-page-schedule-panel="friday">
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>06:30 PM</strong>
+                <span>90 min</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Speaker and attendee welcome evening</h3>
+                <p>
+                  A low-pressure opener for people arriving in Bengaluru on Friday. Expect introductions, meetup-style
+                  conversations, and a chance to settle in before the main conference day.
+                </p>
+                <div class="agenda-slot__meta">Community-led evening near the venue.</div>
+              </div>
+            </article>
+
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>08:15 PM</strong>
+                <span>Flexible</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Dinner clusters and city check-ins</h3>
+                <p>
+                  Small groups break out for dinner, informal contributor conversations, and practical logistics for the
+                  next morning.
+                </p>
+                <div class="agenda-slot__meta">Optional, decentralized, and easy to join late.</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="agenda-list hidden" data-page-schedule-panel="saturday">
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>09:00 AM</strong>
+                <span>60 min</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Registration, breakfast, and sponsor floor</h3>
+                <p>Doors open, badges land, and the venue starts moving before the first talk begins.</p>
+                <div class="agenda-slot__meta">Check in, meet hiring teams, and grab coffee before the keynote.</div>
+              </div>
+            </article>
+
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>10:00 AM</strong>
+                <span>45 min</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Opening keynote</h3>
+                <p>
+                  The main stage starts with a talk that sets the tone for the day: practical Rust, systems depth, and
+                  stories from production teams.
+                </p>
+                <div class="agenda-slot__meta">Main stage programming.</div>
+              </div>
+            </article>
+
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>11:15 AM</strong>
+                <span>2 talks</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Systems, backend, and platform sessions</h3>
+                <p>
+                  Deeper talks on reliability, performance, tooling, and the tradeoffs that show up after shipping Rust
+                  to production.
+                </p>
+                <div class="agenda-slot__meta">Single-track talks with hallway space between sessions.</div>
+              </div>
+            </article>
+
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>02:00 PM</strong>
+                <span>After lunch</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Lightning talks and community updates</h3>
+                <p>
+                  A shorter block for sharp demos, contributor updates, and fast lessons that reward curiosity and keep
+                  the day moving.
+                </p>
+                <div class="agenda-slot__meta">Ideal for new speakers and focused technical stories.</div>
+              </div>
+            </article>
+
+            <article class="agenda-slot frame-panel">
+              <div class="agenda-slot__time">
+                <strong>04:30 PM</strong>
+                <span>Close</span>
+              </div>
+              <div class="agenda-slot__content">
+                <h3>Closing notes, sponsor conversations, and meetup spillover</h3>
+                <p>
+                  Wrap the official program, reconnect with people you met during the day, and continue the conversation
+                  in Bengaluru after the final session.
+                </p>
+                <div class="agenda-slot__meta">Conference close with space for follow-up conversations.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-section section-shell">
+      <div class="page-section__grid">
+        <article class="page-section__panel frame-panel">
+          <p class="section-label">Program Shape</p>
+          <h2 class="panel-heading">One track by design.</h2>
+          <p class="panel-copy">
+            The conference stays compact so attendees do not spend the day choosing between five parallel talks. The
+            schedule is built around shared context and better conversations between sessions.
+          </p>
+
+          <div class="process-list">
+            <div class="process-row">
+              <strong>Talks</strong>
+              <p>Long-form sessions from practitioners working in infra, developer tooling, backend systems, and open source.</p>
+            </div>
+            <div class="process-row">
+              <strong>Lightning talks</strong>
+              <p>Shorter talks with tighter focus for experiments, tooling tips, and lessons that do not need a full slot.</p>
+            </div>
+            <div class="process-row">
+              <strong>Hallway time</strong>
+              <p>Intentional gaps so the conference does not feel like a sprint between rooms.</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="mailing-updates" class="page-section__panel frame-panel">
+          <p class="section-label">Stay Updated</p>
+          <h2 class="panel-heading">Want the final lineup first?</h2>
+          <p class="panel-copy">
+            Join the mailing list and we will send the exact speaker schedule, venue information, and ticket release
+            details as soon as they are ready.
+          </p>
+
+          <div class="hero__actions">
+            <a href="/#mailing-list" class="btn btn-primary">Join Mailing List</a>
+            <a href="https://discord.gg/rustindia" class="btn btn-secondary" target="_blank" rel="noreferrer">Join Discord</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const pageScheduleSwitches = Array.from(document.querySelectorAll("[data-page-schedule-switch]"));
+    const pageSchedulePanels = Array.from(document.querySelectorAll("[data-page-schedule-panel]"));
+
+    if (pageScheduleSwitches.length && pageSchedulePanels.length) {
+      pageScheduleSwitches.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selected = button.getAttribute("data-page-schedule-switch");
+
+          pageScheduleSwitches.forEach((item) => item.classList.toggle("is-active", item === button));
+          pageSchedulePanels.forEach((panel) => {
+            panel.classList.toggle("hidden", panel.getAttribute("data-page-schedule-panel") !== selected);
+          });
+        });
+      });
+    }
+  </script>
+</BaseLayout>
