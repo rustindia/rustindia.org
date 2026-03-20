@@ -486,6 +486,12 @@ img {
   font-size: 1.08rem;
 }
 
+.home-alert__cta {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--color-ink);
+}
+
 .home-flow {
   padding-top: 3rem;
 }
