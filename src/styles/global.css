@@ -966,7 +966,7 @@ img {
 .schedule-side__title {
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-size: clamp(2.4rem, 5vw, 4rem);
   line-height: 0.92;
 }
 
@@ -1205,6 +1205,8 @@ img {
   .schedule-side {
     position: sticky;
     top: 7.4rem;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
   }
 
   .schedule-entry {
