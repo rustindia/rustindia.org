@@ -1222,9 +1222,7 @@ img {
 
   .schedule-side {
     position: sticky;
-    top: 7.4rem;
-    max-height: calc(100vh - 8rem);
-    overflow-y: auto;
+    top: 9rem;
   }
 
   .schedule-entry {
