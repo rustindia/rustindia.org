@@ -298,29 +298,9 @@ img {
 }
 
 .brand-mark {
-  position: relative;
   width: 2.4rem;
   height: 2.4rem;
-  border: 3px solid var(--color-line);
-  border-radius: 999px;
-  background: rgb(239 116 93 / 0.12);
-}
-
-.brand-mark::before,
-.brand-mark::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-}
-
-.brand-mark::before {
-  inset: 0.36rem;
-  border: 3px solid var(--color-accent);
-}
-
-.brand-mark::after {
-  inset: 0.8rem;
-  background: var(--color-accent);
+  object-fit: contain;
 }
 
 .brand-copy {

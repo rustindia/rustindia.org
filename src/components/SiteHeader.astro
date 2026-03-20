@@ -1,9 +1,12 @@
 ---
+import ferrisBadge from "../assets/ferris/ferris-badge.svg";
+
 interface Props {
   currentPath?: string;
 }
 
 const { currentPath = "/" } = Astro.props;
+const ferrisSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -16,7 +19,7 @@ const navItems = [
 <header class="site-header">
   <div class="section-shell site-header__bar">
     <a href="/" class="site-header__brand">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <img src={ferrisSrc} alt="Ferris" class="brand-mark" />
       <span class="brand-copy">
         <strong>Rust India 2026</strong>
         <span>Bengaluru | April 18</span>
