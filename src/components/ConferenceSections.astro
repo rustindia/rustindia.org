@@ -1,132 +1,37 @@
-<section class="announcement section-shell">
-  <div class="announcement__strip accent-panel">
-    <div class="announcement__symbol" aria-hidden="true">+</div>
-    <div class="announcement__copy">
-      <strong>CFPs are open now.</strong>
-      <p>Bring your best Rust migration, reliability, tooling, or performance story. Tickets and the full lineup land soon.</p>
+<section class="home-alert section-shell">
+  <div class="home-alert__strip accent-panel">
+    <div class="home-alert__mark" aria-hidden="true">+</div>
+    <div class="home-alert__copy">
+      <strong>CFPs are now closed.</strong>
+      <p>Thank you for 40+ submissions. The final speaker schedule will be announced soon.</p>
     </div>
   </div>
 </section>
 
-<section class="feature-band section-shell" aria-labelledby="home-highlights">
-  <div class="feature-band__panel frame-panel">
-    <div class="feature-band__grid">
-      <div class="feature-band__item">
-        <p class="feature-band__eyebrow" id="home-highlights">Program</p>
-        <h2 class="feature-band__title">Expert talks with production detail</h2>
-        <p>
-          Hear from shipping teams and open source maintainers working on reliability, performance, developer tooling,
-          and long-running systems in Rust.
-        </p>
-      </div>
+<section class="home-flow section-shell" aria-labelledby="home-focus">
+  <div class="home-flow__intro">
+    <p class="section-label" id="home-focus">What Rust India Includes</p>
+    <h2 class="section-title">One conference, three clear reasons to show up.</h2>
+    <p class="home-support__lead">
+      The site now keeps the home page simple: strong talks, sponsor jobs, and a community channel that starts before
+      the venue doors open.
+    </p>
+  </div>
 
-      <div class="feature-band__item">
-        <p class="feature-band__eyebrow">Hiring</p>
-        <h2 class="feature-band__title">A dedicated Rust jobs board</h2>
-        <p>
-          Sponsors can spotlight roles for Rust engineers in India, and attendees can explore hiring teams without
-          leaving the conference flow.
-        </p>
-      </div>
+  <div class="home-flow__items">
+    <article class="home-flow__item">
+      <h3>Expert Talks</h3>
+      <p>Production stories from teams working on systems, backend services, tooling, and reliability with Rust.</p>
+    </article>
 
-      <div class="feature-band__item">
-        <p class="feature-band__eyebrow">Community</p>
-        <h2 class="feature-band__title">Meet the people building with Rust</h2>
-        <p>
-          The format stays intentionally compact so the hallway track, sponsor conversations, and contributor meetups
-          feel like part of the main event.
-        </p>
-      </div>
-    </div>
+    <article class="home-flow__item">
+      <h3>Sponsor Jobs</h3>
+      <p>Hiring teams can publish serious Rust roles without turning the conference into a cluttered jobs marketplace.</p>
+    </article>
+
+    <article class="home-flow__item">
+      <h3>Community Hub</h3>
+      <p>Meet contributors, speakers, and attendees before April through the Rust India Discord and mailing list.</p>
+    </article>
   </div>
 </section>
-
-<section class="schedule-preview section-shell" aria-labelledby="home-schedule-preview">
-  <div class="split-band__panel frame-panel">
-    <div class="schedule-shell__intro">
-      <p class="split-band__eyebrow" id="home-schedule-preview">Schedule Preview</p>
-      <h2 class="split-band__title">Plan the Rust India weekend.</h2>
-      <p>
-        The final talk lineup is on the way. For now, the site shows the conference shape: a Friday community evening
-        and the main single-track Saturday program in Bengaluru.
-      </p>
-
-      <div class="schedule-shell__switches">
-        <button type="button" class="schedule-shell__switch is-active" data-schedule-switch="preview-friday">
-          Community Evening
-          <span>Friday, April 17</span>
-        </button>
-        <button type="button" class="schedule-shell__switch" data-schedule-switch="preview-saturday">
-          Conference Day
-          <span>Saturday, April 18</span>
-        </button>
-      </div>
-    </div>
-
-    <div>
-      <div class="agenda-list" data-schedule-panel="preview-friday">
-        <article class="agenda-slot frame-panel">
-          <div class="agenda-slot__time">
-            <strong>06:30 PM</strong>
-            <span>90 min</span>
-          </div>
-          <div class="agenda-slot__content">
-            <h3>Community check-in and welcome chai</h3>
-            <p>
-              A lightweight opener for speakers, attendees, contributors, and sponsor teams arriving in Bengaluru the
-              evening before the conference.
-            </p>
-            <div class="agenda-slot__meta">Hosted near the venue with meetup-style conversations and zero slides.</div>
-          </div>
-        </article>
-      </div>
-
-      <div class="agenda-list hidden" data-schedule-panel="preview-saturday">
-        <article class="agenda-slot frame-panel">
-          <div class="agenda-slot__time">
-            <strong>09:00 AM</strong>
-            <span>60 min</span>
-          </div>
-          <div class="agenda-slot__content">
-            <h3>Registration, coffee, and sponsor floor open</h3>
-            <p>Arrive early, collect your badge, meet other Rustaceans, and settle into the venue before the talks begin.</p>
-            <div class="agenda-slot__meta">Venue doors open in central Bengaluru.</div>
-          </div>
-        </article>
-
-        <article class="agenda-slot frame-panel">
-          <div class="agenda-slot__time">
-            <strong>10:00 AM</strong>
-            <span>45 min</span>
-          </div>
-          <div class="agenda-slot__content">
-            <h3>Opening keynote and systems track kickoff</h3>
-            <p>
-              The day begins with a keynote anchored in real-world Rust adoption, followed by production stories from
-              infra, platform, and backend teams.
-            </p>
-            <div class="agenda-slot__meta">Main stage programming through lunch, then lightning talks and community time.</div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  const previewSwitches = Array.from(document.querySelectorAll("[data-schedule-switch]"));
-  const previewPanels = Array.from(document.querySelectorAll("[data-schedule-panel]"));
-
-  if (previewSwitches.length && previewPanels.length) {
-    previewSwitches.forEach((button) => {
-      button.addEventListener("click", () => {
-        const selected = button.getAttribute("data-schedule-switch");
-
-        previewSwitches.forEach((item) => item.classList.toggle("is-active", item === button));
-        previewPanels.forEach((panel) => {
-          panel.classList.toggle("hidden", panel.getAttribute("data-schedule-panel") !== selected);
-        });
-      });
-    });
-  }
-</script>

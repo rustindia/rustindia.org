@@ -4,119 +4,121 @@ import SiteHeader from "../components/SiteHeader.astro";
 
 const jobs = [
   {
-    title: "Senior Rust Backend Engineer",
-    company: "FlowGrid Systems",
-    summary: "Own async services for ingestion, storage lifecycles, and low-latency APIs serving production traffic.",
-    details: "Bengaluru | Hybrid | Full-time | Senior",
+    badge: "AC",
+    badgeBg: "#ffc069",
+    badgeFg: "#4b2217",
+    title: "Senior Rustacean",
+    company: "Apollo Corp",
+    posted: "Posted 2d ago",
+    tags: ["Remote", "Senior", "Systems"],
+    summary: "Lead systems-facing Rust services for a sponsor team focused on infra, performance, and long-running workloads.",
   },
   {
-    title: "Rust Tooling Engineer",
-    company: "Compiler Lane",
-    summary: "Improve internal crates, CI performance, and developer workflows for teams moving more systems to Rust.",
-    details: "Remote within India | Full-time | Mid-Senior",
+    badge: "ND",
+    badgeBg: "#ea9b7d",
+    badgeFg: "#fff8ef",
+    title: "Rust Backend Engineer",
+    company: "Nexus Data",
+    posted: "Posted 4d ago",
+    tags: ["Remote", "Mid-Level", "Web"],
+    summary: "Build backend APIs, queue workers, and service tooling with Rust for data-heavy product teams.",
   },
   {
-    title: "Embedded Rust Engineer",
-    company: "Kiln Robotics",
-    summary: "Build firmware and telemetry pipelines in Rust for robotics control loops and device reliability.",
-    details: "Chennai | On-site | Full-time | Senior",
-  },
-  {
-    title: "Rust and WASM Product Engineer",
-    company: "Northline Studio",
-    summary: "Ship Rust-to-WASM modules for browser-side compute and performance-sensitive product features.",
-    details: "Pune | Hybrid | Contract | Mid",
+    badge: "VX",
+    badgeBg: "#3d221a",
+    badgeFg: "#fff8ef",
+    title: "Lead Embedded Dev",
+    company: "Vortex Hardware",
+    posted: "Posted 1w ago",
+    tags: ["On-site (India)", "Senior", "Embedded"],
+    summary: "Own embedded Rust delivery across hardware interfaces, telemetry pipelines, and firmware reliability work.",
   },
 ];
 ---
 
 <BaseLayout
   title="Jobs | Rust India 2026"
-  description="Rust India jobs board with sponsor and community hiring roles for Rust engineers in India."
+  description="Sponsor jobs and Rust hiring roles for engineers across India, highlighted through Rust India 2026."
 >
   <SiteHeader currentPath="/jobs" />
 
   <main class="site-main">
-    <section class="page-hero section-shell">
-      <div class="page-hero__inner">
-        <div class="page-hero__copy">
-          <p class="section-label">Jobs Board</p>
-          <h1 class="page-hero__title">Rust roles from teams hiring in India.</h1>
-          <p class="page-hero__lede">
-            The Rust India jobs page gives sponsor and community teams a clean way to reach engineers who already care
-            about Rust, systems work, and production depth.
-          </p>
+    <section class="jobs-header section-shell">
+      <p class="section-label">Jobs Board</p>
+      <h1 class="jobs-header__title">Sponsor Jobs</h1>
+      <p class="jobs-header__lede">Find your next role in the Rust ecosystem through the teams supporting Rust India 2026.</p>
+    </section>
 
-          <div class="page-hero__actions">
-            <a href="mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Listing" class="btn btn-primary">Post A Rust Role</a>
-            <a href="mailto:sponsor@rustindia.org" class="btn btn-secondary">Sponsor Hiring Visibility</a>
+    <section class="jobs-board section-shell">
+      <aside class="jobs-filter frame-panel">
+        <h2 class="jobs-filter__title">Filters</h2>
+        <p class="jobs-filter__intro">A simple view of the roles sponsors are currently pushing on the Rust India board.</p>
+
+        <div class="filter-group">
+          <h2>Location</h2>
+          <div class="filter-options">
+            <div class="filter-option">
+              <label><input checked type="checkbox" />Remote</label>
+              <span class="filter-count">12</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />On-site (India)</label>
+              <span class="filter-count">5</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Hybrid</label>
+              <span class="filter-count">3</span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="announcement section-shell">
-      <div class="announcement__strip accent-panel">
-        <div class="announcement__symbol" aria-hidden="true">+</div>
-        <div class="announcement__copy">
-          <strong>Hiring teams can sponsor this page.</strong>
-          <p>Use Rust India to spotlight important roles, share your engineering context, and meet attendees in person.</p>
+        <div class="filter-group">
+          <h2>Experience Level</h2>
+          <div class="filter-options">
+            <div class="filter-option">
+              <label><input checked type="checkbox" />Senior</label>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Mid-Level</label>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Junior</label>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="listing-band section-shell">
-      <div class="listing-band__panel frame-panel">
-        <p class="listing-band__eyebrow">Open Roles</p>
-        <h2 class="listing-band__title">Sample listings for the 2026 jobs board.</h2>
+        <div class="jobs-filter__actions">
+          <button type="button" class="btn btn-primary">Apply Filters</button>
+          <a href="mailto:sponsor@rustindia.org" class="btn btn-secondary">Sponsor The Jobs Board</a>
+        </div>
+      </aside>
 
-        <div class="listing-table">
-          {
-            jobs.map((job) => (
-              <article class="listing-row">
-                <div class="listing-row__meta">
-                  <span class="listing-row__label">{job.title}</span>
-                  <span>{job.company}</span>
-                  <span>{job.details}</span>
+      <div class="jobs-list">
+        {
+          jobs.map((job) => (
+            <article class="job-row frame-panel" style={`--badge-bg:${job.badgeBg}; --badge-fg:${job.badgeFg};`}>
+              <div class="job-row__lead">
+                <div class="job-row__badge">{job.badge}</div>
+
+                <div>
+                  <div class="job-row__headline">
+                    <h2 class="job-row__title">{job.title}</h2>
+                    <span class="job-row__company">{job.company}</span>
+                    <span class="job-row__posted">{job.posted}</span>
+                  </div>
+
+                  <div class="job-row__tags">
+                    {job.tags.map((tag) => <span class="tag">{tag}</span>)}
+                  </div>
+
+                  <p class="job-row__summary">{job.summary}</p>
                 </div>
-                <div class="listing-row__copy">
-                  <p>{job.summary}</p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
 
-    <section class="page-section section-shell">
-      <div class="page-section__grid">
-        <article class="page-section__panel frame-panel">
-          <p class="section-label">For Hiring Teams</p>
-          <h2 class="panel-heading">Send us the role details and application link.</h2>
-          <p class="panel-copy">
-            Include title, company, city, work mode, level, and the application URL. We keep the presentation clean so
-            the page remains useful to candidates.
-          </p>
-
-          <div class="hero__actions">
-            <a href="mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Submission" class="btn btn-primary">Submit Job Details</a>
-          </div>
-        </article>
-
-        <article class="page-section__panel frame-panel">
-          <p class="section-label">Sponsor Contact</p>
-          <h2 class="panel-heading">Need a bigger hiring push?</h2>
-          <p class="panel-copy">
-            Sponsor packages can include jobs board visibility, on-site mentions, and coordinated hiring presence during
-            the conference weekend.
-          </p>
-
-          <div class="hero__actions">
-            <a href="/sponsors" class="btn btn-secondary">See Sponsor Options</a>
-            <a href="mailto:sponsor@rustindia.org" class="btn btn-primary">Talk To Sponsors</a>
-          </div>
-        </article>
+                <a href="mailto:jobs@rustindia.org" class="btn btn-secondary job-row__action">Apply</a>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </section>
   </main>

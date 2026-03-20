@@ -1,38 +1,33 @@
 ---
-import ferrisThink from "../assets/ferris/ferris-think.svg";
+import ferrisBadge from "../assets/ferris/ferris-badge.svg";
 
-const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThink.src;
+const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
 ---
 
-<section class="hero section-shell">
-  <div class="hero__inner">
-    <div class="hero__copy">
-      <p class="section-label">Rust Conference India 2026</p>
-      <h1 class="hero__title">Rust India 2026</h1>
-      <p class="hero__lede">
-        Bringing together Rust engineers, compiler tinkerers, infra teams, and community builders in Bengaluru for one
-        focused Saturday of systems talks, hallway conversations, and practical Rust stories.
-      </p>
+<section class="home-hero section-shell">
+  <p class="section-label">Rust Conference India 2026</p>
+  <h1 class="home-hero__title">Rust India 2026</h1>
 
-      <div class="hero__actions">
-        <a href="/schedule" class="btn btn-primary">View Schedule</a>
-        <a href="#mailing-list" class="btn btn-secondary">Get Ticket Updates</a>
-        <a
-          href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/"
-          class="btn btn-secondary"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Submit CFP
-        </a>
-      </div>
+  <div class="home-hero__art frame-panel">
+    <img src={ferrisBadgeSrc} alt="Ferris badge for Rust India 2026" />
+    <p>Rust India illustration</p>
+  </div>
 
-      <p class="hero__meta">Saturday, April 18, 2026 | Bengaluru | Single-track talks, lightning talks, sponsor jobs, and community meetups</p>
-    </div>
+  <p class="home-hero__lede">
+    Bringing systems engineers, tooling teams, and Rust contributors to Bengaluru for a focused day of talks,
+    community, and hiring conversations around real Rust work.
+  </p>
 
-    <div class="hero__visual frame-panel">
-      <img src={ferrisThinkSrc} alt="Ferris thinking about Rust India 2026" />
-      <p class="hero__visual-caption">Rust India illustration</p>
-    </div>
+  <div class="home-hero__actions">
+    <a href="/schedule" class="btn btn-primary">View Schedule</a>
+    <a href="#mailing-list" class="btn btn-secondary">Get Updates</a>
+    <a
+      href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/"
+      class="btn btn-secondary"
+      target="_blank"
+      rel="noreferrer"
+    >
+      CFP Closed
+    </a>
   </div>
 </section>

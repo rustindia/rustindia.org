@@ -1,82 +1,62 @@
-<section class="page-section section-shell">
-  <div class="page-section__grid">
-    <article id="mailing-list" class="page-section__panel frame-panel">
-      <p class="section-label">Mailing List</p>
-      <h2 class="panel-heading">Get ticket drops and speaker updates first.</h2>
-      <p class="panel-copy">
-        The mailing list is intentionally quiet. You will only hear from us for tickets, speaker announcements, venue
-        details, and other important conference updates.
-      </p>
+<section class="home-support section-shell">
+  <article id="mailing-list" class="home-support__block">
+    <p class="section-label">Mailing List</p>
+    <h2 class="section-title">Get tickets, speakers, and venue updates first.</h2>
+    <p class="home-support__lead">
+      We only send important conference updates. That means tickets, speaker announcements, schedule drops, and venue
+      details. Nothing else.
+    </p>
 
-      <form
-        class="mailing-form"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSf9QQD3qbXNT7pnjCFeJGM6eRfleFxVGc1_-vJSBjRxmeRb-A/formResponse"
-        method="POST"
-        target="hidden_iframe"
-      >
-        <label class="visually-hidden" for="email">Email</label>
-        <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
-        <input
-          id="email"
-          type="email"
-          name="entry.2110698367"
-          required
-          placeholder="you@company.com"
-          autocomplete="email"
-        />
-        <button type="submit" data-signup-button class="btn btn-primary">Join The Mailing List</button>
-      </form>
+    <form
+      class="mailing-form"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSf9QQD3qbXNT7pnjCFeJGM6eRfleFxVGc1_-vJSBjRxmeRb-A/formResponse"
+      method="POST"
+      target="hidden_iframe"
+    >
+      <label class="visually-hidden" for="email">Email</label>
+      <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+      <input
+        id="email"
+        type="email"
+        name="entry.2110698367"
+        required
+        placeholder="you@company.com"
+        autocomplete="email"
+      />
+      <button type="submit" data-signup-button class="btn btn-primary">Join Mailing List</button>
+    </form>
 
-      <p class="mailing-note">Conference updates only. No spam, no weekly drip, no marketing detours.</p>
-      <p data-signup-msg aria-live="polite" class="mailing-note mailing-status hidden">
-        Submission sent. We will share only key conference updates.
-      </p>
+    <p class="mailing-note">Conference updates only.</p>
+    <p data-signup-msg aria-live="polite" class="mailing-note mailing-status hidden">
+      Submission sent. We will share only key conference updates.
+    </p>
 
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
-    </article>
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+  </article>
 
-    <article class="page-section__panel frame-panel">
-      <p class="section-label">Sponsors</p>
-      <h2 class="panel-heading">Put your team in front of Rust builders in India.</h2>
-      <p class="panel-copy">
-        Rust India sponsorship stays focused: stage presence, hiring visibility, meaningful on-site conversations, and
-        a jobs board that feels integrated instead of bolted on.
-      </p>
+  <article class="home-support__block">
+    <p class="section-label">Sponsors</p>
+    <h2 class="section-title">Want your team on the Rust India site and jobs board?</h2>
+    <p class="home-support__lead">
+      Sponsor packages focus on visibility that matters: a place on the sponsor page, hiring presence on the jobs
+      board, and real contact with Rust builders in India.
+    </p>
 
-      <div class="support-list">
-        <div class="support-row">
-          <strong>Hiring visibility</strong>
-          <p>Featured roles on the jobs page, sponsor mentions on-site, and direct access to engineers already invested in Rust.</p>
-        </div>
-        <div class="support-row">
-          <strong>Community presence</strong>
-          <p>Support the conference without drowning the experience in sponsor clutter or generic expo noise.</p>
-        </div>
-        <div class="support-row">
-          <strong>Fast coordination</strong>
-          <p>Reach out directly for the sponsor deck, hiring packages, and custom support around talks or community grants.</p>
-        </div>
-      </div>
-
-      <div class="hero__actions">
-        <a href="/sponsors" class="btn btn-secondary">See Sponsor Options</a>
-        <a href="mailto:sponsor@rustindia.org" class="btn btn-primary">Contact Sponsors</a>
-      </div>
-    </article>
-  </div>
+    <div class="home-hero__actions">
+      <a href="/sponsors" class="btn btn-secondary">See Sponsor Page</a>
+      <a href="mailto:sponsor@rustindia.org" class="btn btn-primary">Contact Sponsors</a>
+    </div>
+  </article>
 </section>
 
-<section class="community-band section-shell">
-  <div class="community-band__panel accent-panel">
-    <div class="community-band__content">
+<section class="section-shell">
+  <div class="home-community accent-panel">
+    <div class="home-community__content">
       <p class="section-label">Community Hub</p>
-      <h2 class="panel-heading">Join the Rust India Discord before the conference does.</h2>
-      <p class="panel-copy">
-        Introduce yourself, find other attendees, share CFP drafts, ask venue questions, and meet the people who will
-        be in the room in Bengaluru.
-      </p>
+      <h2 class="section-title">Join the Rust India Discord before conference week.</h2>
+      <p>Meet future attendees, follow schedule updates, and start conversations with the Rust India community now.</p>
 
-      <div class="community-band__actions">
+      <div class="home-community__actions">
         <a href="https://discord.gg/rustindia" class="btn btn-secondary" target="_blank" rel="noreferrer">Join Discord Community</a>
       </div>
     </div>
@@ -102,7 +82,7 @@
 
       isSubmitting = false;
       signupButton.disabled = false;
-      signupButton.textContent = "Join The Mailing List";
+      signupButton.textContent = "Join Mailing List";
       signupForm.reset();
       signupMessage.textContent = message;
       signupMessage.classList.remove("hidden");
