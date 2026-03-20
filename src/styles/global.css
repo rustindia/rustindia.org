@@ -215,6 +215,13 @@ img {
   border: 3px solid var(--color-line);
   border-radius: 2rem;
   box-shadow: 10px 10px 0 var(--color-shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.frame-panel:hover,
+.accent-panel:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 12px 12px 0 var(--color-shadow);
 }
 
 .frame-panel {
@@ -981,6 +988,7 @@ img {
   display: grid;
   gap: 0.9rem;
   margin-top: 2rem;
+  padding: 0.5rem;
 }
 
 .schedule-day-switch {
@@ -989,6 +997,7 @@ img {
   border: 3px solid var(--color-line);
   border-radius: 1.25rem;
   background: var(--color-panel);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   text-align: left;
   font: inherit;
   font-weight: 700;
@@ -1005,6 +1014,15 @@ img {
   background: var(--color-accent);
   color: #fff9f2;
   box-shadow: 6px 6px 0 rgb(75 34 23 / 0.18);
+}
+
+.schedule-day-switch:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgb(75 34 23 / 0.18);
+}
+
+.schedule-day-switch.is-active:hover {
+  box-shadow: 8px 8px 0 rgb(75 34 23 / 0.18);
 }
 
 .schedule-day-switch.is-active span {
