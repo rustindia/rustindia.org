@@ -630,6 +630,7 @@ img {
 
 .home-community .btn-secondary {
   background: var(--color-panel);
+  color: var(--color-ink);
 }
 
 .page-header {
