@@ -7,7 +7,18 @@ import pre6Logo from "../assets/pre6_logo.svg";
 
 const sponsorTiers = {
   platinum: [
-    { initials: "Invideo", name: "Invideo", tone: "#1f1f1f", text: "#f4f4f4", link: "https://invideo.io/", logo: "" },
+    {
+      initials: "Soon",
+      name: "Platinum sponsor reveal pending",
+      tone: "#efe5df",
+      text: "#4b2217",
+      link: "",
+      logo: "",
+      logoText: "Announcement Soon",
+      logoMeta: "Platinum partner",
+      wordmarkClass: "sponsor-wordmark--pending",
+    },
+    // { initials: "Invideo", name: "Invideo", tone: "#1f1f1f", text: "#f4f4f4", link: "https://invideo.io/", logo: "" },
   ],
   gold: [
     {
@@ -22,16 +33,32 @@ const sponsorTiers = {
     { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: e6dataLogo.src },
   ],
   silver: [
-    { initials: "Laserdata", name: "Laserdata", tone: "#d9d9d9", text: "#333333", link: "https://laserdata", logo: "" },
+    {
+      initials: "Laserdata",
+      name: "Laserdata",
+      tone: "#d9d9d9",
+      text: "#333333",
+      link: "https://laserdata.com",
+      logo: "",
+      logoText: "Laserdata",
+      wordmarkClass: "sponsor-wordmark--laserdata",
+    },
     { initials: "Pre6", name: "Pre6", tone: "#d9d9d9", text: "#333333", link: "https://pre6.ai", logo: pre6Logo.src },
-    { initials: "...", name: "todo..", tone: "#d9d9d9", text: "#333333", link: "#", logo: "" },
+    // { initials: "Juspay", name: "Juspay", tone: "#d9d9d9", text: "#333333", link: "https://juspay.io", logo: "" },
   ],
-};
-
-const tierLinkStyles = {
-  platinum: "flex: 0 1 min(28rem, 100%);",
-  gold: "flex: 0 1 min(24rem, calc(50% - 0.7rem));",
-  silver: "flex: 0 1 min(12rem, calc(33.333% - 0.95rem));",
+  livestream: [
+    {
+      initials: "Soon",
+      name: "Livestream partner reveal pending",
+      tone: "#efe5df",
+      text: "#4b2217",
+      link: "",
+      logo: "",
+      logoText: "Announcement Soon",
+      logoMeta: "Livestream partner",
+      wordmarkClass: "sponsor-wordmark--pending",
+    },
+  ],
 };
 ---
 
@@ -55,7 +82,7 @@ const tierLinkStyles = {
       <div class="sponsor-tier sponsor-tier--platinum">
         {
           sponsorTiers.platinum.map((sponsor) => (
-            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.platinum}>
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--platinum">
               {sponsor.logo ? (
                 <article class="sponsor-slot sponsor-slot--large sponsor-logo-card frame-panel" aria-label={sponsor.name}>
                   <div class="sponsor-logo-frame">
@@ -80,12 +107,12 @@ const tierLinkStyles = {
       </div>
 
       <div class="tier-heading">
-        <span>Oxide (Gold)</span>
+        <span>Cargo (Gold)</span>
       </div>
       <div class="sponsor-tier sponsor-tier--gold">
         {
           sponsorTiers.gold.map((sponsor) => (
-            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.gold}>
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--gold">
               {sponsor.logo ? (
                 <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
                   <div class="sponsor-logo-frame">
@@ -110,16 +137,23 @@ const tierLinkStyles = {
       </div>
 
       <div class="tier-heading">
-        <span>Cargo (Silver)</span>
+        <span>Oxide (Silver)</span>
       </div>
       <div class="sponsor-tier sponsor-tier--silver">
         {
           sponsorTiers.silver.map((sponsor) => (
-            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.silver}>
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--silver">
               {sponsor.logo ? (
                 <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
                   <div class="sponsor-logo-frame">
                     <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--silver", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : sponsor.logoText ? (
+                <article class="sponsor-slot sponsor-logo-card sponsor-logo-card--wordmark frame-panel" aria-label={sponsor.name}>
+                  <div class:list={["sponsor-wordmark", sponsor.wordmarkClass]}>
+                    <strong>{sponsor.logoText}</strong>
+                    {sponsor.logoMeta && <small>{sponsor.logoMeta}</small>}
                   </div>
                 </article>
               ) : (
@@ -139,6 +173,24 @@ const tierLinkStyles = {
         }
       </div>
 
+      <div class="tier-heading">
+        <span>Livestream Partner</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--livestream">
+        {
+          sponsorTiers.livestream.map((sponsor) => (
+            <div class="sponsor-tier__link sponsor-tier__link--livestream">
+              <article class="sponsor-slot sponsor-logo-card sponsor-logo-card--wordmark frame-panel" aria-label={sponsor.name}>
+                <div class:list={["sponsor-wordmark", sponsor.wordmarkClass]}>
+                  <strong>{sponsor.logoText}</strong>
+                  {sponsor.logoMeta && <small>{sponsor.logoMeta}</small>}
+                </div>
+              </article>
+            </div>
+          ))
+        }
+      </div>
+
       <div class="sponsor-prospectus frame-panel">
         <p class="section-label">Sponsor Rust India</p>
         <h2>Want to see your logo here?</h2>
@@ -154,7 +206,25 @@ const tierLinkStyles = {
 
 <style>
   .sponsor-tier__link {
-    display: flex;
+    display: block;
+    min-width: 0;
+    text-decoration: none;
+  }
+
+  .sponsor-tier__link--platinum {
+    flex: 0 1 min(28rem, 100%);
+  }
+
+  .sponsor-tier__link--gold {
+    flex: 0 1 min(24rem, calc(50% - 0.7rem));
+  }
+
+  .sponsor-tier__link--silver {
+    flex: 0 1 min(12rem, calc(33.333% - 0.95rem));
+  }
+
+  .sponsor-tier__link--livestream {
+    flex: 0 1 min(20rem, 100%);
   }
 
   .sponsor-logo {
@@ -191,6 +261,10 @@ const tierLinkStyles = {
     background: #ffffff;
   }
 
+  .sponsor-logo-card--wordmark {
+    padding: 1.3rem 1.1rem;
+  }
+
   .sponsor-logo-frame {
     display: flex;
     width: 100%;
@@ -199,7 +273,50 @@ const tierLinkStyles = {
     justify-content: center;
   }
 
+  .sponsor-wordmark {
+    display: grid;
+    place-items: center;
+    gap: 0.32rem;
+    width: 100%;
+    text-align: center;
+    color: #352018;
+  }
+
+  .sponsor-wordmark strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    line-height: 0.95;
+  }
+
+  .sponsor-wordmark small {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .sponsor-wordmark--laserdata strong {
+    font-size: clamp(1.15rem, 1.9vw, 1.7rem);
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .sponsor-wordmark--pending strong {
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+  }
+
   .sponsor-tier__link > .sponsor-slot {
     width: 100%;
+  }
+
+  @media (max-width: 759px) {
+    .sponsor-tier__link--platinum,
+    .sponsor-tier__link--gold,
+    .sponsor-tier__link--silver,
+    .sponsor-tier__link--livestream {
+      flex: 1 1 100%;
+    }
   }
 </style>
