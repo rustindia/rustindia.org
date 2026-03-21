@@ -11,9 +11,9 @@ const sponsorTiers = {
     { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: "" },
   ],
   silver: [
-    { initials: "LT", name: "Laserdata", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
-    { initials: "LT", name: "Juspay", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
-    { initials: "LT", name: "", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
+    { initials: "Laserdata", name: "Laserdata", tone: "#d9d9d9", text: "#333333", link: "https://laserdata", logo: "" },
+    { initials: "Pre6", name: "Pre6", tone: "#d9d9d9", text: "#333333", link: "https://pre6.ai", logo: "" },
+    { initials: "...", name: "todo..", tone: "#d9d9d9", text: "#333333", link: "#", logo: "" },
   ],
 };
 ---
@@ -38,6 +38,7 @@ const sponsorTiers = {
       <div class="sponsor-tier sponsor-tier--platinum">
         {
           sponsorTiers.platinum.map((sponsor) => (
+            <a href={sponsor.link}>
             <article
               class="sponsor-slot sponsor-slot--large frame-panel"
               style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
@@ -48,6 +49,7 @@ const sponsorTiers = {
                 <small>{sponsor.name}</small>
               </div>
             </article>
+            </a>
           ))
         }
       </div>
@@ -58,6 +60,7 @@ const sponsorTiers = {
       <div class="sponsor-tier sponsor-tier--gold">
         {
           sponsorTiers.gold.map((sponsor) => (
+            <a href={sponsor.link}>
             <article
               class="sponsor-slot frame-panel"
               style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
@@ -68,6 +71,7 @@ const sponsorTiers = {
                 <small>{sponsor.name}</small>
               </div>
             </article>
+            </a>
           ))
         }
       </div>
@@ -78,6 +82,7 @@ const sponsorTiers = {
       <div class="sponsor-tier sponsor-tier--silver">
         {
           sponsorTiers.silver.map((sponsor) => (
+            <a href={sponsor.link}>
             <article
               class="sponsor-slot frame-panel"
               style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
@@ -88,6 +93,7 @@ const sponsorTiers = {
                 <small>{sponsor.name}</small>
               </div>
             </article>
+            </a>
           ))
         }
       </div>
