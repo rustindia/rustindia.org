@@ -1,159 +1,38 @@
-<section class="section-shell pb-24 md:pb-32">
-  <div class="grid gap-8 lg:grid-cols-12">
-    <article id="cfp" class="hero-glass rounded-[2rem] p-7 md:p-10 lg:col-span-8">
-      <p class="section-kicker">CFP Is Open</p>
-      <h2 class="mt-4 max-w-3xl font-display text-4xl font-semibold leading-tight text-rust-50">
-        Bring your best Rust battle story to Bengaluru.
-      </h2>
-      <p class="mt-4 max-w-3xl text-lg text-rust-100/90">
-        Share practical learnings from migrations, performance tuning, reliability incidents, tooling workflows, and
-        production architecture. New speakers are welcome.
-      </p>
-      <div class="mt-8 flex flex-wrap items-center gap-3">
-        <a href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/" class="cta-button cta-primary" target="_blank" rel="noreferrer">Submit CFP</a>
-        <span class="rounded-full border border-white/20 bg-black/25 px-4 py-2 text-sm text-rust-100">Formats: 25 and 45 mins</span>
-      </div>
-    </article>
-
-    <article class="hero-glass rounded-[2rem] p-7 md:p-8 lg:col-span-4">
-      <p class="section-kicker">Conference Snapshot</p>
-      <h3 class="mt-4 font-display text-3xl font-semibold text-rust-50">One focused day</h3>
-      <div class="mt-5 grid gap-3 text-rust-100/95">
-        <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-          <p class="text-xs uppercase tracking-wider text-rust-200">Date</p>
-          <p class="mt-1 font-display text-2xl text-rust-50">18 Apr 2026</p>
-        </div>
-        <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-          <p class="text-xs uppercase tracking-wider text-rust-200">Day</p>
-          <p class="mt-1 font-display text-2xl text-rust-50">Saturday</p>
-        </div>
-        <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-          <p class="text-xs uppercase tracking-wider text-rust-200">Venue City</p>
-          <p class="mt-1 font-display text-2xl text-rust-50">Bengaluru</p>
-        </div>
-      </div>
-    </article>
-
-    <article id="mailing-list" class="hero-glass rounded-[2rem] p-7 md:p-8 lg:col-span-5">
-      <p class="section-kicker">Mailing List</p>
-      <h3 class="mt-4 font-display text-3xl font-semibold text-rust-50">Get the ticket drop first</h3>
-      <p class="mt-3 text-rust-100/90">We will send only key updates: tickets, agenda, speakers, and important logistics.</p>
-
-      <form
-        class="mt-7 flex flex-col gap-3"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSf9QQD3qbXNT7pnjCFeJGM6eRfleFxVGc1_-vJSBjRxmeRb-A/formResponse"
-        method="POST"
-        target="hidden_iframe"
-      >
-        <label class="sr-only" for="email">Email</label>
-
-        <!-- Honeypot anti-spam (invisible, no styling impact) -->
-        <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
-
-        <input
-          id="email"
-          type="email"
-          name="entry.2110698367"
-          required
-          placeholder="you@company.com"
-          autocomplete="email"
-          class="w-full rounded-full border border-white/20 bg-black/30 px-5 py-3 text-rust-50 placeholder:text-rust-100/65 focus:border-rust-300 focus:outline-none"
-        />
-
-        <button type="submit" data-signup-button class="cta-button cta-primary w-fit">Sign Up</button>
-      </form>
-
-      <p data-signup-msg aria-live="polite" class="mt-3 hidden text-sm text-rust-200">
-        Submission sent. We will share key updates only.
-      </p>
-
-      <!-- Hidden iframe prevents Google redirect -->
-      <iframe name="hidden_iframe" style="display:none;"></iframe>
-    </article>
-
-    <article id="sponsors" class="hero-glass rounded-[2rem] p-7 md:p-10 lg:col-span-7">
-      <div class="grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
-        <div>
-          <p class="section-kicker">Sponsors</p>
-          <h3 class="mt-4 font-display text-4xl font-semibold text-rust-50">Partner with Rust India</h3>
-          <p class="mt-3 text-rust-100/90">
-            Reach a concentrated audience of Rust developers and engineering leaders through curated sponsor slots.
-          </p>
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a href="mailto:sponsor@rustindia.org" class="cta-button cta-primary">Reach Out To Sponsor</a>
-            <a
-              href="mailto:sponsor@rustindia.org?subject=Rust%20India%202026%20Sponsorship%20Deck"
-              class="cta-button cta-secondary"
-              aria-label="Request the Rust India sponsorship deck by email"
-            >
-              View Sponsorship Deck
-            </a>
-            <a
-              href="mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Listing"
-              class="cta-button cta-ghost"
-              aria-label="Post a Rust role to the Rust India jobs board by email"
-            >
-              Post Hiring Role
-            </a>
-          </div>
-        </div>
-        <div class="grid content-start gap-2 text-sm text-rust-100/95">
-          <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Hiring spotlight</span>
-          <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Booth and demos</span>
-          <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Branded lounges</span>
-          <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Talk sponsorship</span>
-          <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Community grants</span>
-        </div>
-      </div>
-    </article>
+<section class="home-alert section-shell">
+  <div class="home-alert__strip accent-panel">
+    <div class="home-alert__mark" aria-hidden="true">+</div>
+    <div class="home-alert__copy">
+      <strong>CFPs are now closed.</strong>
+      <p>Thank you for 40+ submissions. The final speaker schedule will be announced soon.</p>
+    </div>
+    <a href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/" class="btn btn-secondary home-alert__cta">View CFPs</a>
   </div>
 </section>
 
-<script>
-  const signupSection = document.querySelector("#mailing-list");
-  const signupForm = signupSection?.querySelector("form");
-  const signupMessage = signupSection?.querySelector("[data-signup-msg]");
-  const signupButton = signupSection?.querySelector("[data-signup-button]");
-  const signupFrame = signupSection?.querySelector('iframe[name="hidden_iframe"]');
+<section class="home-flow section-shell" aria-labelledby="home-focus">
+  <div class="home-flow__intro">
+    <p class="section-label" id="home-focus">What Rust India Includes</p>
+    <h2 class="section-title">One conference, three clear reasons to show up.</h2>
+    <p class="home-support__lead">
+      The site now keeps the home page simple: strong talks, sponsor jobs, and a community channel that starts before
+      the venue doors open.
+    </p>
+  </div>
 
-  if (signupForm && signupMessage && signupButton && signupFrame) {
-    let isSubmitting = false;
-    let fallbackTimer = 0;
+  <div class="home-flow__items">
+    <article class="home-flow__item">
+      <h3>Expert Talks</h3>
+      <p>Production stories from teams working on systems, backend services, tooling, and reliability with Rust.</p>
+    </article>
 
-    const finalizeSubmission = (message) => {
-      if (fallbackTimer) {
-        window.clearTimeout(fallbackTimer);
-        fallbackTimer = 0;
-      }
+    <article class="home-flow__item">
+      <h3>Sponsor Jobs</h3>
+      <p>Hiring teams can publish serious Rust roles without turning the conference into a cluttered jobs marketplace.</p>
+    </article>
 
-      isSubmitting = false;
-      signupButton.disabled = false;
-      signupButton.textContent = "Sign Up";
-      signupForm.reset();
-      signupMessage.textContent = message;
-      signupMessage.classList.remove("hidden");
-    };
-
-    signupFrame.addEventListener("load", () => {
-      if (!isSubmitting) return;
-      finalizeSubmission("Submission received. Watch your inbox for conference updates.");
-    });
-
-    signupForm.addEventListener("submit", (event) => {
-      if (isSubmitting) {
-        event.preventDefault();
-        return;
-      }
-
-      isSubmitting = true;
-      signupButton.disabled = true;
-      signupButton.textContent = "Sending...";
-      signupMessage.classList.add("hidden");
-
-      fallbackTimer = window.setTimeout(() => {
-        if (!isSubmitting) return;
-        finalizeSubmission("Submission sent. If you do not receive updates, please try again.");
-      }, 4500);
-    });
-  }
-</script>
+    <article class="home-flow__item">
+      <h3>Community Hub</h3>
+      <p>Meet contributors, speakers, and attendees before April through the Rust India Discord and mailing list.</p>
+    </article>
+  </div>
+</section>

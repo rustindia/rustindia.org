@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import HeroCampaign from "../components/HeroCampaign.astro";
@@ -8,21 +8,13 @@ import CommunityPulse from "../components/CommunityPulse.astro";
 
 <BaseLayout
   title="Rust India Conference 2026 | Bengaluru"
-  description="Rust India Conference lands in Bengaluru on Saturday, April 18, 2026. CFP is open and tickets are opening soon."
+  description="Rust India Conference lands in Bengaluru on Saturday, April 18, 2026 with schedule previews, sponsorship, jobs, and mailing list updates."
 >
-  <SiteHeader />
+  <SiteHeader currentPath="/" />
 
-  <main class="pt-1">
+  <main class="site-main">
     <HeroCampaign />
     <ConferenceSections />
     <CommunityPulse />
   </main>
-
-  <footer class="section-shell pb-10 text-sm text-rust-100/80">
-    <hr class="soft-divider mb-6" />
-    <p>
-      Rust India Community | Bengaluru | April 18, 2026 | Built with Astro 5 + Tailwind CSS | Website by Swarnim |
-      swarnimarun.com
-    </p>
-  </footer>
 </BaseLayout>

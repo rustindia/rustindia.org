@@ -3,212 +3,103 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
 const jobs = [
-//   {
-//     title: "Senior Rust Backend Engineer",
-//     company: "Sample Infra Labs",
-//     city: "Bengaluru",
-//     workMode: "Hybrid (3 days on-site)",
-//     type: "Full-time",
-//     focus: "Distributed Systems",
-//     level: "Senior",
-// //     compensation: "INR 42-58 LPA",
-//     summary: "Own async Rust services for event ingestion, storage lifecycles, and low-latency APIs.",
-//     link: "https://example.com/jobs/rust-backend"
-//   },
-//   {
-//     title: "Rust Developer Experience Engineer",
-//     company: "Sample Tooling Co",
-//     city: "Remote (India)",
-//     workMode: "Remote",
-//     type: "Full-time",
-//     focus: "Developer Tooling",
-//     level: "Mid-Senior",
-// //     compensation: "INR 32-46 LPA",
-//     summary: "Improve Rust build workflows, CI performance, and internal crates used by platform teams.",
-//     link: "https://example.com/jobs/rust-devex"
-//   },
-//   {
-//     title: "Systems Engineer (Rust)",
-//     company: "Sample Payments Stack",
-//     city: "Hyderabad",
-//     workMode: "On-site",
-//     type: "Full-time",
-//     focus: "Reliability",
-//     level: "Senior",
-// //    compensation: "INR 36-52 LPA",
-//     summary: "Build fault-tolerant Rust services for ledger integrity, retries, and observability pipelines.",
-//     link: "https://example.com/jobs/rust-systems"
-//   },
-//   {
-//     title: "Rust + WASM Engineer",
-//     company: "Sample Product Studio",
-//     city: "Pune",
-//     workMode: "Hybrid",
-//     type: "Contract",
-//     focus: "WebAssembly",
-//     level: "Mid",
-// //    compensation: "Contract (6 months)",
-//     summary: "Ship Rust-to-WASM modules for browser-side compute and performance-sensitive workflows.",
-//     link: "https://example.com/jobs/rust-wasm"
-//   },
-//   {
-//     title: "Embedded Rust Engineer",
-//     company: "Sample Robotics Works",
-//     city: "Chennai",
-//     workMode: "On-site",
-//     type: "Full-time",
-//     focus: "Embedded",
-//     level: "Senior",
-// //    compensation: "INR 30-44 LPA",
-//     summary: "Develop firmware in Rust for device control loops, telemetry, and safety-critical subsystems.",
-//     link: "https://example.com/jobs/rust-embedded"
-//   }
-];
-
-const sponsoredJobs = [
-// {
-//   title: "Principal Rust Platform Engineer (Sponsored)",
-//   company: "Placeholder Cloud Systems",
-//   city: "Bengaluru",
-//   workMode: "Hybrid (2 days on-site)",
-//   type: "Full-time",
-//   focus: "Runtime Performance",
-//   level: "Principal",
-// //  compensation: "INR 70-95 LPA + ESOPs",
-//   summary: "Lead a Rust platform rewrite for high-throughput data services, memory profiling, and SLO ownership.",
-//   link: "https://example.com/jobs/sponsored-rust-platform"
-// }
+  {
+    badge: "AC",
+    badgeBg: "#ffc069",
+    badgeFg: "#4b2217",
+    title: "# Ping us to submit Job",
+    company: "Rust India",
+    posted: "Posted 2d ago",
+    tags: ["Ferris"],
+    summary: "mailto: team@rustindia.org to let us know if you want to post a new role or make any updates",
+  }
 ];
 ---
 
-<BaseLayout title="Rust Jobs in India | Rust India" description="Rust jobs board for roles shared by Rust India community and sponsor teams.">
-  <SiteHeader />
+<BaseLayout
+  title="Jobs | Rust India 2026"
+  description="Sponsor jobs and Rust hiring roles for engineers across India, highlighted through Rust India 2026."
+>
+  <SiteHeader currentPath="/jobs" />
 
-  <main class="pt-1">
-    <section class="section-shell pt-8 pb-14 md:pt-12 md:pb-24">
-      <div class="grid gap-8 lg:grid-cols-12">
-        <article class="hero-glass rounded-[2rem] p-7 md:p-10 lg:col-span-8">
-          <p class="section-kicker">Rust India Jobs Board</p>
-          <h1 class="mt-4 max-w-4xl font-display text-4xl font-semibold leading-tight text-rust-50 md:text-6xl">
-            Rust hiring roles from community teams across India.
-          </h1>
-          <p class="mt-4 max-w-3xl text-lg text-rust-100/90">
-            This board features curated sample listings, including a sponsored spotlight, to show how hiring teams can
-            showcase Rust roles to the community.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              href="mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Listing"
-              class="cta-button cta-primary"
-            >
-              Post A Rust Role
-            </a>
-            <a href="mailto:sponsor@rustindia.org" class="cta-button cta-secondary">Sponsor Hiring Spotlight</a>
-          </div>
-        </article>
-
-        <article class="hero-glass rounded-[2rem] p-7 md:p-8 lg:col-span-4">
-          <p class="section-kicker">Current Board Status</p>
-          <div class="mt-5 grid gap-3 text-rust-100/95">
-            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-              <p class="text-xs uppercase tracking-wider text-rust-200">Listings</p>
-              <p class="mt-1 font-display text-2xl text-rust-50">{sponsoredJobs.length} Sponsored + {jobs.length} Community</p>
-            </div>
-            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-              <p class="text-xs uppercase tracking-wider text-rust-200">Coverage</p>
-              <p class="mt-1 font-display text-2xl text-rust-50">City + Work Mode</p>
-            </div>
-            <div class="rounded-2xl border border-white/15 bg-black/20 p-4">
-              <p class="text-xs uppercase tracking-wider text-rust-200">Update Model</p>
-              <p class="mt-1 font-display text-2xl text-rust-50">Sponsored + Curated</p>
-            </div>
-          </div>
-        </article>
-      </div>
+  <main class="site-main">
+    <section class="jobs-header section-shell">
+      <p class="section-label">Jobs Board</p>
+      <h1 class="jobs-header__title">Posted Jobs</h1>
+      <p class="jobs-header__lede">Find your next role in the Rust ecosystem through the teams supporting Rust India 2026.</p>
     </section>
 
-    <section class="section-shell pb-20 md:pb-32">
-        {sponsoredJobs.map((sponsoredJob) => (
-      <article class="hero-glass rounded-[2rem] border border-rust-300/50 bg-rust-500/20 p-6 shadow-2xl shadow-black/35 mb-6">
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <p class="text-xs uppercase tracking-widest text-rust-200">Sponsored Spotlight</p>
-              <p class="mt-1 font-display text-3xl text-rust-50">{sponsoredJob.title}</p>
-              <p class="mt-1 text-rust-100/90">{sponsoredJob.company}</p>
-            </div>
-            <a href={sponsoredJob.link} class="cta-button cta-primary" target="_blank" rel="noreferrer">
-              View Sponsored Role
-            </a>
-          </div>
-          <p class="mt-4 text-rust-100/90">{sponsoredJob.summary}</p>
-          <div class="mt-4 flex flex-wrap gap-2 text-sm text-rust-100/95">
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">City: {sponsoredJob.city}</span>
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Mode: {sponsoredJob.workMode}</span>
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Type: {sponsoredJob.type}</span>
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Focus: {sponsoredJob.focus}</span>
-            {
-              sponsoredJob.compensation ? 
-                <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">{sponsoredJob.compensation}</span>
-                : <></>
-            }
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Level: {sponsoredJob.level}</span>
-            <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Sample Listing</span>
-          </div>
-      </article>
-        ))}
+    <section class="jobs-board section-shell">
+      <aside class="jobs-filter frame-panel">
+        <h2 class="jobs-filter__title">Filters</h2>
+        <p class="jobs-filter__intro">A simple view of the roles sponsors are currently pushing on the Rust India board.</p>
 
-      <div class="grid gap-3">
-        {jobs.map((job) => (
-          <article class="pulse-card rounded-2xl p-5">
-            <div class="flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p class="font-display text-2xl text-rust-50">{job.title}</p>
-                <p class="mt-1 text-rust-100/90">{job.company}</p>
+        <div class="filter-group">
+          <h2>Location</h2>
+          <div class="filter-options">
+            <div class="filter-option">
+              <label><input checked type="checkbox" />Remote</label>
+              <span class="filter-count">1</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />On-site (India)</label>
+              <span class="filter-count">0</span>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Hybrid</label>
+              <span class="filter-count">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h2>Experience Level</h2>
+          <div class="filter-options">
+            <div class="filter-option">
+              <label><input checked type="checkbox" />Senior</label>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Mid-Level</label>
+            </div>
+            <div class="filter-option">
+              <label><input type="checkbox" />Junior</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="jobs-filter__actions">
+          <button type="button" class="btn btn-primary">Apply Filters</button>
+          <a href="mailto:team@rustindia.org" class="btn btn-secondary">Post to the Jobs Board</a>
+        </div>
+      </aside>
+
+      <div class="jobs-list">
+        {
+          jobs.map((job) => (
+            <article class="job-row frame-panel" style={`--badge-bg:${job.badgeBg}; --badge-fg:${job.badgeFg};`}>
+              <div class="job-row__lead">
+                <div class="job-row__badge">{job.badge}</div>
+
+                <div>
+                  <div class="job-row__headline">
+                    <h2 class="job-row__title">{job.title}</h2>
+                    <span class="job-row__company">{job.company}</span>
+                    <span class="job-row__posted">{job.posted}</span>
+                  </div>
+
+                  <div class="job-row__tags">
+                    {job.tags.map((tag) => <span class="tag">{tag}</span>)}
+                  </div>
+
+                  <p class="job-row__summary">{job.summary}</p>
+                </div>
+
+                <a href="mailto:jobs@rustindia.org" class="btn btn-secondary job-row__action">Apply</a>
               </div>
-              <a href={job.link} class="cta-button cta-secondary" target="_blank" rel="noreferrer">
-                View Role
-              </a>
-            </div>
-            <p class="mt-3 text-rust-100/90">{job.summary}</p>
-            <div class="mt-3 flex flex-wrap gap-2 text-sm text-rust-100/95">
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">City: {job.city}</span>
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Mode: {job.workMode}</span>
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Type: {job.type}</span>
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Focus: {job.focus}</span>
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Level: {job.level}</span>
-              {
-                job.compensation ? 
-                  <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">{job.compensation}</span>
-                  : <></>
-              }
-              <span class="rounded-full border border-white/20 bg-black/25 px-3 py-1">Sample Listing</span>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
-
-      <article class="hero-glass rounded-[2rem] p-7 md:p-8 mt-8">
-        <p class="section-kicker">For Hiring Teams</p>
-        <h2 class="mt-4 font-display text-3xl font-semibold text-rust-50">Share your Rust opening with the community</h2>
-        <p class="mt-3 text-rust-100/90">
-          Send role title, city, work mode (on-site, hybrid, remote), level, and application URL. We publish curated
-          roles plus sponsored spotlight placements for Rust engineers in India.
-        </p>
-        <a
-          href="mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Submission"
-          class="cta-button cta-primary mt-7"
-        >
-          Submit Job Information
-        </a>
-      </article>
     </section>
   </main>
-
-  <footer class="section-shell pb-10 text-sm text-rust-100/80">
-    <hr class="soft-divider mb-6" />
-    <p>
-      Rust India Community | Bengaluru | April 18, 2026 | Built with Astro 5 + Tailwind CSS | Website by Swarnim |
-      swarnimarun.com
-    </p>
-  </footer>
 </BaseLayout>

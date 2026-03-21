@@ -1,150 +1,25 @@
 ---
-import ferrisBadge from "../assets/ferris/ferris-badge.svg";
-import ferrisThink from "../assets/ferris/ferris-think.svg";
+import ferrisBadge from "../assets/mascot.png";
 
 const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
-const ferrisThinkSrc = typeof ferrisThink === "string" ? ferrisThink : ferrisThink.src;
 ---
 
-<section class="section-shell pt-8 pb-14 md:pt-12 md:pb-24">
-  <div class="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
-    <article class="hero-glass rounded-[2rem] p-6 shadow-2xl shadow-black/35 md:p-10">
-      <div class="mb-5 flex flex-wrap items-center gap-2 text-sm">
-        <span class="rounded-full border border-rust-200/40 bg-rust-500/20 px-4 py-1.5 font-semibold text-rust-100">
-          Rust India Conference 2026
-        </span>
-        <span class="rounded-full border border-white/20 bg-black/25 px-4 py-1.5 text-rust-100">
-          Saturday, 18 April
-        </span>
-        <span class="rounded-full border border-white/20 bg-black/25 px-4 py-1.5 text-rust-100">
-          Bengaluru
-        </span>
-      </div>
+<section class="home-hero section-shell">
+  <p class="section-label">Rust India Conference 2026</p>
+  <h1 class="home-hero__title">Rust India Conference 2026</h1>
 
-      <p class="font-display text-xs uppercase tracking-[0.26em] text-rust-200">Rust Systems Meet Community</p>
-      <h1 class="mt-4 max-w-4xl font-display text-4xl font-bold leading-[1.05] text-rust-50 md:text-6xl xl:text-7xl">
-        Build fearless software with Rust India.
-      </h1>
-      <p class="mt-5 max-w-2xl text-base leading-relaxed text-rust-100/90 md:text-lg">
-        Join maintainers, compiler tinkerers, infra teams, and curious builders for a full day of practical Rust talks,
-        sharp hallway conversations, and real production stories from shipping teams. CFP is open now and tickets are
-        opening soon.
-      </p>
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="https://hasgeek.com/rustbangalore/cfp-rust-india-conference-2026/" class="cta-button cta-primary">Submit CFP</a>
-        <a href="/jobs" class="cta-button cta-secondary">Explore Rust Jobs</a>
-        <a href="/#mailing-list" class="cta-button cta-ghost">Get Ticket Updates</a>
-        <a href="mailto:sponsor@rustindia.org" class="cta-button cta-ghost border-rust-300/50 bg-rust-500/20 hover:bg-rust-500/30">
-          Sponsor Rust India
-        </a>
-      </div>
-
-      <div class="mt-8 grid gap-3 sm:grid-cols-3">
-        <div class="countdown-card rounded-2xl border border-white/15 bg-black/30 p-5">
-          <p class="text-xs uppercase tracking-widest text-rust-200">Countdown To Kickoff</p>
-          <p data-countdown class="countdown-value mt-2 font-display font-semibold text-rust-50">Loading...</p>
-          <p class="mt-2 text-sm text-rust-100/80">Days Hours Minutes Seconds</p>
-        </div>
-        <div class="rounded-2xl border border-white/15 bg-black/30 px-4 py-3">
-          <p class="text-xs uppercase tracking-widest text-rust-200">CFP Status</p>
-          <p class="mt-1 font-display text-2xl font-semibold text-rust-50">Open</p>
-        </div>
-        <div class="rounded-2xl border border-white/15 bg-black/30 px-4 py-3">
-          <p class="text-xs uppercase tracking-widest text-rust-200">Tickets</p>
-          <p class="mt-1 font-display text-2xl font-semibold text-rust-50">Opening Soon</p>
-        </div>
-      </div>
-    </article>
-
-    <aside class="grid gap-6">
-      <article class="hero-glass reveal-card rounded-[2rem] p-6">
-        <p class="text-xs uppercase tracking-[0.2em] text-rust-200">Ferris Signal</p>
-        <h2 class="mt-2 font-display text-3xl font-semibold text-rust-50">More Rust, less undefined behavior</h2>
-        <p class="mt-2 text-rust-100/85">
-          Rustaceans from product, infra, and open source communities converge to trade hard-earned lessons on
-          ownership, reliability, and performance tuning.
-        </p>
-        <div class="mt-5 rounded-2xl border border-white/10 bg-black/25 pt-8">
-          <div class="flex flex-wrap items-end justify-center gap-3">
-            <img
-              src={ferrisThinkSrc}
-              alt="Ferris thinking about Rust systems design"
-              class="h-56 w-auto max-w-full object-contain"
-            />
-          </div>
-        </div>
-        <div class="mt-3 grid gap-3">
-          <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="font-display text-xl text-rust-50">Borrow checker battle stories</p>
-            <p class="text-rust-100/85">What failed, what got refactored, and what finally made it to production.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="hero-glass reveal-card rounded-[2rem] p-6">
-        <p class="text-xs uppercase tracking-[0.2em] text-rust-200">Conference Focus</p>
-        <ul class="mt-3 grid gap-3 text-rust-100/95">
-          <li class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="font-display text-xl text-rust-50">Single-track Rust depth</p>
-            <p class="text-rust-100/85">One track with 5 full talks and 8 lightning talks focused on real systems work.</p>
-          </li>
-          <li class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="font-display text-xl text-rust-50">Hands-on outcomes</p>
-            <p class="text-rust-100/85">Sessions prioritize profiling wins, reliability fixes, and shipping lessons.</p>
-          </li>
-          <li class="rounded-2xl border border-white/10 bg-black/20 p-4">
-            <p class="font-display text-xl text-rust-50">Career momentum</p>
-            <p class="text-rust-100/85">Meet hiring teams and contributors through the on-site Rust jobs board.</p>
-          </li>
-        </ul>
-      </article>
-    </aside>
+  <div class="home-hero__art frame-panel">
+    <img src={ferrisBadgeSrc} alt="Ferris badge for Rust India 2026" />
+    <!-- <p>Rust India illustration</p> -->
   </div>
 
-  <div class="ticker mt-6 rounded-2xl border border-rust-200/25 bg-black/35 py-2 font-display text-rust-100">
-    <span>CFP OPEN NOW | BENGALURU | SATURDAY APRIL 18, 2026 | RUSTACEANS WELCOME | </span>
+  <p class="home-hero__lede">
+    Bringing systems engineers, tooling teams, and Rust contributors to Bengaluru for a focused day of talks,
+    community, and hiring conversations around real Rust work.
+  </p>
+
+  <div class="home-hero__actions">
+    <a href="/schedule" class="btn btn-primary">View Schedule</a>
+    <a href="#mailing-list" class="btn btn-secondary">Get Updates</a>
   </div>
 </section>
-
-<script>
-  const targetDate = new Date("2026-04-18T09:00:00+05:30").getTime();
-  const countdownNode = document.querySelector("[data-countdown]");
-
-  if (countdownNode) {
-    let intervalId = 0;
-
-    const render = () => {
-      const now = Date.now();
-      const distance = Math.max(0, targetDate - now);
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
-
-      if (distance === 0) {
-        countdownNode.textContent = "Live now";
-        if (intervalId) {
-          window.clearInterval(intervalId);
-          intervalId = 0;
-        }
-        return;
-      }
-
-      countdownNode.textContent = `${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
-    };
-
-    render();
-    intervalId = window.setInterval(render, 1000);
-
-    window.addEventListener(
-      "pagehide",
-      () => {
-        if (intervalId) {
-          window.clearInterval(intervalId);
-        }
-      },
-      { once: true }
-    );
-  }
-</script>

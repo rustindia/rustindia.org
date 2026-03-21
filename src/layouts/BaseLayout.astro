@@ -1,5 +1,6 @@
 ---
-import Analytics from '@vercel/analytics/astro'
+import Analytics from "@vercel/analytics/astro";
+import ferrisBadge from "../assets/ferris/ferris-badge.svg";
 import "../styles/global.css";
 
 interface Props {
@@ -8,9 +9,11 @@ interface Props {
 }
 
 const {
-  title = "Rust India Community",
-  description = "Rust India Conference in Bengaluru - April 18, 2026."
+  title = "Rust India 2026",
+  description = "Rust India Conference in Bengaluru on Saturday, April 18, 2026.",
 } = Astro.props;
+
+const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
 ---
 
 <!doctype html>
@@ -19,28 +22,58 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="icon" href={ferrisBadgeSrc} type="image/svg+xml" />
     <title>{title}</title>
   </head>
   <body>
     <div class="space-backdrop" aria-hidden="true">
       <div class="space-grid"></div>
-      <div class="metro-lines" data-parallax="6"></div>
+      <div class="metro-lines" data-parallax="4"></div>
       <div class="city-nodes" data-parallax="-5"></div>
-      <div class="ring-road" data-parallax="9"></div>
+      <div class="ring-road" data-parallax="6"></div>
       <div class="urban-skyline" data-parallax="3"></div>
-      <div class="signal-haze" data-parallax="-7"></div>
-      <div class="space-orb space-orb-a" data-parallax="12"></div>
-      <div class="space-orb space-orb-b" data-parallax="-16"></div>
-      <div class="space-orb space-orb-c" data-parallax="8"></div>
+      <div class="signal-haze" data-parallax="-4"></div>
+      <div class="space-orb space-orb-a" data-parallax="5"></div>
+      <div class="space-orb space-orb-b" data-parallax="-7"></div>
+      <div class="space-orb space-orb-c" data-parallax="4"></div>
     </div>
+
     <div class="grain-overlay" aria-hidden="true"></div>
+
     <slot />
+
+    <footer class="site-footer">
+      <div class="section-shell site-footer__inner">
+        <div class="site-footer__brand">
+          <img src={ferrisBadgeSrc} alt="Ferris" class="brand-mark" />
+          <span>Rust India 2026</span>
+        </div>
+
+        <nav class="site-footer__links" aria-label="Footer">
+          <a href="/">Home</a>
+          <a href="/schedule">Schedule</a>
+          <a href="/sponsors">Sponsors</a>
+          <a href="/jobs">Our Jobs Board</a>
+          <a href="mailto:team@rustindia.org">Contact</a>
+        </nav>
+
+        <p class="site-footer__note">Built with Rust love for the Indian Rust community. git@blame -> swarnimarun.com</p>
+      </div>
+    </footer>
+
     <script is:inline>
       const parallaxNodes = Array.from(document.querySelectorAll("[data-parallax]"));
+      const finePointer = window.matchMedia("(pointer: fine)");
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const headerMenu = document.querySelector("[data-mobile-menu]");
+
+      if (headerMenu) {
+        headerMenu.addEventListener("toggle", () => {
+          document.body.classList.toggle("menu-open", headerMenu.open);
+        });
+      }
 
       if (!prefersReducedMotion.matches && parallaxNodes.length) {
-        const finePointer = window.matchMedia("(pointer: fine)").matches;
         const controller = new AbortController();
         const signal = controller.signal;
         const state = {
@@ -48,7 +81,7 @@ const {
           targetY: 0,
           currentX: 0,
           currentY: 0,
-          scrollRatio: 0
+          scrollRatio: 0,
         };
         let frameId = 0;
 
@@ -57,14 +90,14 @@ const {
           state.scrollRatio = window.scrollY / maxScroll - 0.5;
         };
 
-        if (finePointer) {
+        if (finePointer.matches) {
           window.addEventListener(
             "pointermove",
             (event) => {
               state.targetX = event.clientX / window.innerWidth - 0.5;
               state.targetY = event.clientY / window.innerHeight - 0.5;
             },
-            { passive: true, signal }
+            { passive: true, signal },
           );
         }
 
@@ -77,10 +110,10 @@ const {
 
           parallaxNodes.forEach((node) => {
             const depth = Number(node.getAttribute("data-parallax")) || 0;
-            const driftX = Math.sin(time * 0.00012 + depth) * depth * 0.08;
-            const driftY = Math.cos(time * 0.0001 + depth) * depth * 0.07;
-            const tx = state.currentX * depth * 1.8 + driftX;
-            const ty = state.currentY * depth * 1.5 + state.scrollRatio * depth * -2 + driftY;
+            const driftX = Math.sin(time * 0.0001 + depth) * depth * 0.06;
+            const driftY = Math.cos(time * 0.00008 + depth) * depth * 0.05;
+            const tx = state.currentX * depth * 1.5 + driftX;
+            const ty = state.currentY * depth * 1.35 + state.scrollRatio * depth * -8 + driftY;
             node.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
           });
 
@@ -95,9 +128,12 @@ const {
             window.cancelAnimationFrame(frameId);
             controller.abort();
           },
-          { once: true }
+          { once: true },
         );
       }
+
     </script>
+
+    <Analytics />
   </body>
 </html>

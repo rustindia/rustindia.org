@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const sponsorTiers = {
+  platinum: [
+    { initials: "Invideo", name: "Invideo", tone: "#1f1f1f", text: "#f4f4f4", link: "https://invideo.io/", logo: "" },
+  ],
+  gold: [
+    { initials: "Aftershoot", name: "Aftershoot", tone: "#232323", text: "#f4f4f4", link: "https://aftershoot.com/", logo: "" },
+    { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: "" },
+  ],
+  silver: [
+    { initials: "LT", name: "Laserdata", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
+    { initials: "LT", name: "Juspay", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
+    { initials: "LT", name: "", tone: "#d9d9d9", text: "#333333", link: "", logo: "" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Sponsors | Rust India 2026"
+  description="Sponsor Rust India 2026 in Bengaluru and get your brand in front of Rust engineers, contributors, and hiring teams."
+>
+  <SiteHeader currentPath="/sponsors" />
+
+  <main class="site-main">
+    <section class="jobs-header section-shell">
+      <p class="section-label">Sponsors</p>
+      <h1 class="jobs-header__title">Our Sponsors</h1>
+      <p class="jobs-header__lede">Thank you to the partners helping power Rust India 2026 in Bengaluru.</p>
+    </section>
+
+    <section class="sponsors-page section-shell" aria-labelledby="platinum-tier">
+      <div class="tier-heading">
+        <span id="platinum-tier">Platinum</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--platinum">
+        {
+          sponsorTiers.platinum.map((sponsor) => (
+            <article
+              class="sponsor-slot sponsor-slot--large frame-panel"
+              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+              aria-label={sponsor.name}
+            >
+              <div class="sponsor-slot__mark">
+                <strong>{sponsor.initials}</strong>
+                <small>{sponsor.name}</small>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="tier-heading">
+        <span>Gold</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--gold">
+        {
+          sponsorTiers.gold.map((sponsor) => (
+            <article
+              class="sponsor-slot frame-panel"
+              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+              aria-label={sponsor.name}
+            >
+              <div class="sponsor-slot__mark">
+                <strong>{sponsor.initials}</strong>
+                <small>{sponsor.name}</small>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="tier-heading">
+        <span>Silver</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--silver">
+        {
+          sponsorTiers.silver.map((sponsor) => (
+            <article
+              class="sponsor-slot frame-panel"
+              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+              aria-label={sponsor.name}
+            >
+              <div class="sponsor-slot__mark">
+                <strong>{sponsor.initials}</strong>
+                <small>{sponsor.name}</small>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="sponsor-prospectus frame-panel">
+        <p class="section-label">Sponsor Rust India</p>
+        <h2>Want to see your logo here?</h2>
+        <p>Partner with Rust India 2026 and connect with engineers, contributors, and hiring teams across the Rust ecosystem in India.</p>
+
+        <div class="sponsor-prospectus__actions">
+          <a href="mailto:sponsor@rustindia.org" class="btn btn-primary">Download Prospectus</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

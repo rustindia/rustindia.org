@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+
+const confDay = [
+  {
+    time: "09:00 AM",
+    duration: "~55 min",
+    tags: ["Registration"],
+    title: "Registration and checkin",
+    summary: "Grab your badge, settle in, and meet Rustaceans before the conference day begins.",
+    speaker: "Venue Team",
+    role: "Main lobby check-in",
+    location: "Main Gate & Lobby",
+    initials: "VT",
+    badgeBg: "#ffd38a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "11:00 AM",
+    duration: "45 min",
+    tags: ["Keynote"],
+    title: "#TO BE REVEALED SOON",
+    summary: "...",
+    speaker: "..",
+    role: "..",
+    location: "..",
+    initials: "NM",
+    badgeBg: "#ffc069",
+    badgeFg: "#4b2217",
+  }
+];
+
+const workshopDay = [
+  {
+    time: "09:30 AM",
+    duration: "360 min",
+    tags: ["Community"],
+    title: "Workshop Checkin",
+    summary: "A softer hand-ons presentations and walk throughs with some of the best experts on the topics of high relevance to day to day Rust",
+    speaker: "Workshop Team",
+    role: "Rust India Team",
+    location: "TBD",
+    initials: "WT",
+    badgeBg: "#ffd38a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "07:30 PM",
+    duration: "90 min",
+    tags: ["Community"],
+    title: "Volunteers & Speaker Dinner",
+    summary: "-- Invite only --",
+    speaker: "",
+    role: "",
+    location: "BLR",
+    initials: "DD",
+    badgeBg: "#3d221a",
+    badgeFg: "#fff8ef",
+  },
+];
+---
+
+<BaseLayout
+  title="Schedule | Rust India 2026"
+  description="Rust India 2026 schedule preview for the Bengaluru conference weekend on April 18 and community programming around it."
+>
+  <SiteHeader currentPath="/schedule" />
+
+  <main class="site-main">
+    <section class="jobs-header section-shell">
+      <p class="section-label">Schedule</p>
+      <h1 class="jobs-header__title">Schedule</h1>
+      <p class="jobs-header__lede">Plan your Rust India conference flow in Bengaluru across the main day and community programming around it.</p>
+    </section>
+
+    <section class="schedule-page section-shell">
+      <div class="schedule-layout">
+        <aside class="schedule-side">
+          <div class="schedule-day-switches">
+            <button type="button" class="schedule-day-switch" data-day-switch="day-two">
+              Workshop
+              <span>April 17</span>
+            </button>
+            <button type="button" class="schedule-day-switch is-active" data-day-switch="day-one">
+              Conference
+              <span>April 18</span>
+            </button>
+          </div>
+
+          <p class="schedule-side__note">CFPs are closed. Final speaker order and room details will be published here.</p>
+        </aside>
+
+        <div class="schedule-stack">
+          <div class="schedule-day" data-day-panel="day-one">
+            {
+              confDay.map((item) => (
+                <article class="schedule-entry frame-panel" style={`--speaker-bg:${item.badgeBg}; --speaker-fg:${item.badgeFg};`}>
+                  <div class="schedule-entry__time">
+                    <strong>{item.time}</strong>
+                    <span>{item.duration}</span>
+                  </div>
+
+                  <div class="schedule-entry__body">
+                    <div class="schedule-entry__tags">
+                      {item.tags.map((tag) => <span class="tag">{tag}</span>)}
+                    </div>
+
+                    <h2 class="schedule-entry__title">{item.title}</h2>
+                    <p class="schedule-entry__summary">{item.summary}</p>
+
+                    <div class="schedule-entry__footer">
+                      <div class="schedule-entry__speaker">
+                        <div class="schedule-entry__avatar">{item.initials}</div>
+                        <div>
+                          <div class="schedule-entry__speaker-name">{item.speaker}</div>
+                          <div class="schedule-entry__speaker-role">{item.role}</div>
+                        </div>
+                      </div>
+
+                      <div class="schedule-entry__location">{item.location}</div>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="schedule-day hidden" data-day-panel="day-two">
+            {
+              workshopDay.map((item) => (
+                <article class="schedule-entry frame-panel" style={`--speaker-bg:${item.badgeBg}; --speaker-fg:${item.badgeFg};`}>
+                  <div class="schedule-entry__time">
+                    <strong>{item.time}</strong>
+                    <span>{item.duration}</span>
+                  </div>
+
+                  <div class="schedule-entry__body">
+                    <div class="schedule-entry__tags">
+                      {item.tags.map((tag) => <span class="tag">{tag}</span>)}
+                    </div>
+
+                    <h2 class="schedule-entry__title">{item.title}</h2>
+                    <p class="schedule-entry__summary">{item.summary}</p>
+
+                    <div class="schedule-entry__footer">
+                      <div class="schedule-entry__speaker">
+                        <div class="schedule-entry__avatar">{item.initials}</div>
+                        <div>
+                          <div class="schedule-entry__speaker-name">{item.speaker}</div>
+                          <div class="schedule-entry__speaker-role">{item.role}</div>
+                        </div>
+                      </div>
+
+                      <div class="schedule-entry__location">{item.location}</div>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const daySwitches = Array.from(document.querySelectorAll("[data-day-switch]"));
+    const dayPanels = Array.from(document.querySelectorAll("[data-day-panel]"));
+
+    if (daySwitches.length && dayPanels.length) {
+      daySwitches.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selected = button.getAttribute("data-day-switch");
+
+          daySwitches.forEach((item) => item.classList.toggle("is-active", item === button));
+          dayPanels.forEach((panel) => {
+            panel.classList.toggle("hidden", panel.getAttribute("data-day-panel") !== selected);
+          });
+        });
+      });
+    }
+  </script>
+</BaseLayout>
