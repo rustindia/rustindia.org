@@ -1,20 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import aftershootLogo from "../assets/aftershoot_logo.svg";
+import e6dataLogo from "../assets/e6data_logo.svg";
+import pre6Logo from "../assets/pre6_logo.svg";
 
 const sponsorTiers = {
   platinum: [
     { initials: "Invideo", name: "Invideo", tone: "#1f1f1f", text: "#f4f4f4", link: "https://invideo.io/", logo: "" },
   ],
   gold: [
-    { initials: "Aftershoot", name: "Aftershoot", tone: "#232323", text: "#f4f4f4", link: "https://aftershoot.com/", logo: "" },
-    { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: "" },
+    {
+      initials: "Aftershoot",
+      name: "Aftershoot",
+      tone: "#232323",
+      text: "#f4f4f4",
+      link: "https://aftershoot.com/",
+      logo: aftershootLogo.src,
+      logoClass: "sponsor-logo--aftershoot",
+    },
+    { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: e6dataLogo.src },
   ],
   silver: [
     { initials: "Laserdata", name: "Laserdata", tone: "#d9d9d9", text: "#333333", link: "https://laserdata", logo: "" },
-    { initials: "Pre6", name: "Pre6", tone: "#d9d9d9", text: "#333333", link: "https://pre6.ai", logo: "" },
+    { initials: "Pre6", name: "Pre6", tone: "#d9d9d9", text: "#333333", link: "https://pre6.ai", logo: pre6Logo.src },
     { initials: "...", name: "todo..", tone: "#d9d9d9", text: "#333333", link: "#", logo: "" },
   ],
+};
+
+const tierLinkStyles = {
+  platinum: "flex: 0 1 min(28rem, 100%);",
+  gold: "flex: 0 1 min(24rem, calc(50% - 0.7rem));",
+  silver: "flex: 0 1 min(12rem, calc(33.333% - 0.95rem));",
 };
 ---
 
@@ -33,66 +50,90 @@ const sponsorTiers = {
 
     <section class="sponsors-page section-shell" aria-labelledby="platinum-tier">
       <div class="tier-heading">
-        <span id="platinum-tier">Platinum</span>
+        <span id="platinum-tier">Ferris (Platinum)</span>
       </div>
       <div class="sponsor-tier sponsor-tier--platinum">
         {
           sponsorTiers.platinum.map((sponsor) => (
-            <a href={sponsor.link}>
-            <article
-              class="sponsor-slot sponsor-slot--large frame-panel"
-              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
-              aria-label={sponsor.name}
-            >
-              <div class="sponsor-slot__mark">
-                <strong>{sponsor.initials}</strong>
-                <small>{sponsor.name}</small>
-              </div>
-            </article>
+            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.platinum}>
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-slot--large sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--platinum", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot sponsor-slot--large frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
             </a>
           ))
         }
       </div>
 
       <div class="tier-heading">
-        <span>Gold</span>
+        <span>Oxide (Gold)</span>
       </div>
       <div class="sponsor-tier sponsor-tier--gold">
         {
           sponsorTiers.gold.map((sponsor) => (
-            <a href={sponsor.link}>
-            <article
-              class="sponsor-slot frame-panel"
-              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
-              aria-label={sponsor.name}
-            >
-              <div class="sponsor-slot__mark">
-                <strong>{sponsor.initials}</strong>
-                <small>{sponsor.name}</small>
-              </div>
-            </article>
+            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.gold}>
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--gold", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
             </a>
           ))
         }
       </div>
 
       <div class="tier-heading">
-        <span>Silver</span>
+        <span>Cargo (Silver)</span>
       </div>
       <div class="sponsor-tier sponsor-tier--silver">
         {
           sponsorTiers.silver.map((sponsor) => (
-            <a href={sponsor.link}>
-            <article
-              class="sponsor-slot frame-panel"
-              style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
-              aria-label={sponsor.name}
-            >
-              <div class="sponsor-slot__mark">
-                <strong>{sponsor.initials}</strong>
-                <small>{sponsor.name}</small>
-              </div>
-            </article>
+            <a href={sponsor.link} class="sponsor-tier__link" style={tierLinkStyles.silver}>
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--silver", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
             </a>
           ))
         }
@@ -110,3 +151,55 @@ const sponsorTiers = {
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  .sponsor-tier__link {
+    display: flex;
+  }
+
+  .sponsor-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .sponsor-logo--platinum {
+    max-height: 11rem;
+  }
+
+  .sponsor-logo--gold {
+    max-height: 8rem;
+  }
+
+  .sponsor-logo--aftershoot {
+    max-height: 6.8rem;
+  }
+
+  .sponsor-logo--silver {
+    max-height: 6rem;
+  }
+
+  .sponsor-logo-card {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: #ffffff;
+  }
+
+  .sponsor-logo-frame {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsor-tier__link > .sponsor-slot {
+    width: 100%;
+  }
+</style>

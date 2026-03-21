@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3720 1240">
+    <defs>
+        <circle id="logo-r1" cx="500" cy="500" r="150" />
+        <circle id="logo-r2" cx="500" cy="500" r="300" />
+        <circle id="logo-r3" cx="500" cy="500" r="500" />
+        <rect id="logo-pv" x="200" y="500" width="150" height="500" />
+        <path id="logo-sd" d="M288,288 L576,0 H788 L394,394 Z" />
+        <mask id="logo-mask-logo">
+            <rect x="0" y="0" width="1000" height="1000" fill="white" />
+            <use href="#logo-r2" fill="black" />
+            <use href="#logo-r1" fill="white" />
+            <use href="#logo-pv" fill="black" />
+            <use href="#logo-sd" fill="black" />
+        </mask>
+        <mask id="logo-mask-p">
+            <!--rect x="0" y="0" width="1000" height="1000" fill="white" /-->
+            <rect x="0" y="0" width="1000" height="1000" fill="black" />
+            <use href="#logo-r3" fill="white" />
+            <use href="#logo-r1" fill="black" />
+        </mask>
+        <mask id="logo-mask-re">
+            <rect x="0" y="0" width="1260" height="1000" fill="white" />
+            <circle cx="750" cy="500" r="360" fill="black" />
+            <circle cx="750" cy="500" r="300" fill="white" />
+            <circle cx="750" cy="500" r="150" fill="black" />
+            <line x1="598" y1="470" x2="1050" y2="470" stroke-width="120" stroke="white" />
+            <line x1="750" y1="560" x2="1050" y2="560" stroke-width="60" stroke="black" />
+            <!--rect x="750" y="425" width="302" height="150" fill="black" /-->
+            <!--path d="M750,500 h302 A302,302,0,0,0,963,287 Z" fill="black" /-->
+            <!--line x1="538" y1="712" x2="962" y2="288" stroke-width="120" stroke="white" /-->
+        </mask>
+    </defs>
+    <circle cx="500" cy="500" r="500" fill="#ef4444" mask="url(#logo-mask-logo)" transform="translate(120, 120)" />
+    <!-- p -->
+    <g fill="var(--logo-text-color, var(--logo-color, #1d293d))" mask="url(#logo-mask-p)" transform="translate(1040, 120)">
+        <use href="#logo-r2" />
+        <use href="#logo-pv" />
+    </g>
+
+    <!-- re -->
+    <g fill="var(--logo-text-color, var(--logo-color, #1d293d))" mask="url(#logo-mask-re)" transform="translate(1900, 120)">
+        <!--path d="M0,300 A300,300,0,0,1,450,41 L375,171 A150,150,0,0,0,150,300 v300 h-150 Z" /-->
+        <path d="M0,500 A300,300,0,0,1,600,500 h-150 A150,150,0,0,0,150,500 v300 h-150 Z" />
+        <circle cx="750" cy="500" r="300" />
+    </g>
+
+    <!-- 6 -->
+    <g fill="var(--logo-text-color, var(--logo-color, #1d293d))" mask="url(#logo-mask-p)" transform="translate(2800, 120)">
+        <use href="#logo-r2" />
+        <use href="#logo-r1" />
+        <use href="#logo-sd" />
+    </g>
+</svg>
