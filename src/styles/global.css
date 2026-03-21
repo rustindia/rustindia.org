@@ -409,19 +409,22 @@ img {
 }
 
 .home-hero__art {
-  width: min(34rem, 100%);
+  width: min(22rem, 100%);
   margin: 1.8rem auto 0;
-  padding: 1.6rem;
+  padding: 1.4rem 1.4rem 0.6rem;
   background: linear-gradient(180deg, #fff4e6 0%, #f6ede6 100%);
+  overflow: hidden;
 }
 
 .home-hero__art img {
-  width: min(11rem, 40%);
-  margin: 4rem auto;
+  width: 100%;
+  display: block;
+  border-radius: 1rem;
 }
 
 .home-hero__art p {
   margin: 0;
+  padding: 0.5rem 1rem;
   text-align: right;
   font-size: 0.95rem;
   font-weight: 600;
@@ -686,7 +689,9 @@ img {
 }
 
 .sponsor-tier {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.4rem;
 }
 
@@ -1193,16 +1198,16 @@ img {
     border-left: 3px solid rgb(75 34 23 / 0.12);
   }
 
-  .sponsor-tier--platinum {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .sponsor-tier--platinum .sponsor-slot {
+    flex: 0 1 calc(50% - 1.4rem);
   }
 
-  .sponsor-tier--gold {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .sponsor-tier--gold .sponsor-slot {
+    flex: 0 1 calc(33.333% - 1.4rem);
   }
 
-  .sponsor-tier--silver {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .sponsor-tier--silver .sponsor-slot {
+    flex: 0 1 calc(25% - 1.4rem);
   }
 
   .jobs-board {
@@ -1292,11 +1297,7 @@ img {
   }
 
   .home-hero__art {
-    padding: 1.2rem;
-  }
-
-  .home-hero__art img {
-    margin: 2.6rem auto;
+    padding: 0;
   }
 
   .home-alert__strip,
