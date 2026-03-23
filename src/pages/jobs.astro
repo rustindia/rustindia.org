@@ -2,6 +2,23 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
+interface Job {
+  badge: string;
+  badgeBg: string;
+  badgeFg: string;
+  title: string;
+  company: string;
+  posted: string;
+  workMode: string;
+  workModeLabel: string;
+  level: string;
+  levelLabel: string;
+  tags: string[];
+  summary: string;
+  actionHref: string;
+  actionLabel: string;
+}
+
 const filterGroups = [
   {
     id: "workMode",
@@ -23,98 +40,17 @@ const filterGroups = [
   },
 ];
 
-const jobs = [
-  {
-    badge: "AS",
-    badgeBg: "#ffd38a",
-    badgeFg: "#4b2217",
-    title: "Senior Platform Engineer",
-    company: "Aftershoot",
-    posted: "Preview listing",
-    workMode: "remote",
-    workModeLabel: "Remote",
-    level: "senior",
-    levelLabel: "Senior",
-    tags: ["Dummy", "Platform", "Sponsor-backed"],
-    summary: "Mock role for the Rust India board preview. Real sponsor openings will replace this closer to conference week.",
-    actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Interest%20-%20Senior%20Platform%20Engineer",
-    actionLabel: "Signal Interest",
-  },
-  {
-    badge: "E6",
-    badgeBg: "#ddc1ff",
-    badgeFg: "#4b2217",
-    title: "Staff Data Infrastructure Engineer",
-    company: "E6Data",
-    posted: "Preview listing",
-    workMode: "hybrid",
-    workModeLabel: "Hybrid",
-    level: "senior",
-    levelLabel: "Senior",
-    tags: ["Dummy", "Data Infra", "Sponsor-backed"],
-    summary: "Sample card used to test sponsor job layouts, counts, and filters before the real board goes live.",
-    actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Interest%20-%20Staff%20Data%20Infrastructure%20Engineer",
-    actionLabel: "Signal Interest",
-  },
-  {
-    badge: "LD",
-    badgeBg: "#d8d8d8",
-    badgeFg: "#4b2217",
-    title: "Rust Backend Engineer",
-    company: "Laserdata",
-    posted: "Preview listing",
-    workMode: "onsite",
-    workModeLabel: "On-site (India)",
-    level: "mid",
-    levelLabel: "Mid-Level",
-    tags: ["Dummy", "Storage", "Sponsor-backed"],
-    summary: "This mock listing keeps the jobs board realistic while the actual sponsor submissions are still being finalized.",
-    actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Interest%20-%20Rust%20Backend%20Engineer",
-    actionLabel: "Signal Interest",
-  },
-  {
-    badge: "P6",
-    badgeBg: "#f3d1c6",
-    badgeFg: "#4b2217",
-    title: "Compiler Tooling Engineer",
-    company: "Pre6",
-    posted: "Preview listing",
-    workMode: "remote",
-    workModeLabel: "Remote",
-    level: "mid",
-    levelLabel: "Mid-Level",
-    tags: ["Dummy", "Tooling", "Sponsor-backed"],
-    summary: "Preview-only content for the conference jobs board so layout, filtering, and actions can be reviewed in production.",
-    actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Interest%20-%20Compiler%20Tooling%20Engineer",
-    actionLabel: "Signal Interest",
-  },
-  {
-    badge: "SP",
-    badgeBg: "#ffe6bf",
-    badgeFg: "#4b2217",
-    title: "Junior Developer Experience Engineer",
-    company: "Sponsor Preview",
-    posted: "Preview listing",
-    workMode: "hybrid",
-    workModeLabel: "Hybrid",
-    level: "junior",
-    levelLabel: "Junior",
-    tags: ["Dummy", "Docs", "Board preview"],
-    summary: "A final mock role keeps the filter set honest so every level and work mode can be tested before launch.",
-    actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Jobs%20Board%20Interest%20-%20Junior%20Developer%20Experience%20Engineer",
-    actionLabel: "Signal Interest",
-  },
-];
+const jobs: Job[] = [];
 
 const inviteCard = {
   badge: "+",
-  title: "Want to add a real role here?",
+  title: "Want to add a role here?",
   company: "Rust India Jobs Board",
-  posted: "Invite open",
-  summary: "Mail the team and we will swap these preview cards for your sponsor-backed Rust role once the board opens for conference hiring.",
-  tags: ["Post a role", "Sponsor-backed", "Hiring"],
-  actionHref: "mailto:team@rustindia.org?subject=Rust%20India%20Jobs%20Board",
-  actionLabel: "Post to the Jobs Board",
+  posted: "Submissions open",
+  summary: "Mail the team with the role, company, work mode, and level. We will publish relevant Rust openings on the board.",
+  tags: ["Submit a job", "Rust hiring", "Hiring"],
+  actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Job%20Submission",
+  actionLabel: "Submit a Job",
 };
 ---
 
@@ -128,13 +64,13 @@ const inviteCard = {
     <section class="jobs-header section-shell">
       <p class="section-label">Jobs Board</p>
       <h1 class="jobs-header__title">Posted Jobs</h1>
-      <p class="jobs-header__lede">Preview the board with dummy sponsor-backed roles while the real hiring list gets finalized for Rust India 2026.</p>
+      <p class="jobs-header__lede">Rust-focused roles from teams hiring around the conference. Use the filters to narrow by work mode and experience level.</p>
     </section>
 
     <section class="jobs-board section-shell">
       <aside class="jobs-filter frame-panel">
         <h2 class="jobs-filter__title">Filters</h2>
-        <p class="jobs-filter__intro">These knobs update live so you can test the board without waiting for real sponsor roles to land.</p>
+        <p class="jobs-filter__intro">Filter the board by work mode and experience level. Counts update live as jobs are added.</p>
 
         <form class="jobs-filter__form" data-jobs-filters>
           {
@@ -166,15 +102,15 @@ const inviteCard = {
 
         <div class="jobs-filter__actions">
           <button type="button" class="btn btn-primary" data-filter-reset>Reset Filters</button>
-          <a href={inviteCard.actionHref} class="btn btn-secondary">{inviteCard.actionLabel}</a>
+          <a href={inviteCard.actionHref} class="btn btn-primary">{inviteCard.actionLabel}</a>
         </div>
       </aside>
 
       <div class="jobs-board__main">
         <div class="jobs-results frame-panel" role="status" aria-live="polite">
-          <p class="section-label">Board Preview</p>
-          <h2 class="jobs-results__title"><span data-jobs-count>{jobs.length}</span> dummy roles in view</h2>
-          <p class="jobs-results__note" data-jobs-state>Filters update live while the board stays in preview mode.</p>
+          <p class="section-label">Open Roles</p>
+          <h2 class="jobs-results__title"><span data-jobs-count>{jobs.length}</span> open roles</h2>
+          <p class="jobs-results__note" data-jobs-state>Filter the current postings or submit a job to be listed.</p>
         </div>
 
         <div class="jobs-list">
@@ -218,9 +154,9 @@ const inviteCard = {
           }
 
           <article class="job-row job-row--empty frame-panel" data-jobs-empty hidden>
-            <p class="section-label">No Matches</p>
-            <h2 class="job-row__title">Nothing lines up with the current filter mix.</h2>
-            <p class="job-row__summary">Reset the knobs or post a sponsor-backed role and the preview board will immediately have something useful to show here.</p>
+            <p class="section-label">No Jobs Yet</p>
+            <h2 class="job-row__title">There are no live job posts on the board right now.</h2>
+            <p class="job-row__summary">You can still adjust the filters, and hiring teams can use the submit flow below to add the first opening.</p>
           </article>
 
           <article class="job-row job-row--invite accent-panel">
@@ -244,7 +180,7 @@ const inviteCard = {
                 <p class="job-row__summary">{inviteCard.summary}</p>
               </div>
 
-              <a href={inviteCard.actionHref} class="btn btn-secondary job-row__action">
+              <a href={inviteCard.actionHref} class="btn btn-primary job-row__action">
                 {inviteCard.actionLabel}
               </a>
             </div>
@@ -269,7 +205,7 @@ const inviteCard = {
     Array.from(document.querySelectorAll("[data-filter-count]")).map((node) => [node.dataset.filterCount, node]),
   );
 
-  if (filterForm && jobCards.length && resultsCount && resultsState && emptyState && resetButton) {
+  if (filterForm && resultsCount && resultsState && emptyState && resetButton) {
     const inputs = Array.from(filterForm.querySelectorAll("input[data-filter-group]"));
     const groups = [...new Set(inputs.map((input) => input.dataset.filterGroup).filter(Boolean))];
 
@@ -358,8 +294,8 @@ const inviteCard = {
       resultsCount.textContent = String(visibleCount);
       resultsState.textContent =
         visibleCount === 0
-          ? "No preview roles match these settings. Reset the filters or post a sponsor-backed opening."
-          : `${visibleCount} dummy ${visibleCount === 1 ? "role" : "roles"} match your current filters.`;
+          ? "No jobs match the current filters yet. Reset the filters or submit a job."
+          : `${visibleCount} ${visibleCount === 1 ? "role matches" : "roles match"} your current filters.`;
 
       updateGroupMeta();
       updateOptionCounts();
