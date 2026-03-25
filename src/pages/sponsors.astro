@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import invideoLogo from "../assets/invideo_logo.svg";
 import aftershootLogo from "../assets/aftershoot_logo.svg";
 import e6dataLogo from "../assets/e6data_logo.svg";
 import pre6Logo from "../assets/pre6_logo.svg";
@@ -8,15 +9,12 @@ import pre6Logo from "../assets/pre6_logo.svg";
 const sponsorTiers = {
   platinum: [
     {
-      initials: "Soon",
-      name: "Platinum sponsor reveal pending",
+      initials: "Invideo",
+      name: "Invideo",
       tone: "#efe5df",
       text: "#4b2217",
-      link: "",
-      logo: "",
-      logoText: "Announcement Soon",
-      logoMeta: "Platinum partner",
-      wordmarkClass: "sponsor-wordmark--pending",
+      link: "https://invideo.io",
+      logo: invideoLogo.src,
     },
     // { initials: "Invideo", name: "Invideo", tone: "#1f1f1f", text: "#f4f4f4", link: "https://invideo.io/", logo: "" },
   ],
