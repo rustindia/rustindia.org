@@ -456,12 +456,11 @@ img {
 .home-hero__banner-open {
   margin: 0;
   width: fit-content;
-  padding: 0.48rem 0.8rem;
-  border: 3px solid var(--color-shadow);
-  border-radius: 999px;
+  padding: 0.4rem 0.8rem 0.4rem 0;
+  border-radius: 4px;
   background: var(--color-panel);
-  font-size: 1rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1401,10 +1400,14 @@ img {
 }
 
 @media (min-width: 760px) {
+  .home-flow__item {
+    padding-top: 0;
+    border-top: 0;
+  }
+
   .home-flow__item+.home-flow__item {
     padding-left: 1.35rem;
     border-left: 3px solid rgb(75 34 23 / 0.12);
-    border-top: 0;
   }
 
   .home-support__block+.home-support__block {
@@ -1518,7 +1521,7 @@ img {
   }
 
   .home-hero__banner-open {
-    font-size: 0.88rem;
+    font-size: 1rem;
   }
 
   .home-hero__banner-number {
