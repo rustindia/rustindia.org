@@ -147,14 +147,12 @@ img {
   opacity: 0.14;
   background:
     linear-gradient(to top, rgb(75 34 23 / 0.12) 0 1.25rem, transparent 1.25rem 100%),
-    repeating-linear-gradient(
-      to right,
+    repeating-linear-gradient(to right,
       transparent 0 2rem,
       rgb(239 116 93 / 0.12) 2rem 2.3rem,
       transparent 2.3rem 4rem,
       rgb(75 34 23 / 0.12) 4rem 4.2rem,
-      transparent 4.2rem 6rem
-    );
+      transparent 4.2rem 6rem);
   clip-path: polygon(0% 100%, 0% 58%, 12% 54%, 18% 34%, 33% 48%, 42% 27%, 53% 43%, 64% 32%, 77% 55%, 90% 39%, 100% 49%, 100% 100%);
 }
 
@@ -445,6 +443,22 @@ img {
   justify-content: center;
   gap: 1rem;
   margin-top: 2rem;
+}
+
+.home-hero__ticket-cta {
+  flex: 1 1 100%;
+  max-width: min(34rem, 100%);
+  padding: 1.2rem 2rem;
+  font-size: 1.18rem;
+  box-shadow:
+    0 0 0 3px rgb(75 34 23 / 0.08),
+    8px 8px 0 rgb(75 34 23 / 0.3);
+}
+
+.home-hero__ticket-cta:hover {
+  box-shadow:
+    0 0 0 3px rgb(75 34 23 / 0.08),
+    10px 10px 0 rgb(75 34 23 / 0.26);
 }
 
 .home-alert {
@@ -820,7 +834,7 @@ img {
   margin-top: 1.8rem;
 }
 
-.filter-group + .filter-group {
+.filter-group+.filter-group {
   padding-top: 1.4rem;
   border-top: 2px solid rgb(75 34 23 / 0.12);
 }
@@ -912,16 +926,16 @@ img {
   transition: transform 0.18s ease, background-color 0.18s ease;
 }
 
-.filter-option__label input:checked + .filter-option__knob {
+.filter-option__label input:checked+.filter-option__knob {
   background: var(--color-accent-soft);
 }
 
-.filter-option__label input:checked + .filter-option__knob::after {
+.filter-option__label input:checked+.filter-option__knob::after {
   transform: translateX(0.78rem);
   background: var(--color-accent-deep);
 }
 
-.filter-option__label input:focus-visible + .filter-option__knob {
+.filter-option__label input:focus-visible+.filter-option__knob {
   outline: 3px solid rgb(239 116 93 / 0.85);
   outline-offset: 3px;
 }
@@ -1345,13 +1359,13 @@ img {
 }
 
 @media (min-width: 760px) {
-  .home-flow__item + .home-flow__item {
+  .home-flow__item+.home-flow__item {
     padding-left: 1.35rem;
     border-left: 3px solid rgb(75 34 23 / 0.12);
     border-top: 0;
   }
 
-  .home-support__block + .home-support__block {
+  .home-support__block+.home-support__block {
     padding-left: 2rem;
     border-left: 3px solid rgb(75 34 23 / 0.12);
   }
@@ -1392,8 +1406,9 @@ img {
 }
 
 @media (max-width: 959px) {
+
   .site-header__nav,
-  .site-header__actions > .btn {
+  .site-header__actions>.btn {
     display: none;
   }
 
@@ -1484,7 +1499,7 @@ img {
 
   .home-alert__strip {
     flex-direction: column;
-  } 
+  }
 
   .home-alert__mark {
     display: none;
