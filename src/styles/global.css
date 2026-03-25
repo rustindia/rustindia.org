@@ -407,26 +407,68 @@ img {
 }
 
 .home-hero__art {
-  width: min(22rem, 100%);
+  width: min(38rem, 100%);
   margin: 1.8rem auto 0;
-  padding: 1.4rem 1.4rem 0.6rem;
-  background: linear-gradient(180deg, #fff4e6 0%, #f6ede6 100%);
+  padding: 1.2rem;
+  background: var(--color-panel);
   overflow: hidden;
+  display: flex;
+}
+
+.home-hero__banner {
+  position: relative;
+  min-height: 18rem;
+  display: flex;
+  align-items: end;
+}
+
+.home-hero__banner img {
+  aspect-ratio: auto;
+  max-width: 20rem;
+}
+
+.home-hero__banner-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.25rem;
+  max-width: 18rem;
+  padding: 1rem;
+  text-align: left;
+  color: var(--color-ink);
+}
+
+.home-hero__banner-kicker {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.home-hero__banner-days {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.8vw, 3.5rem);
+  line-height: 0.96;
+}
+
+.home-hero__banner-open {
+  margin: 0;
+  width: fit-content;
+  padding: 0.48rem 0.8rem;
+  border: 3px solid var(--color-shadow);
+  border-radius: 999px;
+  background: var(--color-panel);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .home-hero__art img {
   width: 100%;
   display: block;
-  border-radius: 1rem;
-}
-
-.home-hero__art p {
-  margin: 0;
-  padding: 0.5rem 1rem;
-  text-align: right;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--color-ink-soft);
 }
 
 .home-hero__lede {
@@ -1457,8 +1499,40 @@ img {
     padding-top: 2.4rem;
   }
 
-  .home-hero__art {
+  .home-hero__art:not(.home-hero__banner) {
     padding: 0;
+  }
+
+  .home-hero__banner {
+    min-height: 15rem;
+    padding: 0.85rem;
+  }
+
+  .home-hero__banner-copy {
+    max-width: 15rem;
+    padding: 0.5rem 0.35rem;
+  }
+
+  .home-hero__banner-days {
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+  }
+
+  .home-hero__banner-open {
+    font-size: 0.88rem;
+  }
+
+  .home-hero__banner-number {
+    width: 5.8rem;
+    height: 5.8rem;
+    padding-top: 0.8rem;
+  }
+
+  .home-hero__banner-number span {
+    font-size: 2rem;
+  }
+
+  .home-hero__banner-ferris {
+    width: min(13rem, 60%);
   }
 
   .home-alert__strip,

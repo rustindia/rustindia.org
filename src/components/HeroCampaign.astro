@@ -1,15 +1,21 @@
 ---
-import ferrisBadge from "../assets/mascot.png";
+import ferrisMascot from "../assets/mascot.png";
 
-const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
+const ferrisMascotSrc = typeof ferrisMascot === "string" ? ferrisMascot : ferrisMascot.src;
 ---
 
 <section class="home-hero section-shell">
   <p class="section-label">Rust India Conference 2026</p>
   <h1 class="home-hero__title">Rust India Conference 2026</h1>
 
-  <div class="home-hero__art frame-panel">
-    <img src={ferrisBadgeSrc} alt="Ferris badge for Rust India 2026" />
+  <div class="home-hero__art frame-panel home-hero__banner">
+    <div class="home-hero__banner-copy">
+      <p class="home-hero__banner-kicker">Rust India 2026</p>
+      <p class="home-hero__banner-days">Last few weeks left.</p>
+      <p class="home-hero__banner-open">Tickets open now!!</p>
+    </div>
+
+    <img src={ferrisMascotSrc} alt="Ferris Mascot Rust India 2026" aria-hidden="true" />
   </div>
 
   <p class="home-hero__lede">
@@ -17,7 +23,7 @@ const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBad
     community, and hiring conversations around real Rust work.
   </p>
   <div class="home-hero__actions">
-    <a href="https://hasgeek.com/rustbangalore/rust-india-conference-2026/" class="btn btn-primary home-hero__ticket-cta">Book Tickets Now</a>
+    <a href="https://hasgeek.com/rustbangalore/rust-india-conference-2026/" class="btn btn-primary home-hero__ticket-cta">Here!( Book Tickets )</a>
   </div>
 
   <div class="home-hero__actions">
