@@ -7,6 +7,7 @@ import e6dataLogo from "../assets/e6data_logo.svg";
 import pre6Logo from "../assets/pre6_logo.svg";
 import juspayLogo from "../assets/juspay_logo.svg";
 import laserdataLogo from "../assets/laserdata_logo.jpg";
+import rustRoverLogo from "../assets/rust_rover.svg";
 
 const sponsorTiers = {
   platinum: [
@@ -46,15 +47,12 @@ const sponsorTiers = {
   ],
   livestream: [
     {
-      initials: "Soon",
-      name: "Livestream partner reveal pending",
+      initials: "Jetbrains",
+      name: "RustRover by JetBrains",
       tone: "#efe5df",
       text: "#4b2217",
-      link: "",
-      logo: "",
-      logoText: "Announcement Soon",
-      logoMeta: "Livestream partner",
-      wordmarkClass: "sponsor-wordmark--pending",
+      link: "https://www.jetbrains.com/rust",
+      logo: rustRoverLogo.src,
     },
   ],
 };
@@ -177,14 +175,33 @@ const sponsorTiers = {
       <div class="sponsor-tier sponsor-tier--livestream">
         {
           sponsorTiers.livestream.map((sponsor) => (
-            <div class="sponsor-tier__link sponsor-tier__link--livestream">
-              <article class="sponsor-slot sponsor-logo-card sponsor-logo-card--wordmark frame-panel" aria-label={sponsor.name}>
-                <div class:list={["sponsor-wordmark", sponsor.wordmarkClass]}>
-                  <strong>{sponsor.logoText}</strong>
-                  {sponsor.logoMeta && <small>{sponsor.logoMeta}</small>}
-                </div>
-              </article>
-            </div>
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--livestream">
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--silver", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : sponsor.logoText ? (
+                <article class="sponsor-slot sponsor-logo-card sponsor-logo-card--wordmark frame-panel" aria-label={sponsor.name}>
+                  <div class:list={["sponsor-wordmark", sponsor.wordmarkClass]}>
+                    <strong>{sponsor.logoText}</strong>
+                    {sponsor.logoMeta && <small>{sponsor.logoMeta}</small>}
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
+            </a>
           ))
         }
       </div>
