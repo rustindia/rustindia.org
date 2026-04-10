@@ -2,68 +2,342 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
+const scheduleUrl = "https://hasgeek.com/rustbangalore/rust-india-conference-2026/schedule";
+const saturdayVenueUrl = "https://maps.app.goo.gl/DjaCZYkrkxHu99W86";
+const fridayVenueUrl = "https://maps.app.goo.gl/vhyLFtvNGZx99wtM9";
+
 const confDay = [
   {
-    time: "09:00 AM",
-    duration: "~55 min",
+    time: "08:45-09:30",
+    duration: "45 min",
     tags: ["Registration"],
-    title: "Registration and checkin",
-    summary: "Grab your badge, settle in, and meet Rustaceans before the conference day begins.",
-    speaker: "Venue Team",
+    title: "Check-in",
+    summary: "Audi 1",
+    speaker: "Venue team",
     role: "Main lobby check-in",
-    location: "Main Gate & Lobby",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
     initials: "VT",
     badgeBg: "#ffd38a",
     badgeFg: "#4b2217",
   },
   {
-    time: "11:00 AM",
+    time: "09:30-09:40",
+    duration: "10 min",
+    tags: ["Opening"],
+    title: "Introduction to the Conference",
+    summary: "Audi 1",
+    speaker: "Rust India team",
+    role: "Opening remarks",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "RI",
+    badgeBg: "#f4b183",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "09:45-10:30",
     duration: "45 min",
     tags: ["Keynote"],
-    title: "#TO BE REVEALED SOON",
-    summary: "...",
-    speaker: "..",
-    role: "..",
-    location: "..",
+    title: "Keynote: Rust is poised to grow rapidly, if we keep our eyes on the prize",
+    summary: "Audi 1",
+    speaker: "Niko Matsakis",
+    role: "Co-lead of the Rust Language design team; Senior Principal Engineer at Amazon",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
     initials: "NM",
     badgeBg: "#ffc069",
     badgeFg: "#4b2217",
-  }
+  },
+  {
+    time: "10:35-11:10",
+    duration: "35 min",
+    tags: ["Talk"],
+    title: "Building cancellation-safe async systems with Rust",
+    summary: "Audi 1",
+    speaker: "Samyak Sarnayak",
+    role: "Software Engineer at e6data",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "SS",
+    badgeBg: "#f7c3a2",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "11:15-11:30",
+    duration: "15 min",
+    tags: ["Sponsored"],
+    title: "Sponsored talk: Fast isn't enough: latency is what breaks streaming systems",
+    summary: "Audi 1",
+    speaker: "Kranti Parisa",
+    role: "Founder and CEO at LaserData",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "KP",
+    badgeBg: "#f0a87d",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "11:30-12:00",
+    duration: "30 min",
+    tags: ["Break"],
+    title: "Morning break",
+    summary: "Audi 1",
+    speaker: "All attendees",
+    role: "Refreshment break",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "MB",
+    badgeBg: "#ffe1a8",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "12:00-12:35",
+    duration: "35 min",
+    tags: ["Sponsored"],
+    title: "Sponsored talk: Portable edge ML inference in Rust",
+    summary: "Audi 1",
+    speaker: "Priyanshu Verma",
+    role: "Software Engineer at Aftershoot",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "PV",
+    badgeBg: "#e9b27f",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "12:40-13:15",
+    duration: "35 min",
+    tags: ["Sponsored"],
+    title: "Sponsored talk: The composable era: Rust is reshaping database engineering",
+    summary: "Audi 1",
+    speaker: "Nimalan Mahadevan",
+    role: "Senior Engineer at e6data",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "NM",
+    badgeBg: "#e6a46f",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "13:15-14:15",
+    duration: "60 min",
+    tags: ["Lunch"],
+    title: "Lunch",
+    summary: "Audi 1",
+    speaker: "All attendees",
+    role: "Lunch break",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "LN",
+    badgeBg: "#f4c97d",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "14:15-14:50",
+    duration: "35 min",
+    tags: ["Talk"],
+    title: "Safe by construction: embedded systems in Rust",
+    summary: "Audi 1",
+    speaker: "Devansh Lodha",
+    role: "CSE Undergraduate at IIT Gandhinagar",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "DL",
+    badgeBg: "#d9a26a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "14:55-15:05",
+    duration: "10 min",
+    tags: ["Sponsored"],
+    title: "Sponsored talk: A universal grammar for payments: turning fragmented APIs into compile-time guarantees with Rust",
+    summary: "Audi 1",
+    speaker: "Arun Raj",
+    role: "Software Engineer at Juspay",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "AR",
+    badgeBg: "#e39a66",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "15:10-15:45",
+    duration: "35 min",
+    tags: ["Talk"],
+    title: "Beyond Kafka performance: streaming with Apache Iggy in Rust",
+    summary: "Audi 1",
+    speaker: "Krishna Vishal",
+    role: "Software Engineer at LaserData",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "KV",
+    badgeBg: "#c98f63",
+    badgeFg: "#fff8ef",
+  },
+  {
+    time: "15:45-16:15",
+    duration: "30 min",
+    tags: ["Break"],
+    title: "Evening break",
+    summary: "Audi 1",
+    speaker: "All attendees",
+    role: "Refreshment break",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "EB",
+    badgeBg: "#ffdeac",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "16:15-16:50",
+    duration: "35 min",
+    tags: ["Talk"],
+    title: "From types to trust: safer API designs in Rust",
+    summary: "Audi 1",
+    speaker: "Farhaan Bukhsh",
+    role: "Senior Software and DevOps Engineer at OpenCraft",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "FB",
+    badgeBg: "#b97c57",
+    badgeFg: "#fff8ef",
+  },
+  {
+    time: "16:55-17:30",
+    duration: "35 min",
+    tags: ["Talk"],
+    title: "Unstoppable events: building reliable event-driven systems in Rust",
+    summary: "Audi 1",
+    speaker: "Shriram Balaji",
+    role: "Senior Software Engineer at Microsoft",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "SB",
+    badgeBg: "#a55f45",
+    badgeFg: "#fff8ef",
+  },
+  {
+    time: "17:30-17:45",
+    duration: "15 min",
+    tags: ["Closing"],
+    title: "Concluding remarks; feedback",
+    summary: "Audi 1",
+    speaker: "Rust India team",
+    role: "Closing remarks",
+    location: "Audi 1, NIMHANS Convention Center",
+    locationLink: saturdayVenueUrl,
+    initials: "RI",
+    badgeBg: "#8f523f",
+    badgeFg: "#fff8ef",
+  },
 ];
 
 const workshopDay = [
   {
-    time: "09:30 AM",
-    duration: "360 min",
+    time: "09:00-11:15",
+    duration: "135 min",
     tags: ["Community"],
-    title: "Workshop Checkin",
-    summary: "A softer hand-ons presentations and walk throughs with some of the best experts on the topics of high relevance to day to day Rust",
-    speaker: "Workshop Team",
-    role: "Rust India Team",
-    location: "TBD",
-    initials: "WT",
+    title: "Workshop: Rust's type system for data engineering",
+    summary: "e6data 3rd floor",
+    speaker: "Navdeep Agarwal, Mayur Jadhav",
+    role: "OrcaSheets",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "OA",
     badgeBg: "#ffd38a",
     badgeFg: "#4b2217",
   },
   {
-    time: "07:30 PM",
+    time: "11:15-11:45",
+    duration: "30 min",
+    tags: ["Break"],
+    title: "Break",
+    summary: "e6data 3rd floor",
+    speaker: "All attendees",
+    role: "Break",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "BR",
+    badgeBg: "#f0c97a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "11:45-13:15",
     duration: "90 min",
-    tags: ["Community"],
-    title: "Volunteers & Speaker Dinner",
-    summary: "-- Invite only --",
-    speaker: "",
-    role: "",
-    location: "BLR",
-    initials: "DD",
-    badgeBg: "#3d221a",
-    badgeFg: "#fff8ef",
+    tags: ["Workshop"],
+    title: "Workshop: Build a concurrent cache in Rust",
+    summary: "e6data 3rd floor",
+    speaker: "Sarthak Makhija",
+    role: "Caizen",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "SM",
+    badgeBg: "#f3b67a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "13:15-13:45",
+    duration: "30 min",
+    tags: ["Lunch"],
+    title: "Lunch Break",
+    summary: "e6data 3rd floor",
+    speaker: "All attendees",
+    role: "Lunch break",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "LB",
+    badgeBg: "#f7c46c",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "13:45-15:15",
+    duration: "90 min",
+    tags: ["Workshop"],
+    title: "Workshop: Build a concurrent cache in Rust",
+    summary: "e6data 3rd floor",
+    speaker: "Sarthak Makhija",
+    role: "Caizen",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "SM",
+    badgeBg: "#f3b67a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "15:15-15:30",
+    duration: "15 min",
+    tags: ["Break"],
+    title: "Break",
+    summary: "e6data 3rd floor",
+    speaker: "All attendees",
+    role: "Break",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "BR",
+    badgeBg: "#f0c97a",
+    badgeFg: "#4b2217",
+  },
+  {
+    time: "15:30-17:45",
+    duration: "135 min",
+    tags: ["Workshop"],
+    title: "Workshop: Build a concurrent cache in Rust",
+    summary: "e6data 3rd floor",
+    speaker: "Sarthak Makhija",
+    role: "Caizen",
+    location: "e6data 3rd floor",
+    locationLink: fridayVenueUrl,
+    initials: "SM",
+    badgeBg: "#f3b67a",
+    badgeFg: "#4b2217",
   },
 ];
 ---
 
 <BaseLayout
   title="Schedule | Rust India 2026"
-  description="Rust India 2026 schedule preview for the Bengaluru conference weekend on April 18 and community programming around it."
+  description="Rust India 2026 schedule for the Bengaluru conference weekend on Friday, April 17 and Saturday, April 18, 2026."
 >
   <SiteHeader currentPath="/schedule" />
 
@@ -71,7 +345,7 @@ const workshopDay = [
     <section class="jobs-header section-shell">
       <p class="section-label">Schedule</p>
       <h1 class="jobs-header__title">Schedule</h1>
-      <p class="jobs-header__lede">Plan your Rust India conference flow in Bengaluru across the main day and community programming around it.</p>
+      <p class="jobs-header__lede">Plan your Rust India conference flow in Bengaluru across Friday, April 17 and Saturday, April 18, 2026.</p>
     </section>
 
     <section class="schedule-page section-shell">
@@ -79,16 +353,20 @@ const workshopDay = [
         <aside class="schedule-side">
           <div class="schedule-day-switches">
             <button type="button" class="schedule-day-switch" data-day-switch="day-two">
-              Workshop
-              <span>April 17</span>
+              Friday
+              <span>April 17, 2026</span>
             </button>
             <button type="button" class="schedule-day-switch is-active" data-day-switch="day-one">
-              Conference
-              <span>April 18</span>
+              Saturday
+              <span>April 18, 2026</span>
             </button>
           </div>
 
-          <p class="schedule-side__note">CFPs are closed. Final speaker order and room details will be published here.</p>
+          <p class="schedule-side__note">
+            The Friday workshop day runs in <a href={fridayVenueUrl} target="_blank" rel="noreferrer">e6data's 3rd floor</a>.
+            The Saturday conference day runs in <a href={saturdayVenueUrl} target="_blank" rel="noreferrer">Audi 1, NIMHANS Convention Center</a>.
+            Official schedule: <a href={scheduleUrl} target="_blank" rel="noreferrer">hasgeek.com/rustbangalore/rust-india-conference-2026/schedule</a>.
+          </p>
         </aside>
 
         <div class="schedule-stack">
@@ -118,7 +396,9 @@ const workshopDay = [
                         </div>
                       </div>
 
-                      <div class="schedule-entry__location">{item.location}</div>
+                      <div class="schedule-entry__location">
+                        <a href={item.locationLink} target="_blank" rel="noreferrer">{item.location}</a>
+                      </div>
                     </div>
                   </div>
                 </article>
@@ -152,7 +432,9 @@ const workshopDay = [
                         </div>
                       </div>
 
-                      <div class="schedule-entry__location">{item.location}</div>
+                      <div class="schedule-entry__location">
+                        <a href={item.locationLink} target="_blank" rel="noreferrer">{item.location}</a>
+                      </div>
                     </div>
                   </div>
                 </article>
