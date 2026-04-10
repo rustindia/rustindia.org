@@ -1351,6 +1351,18 @@ img {
   font-weight: 700;
 }
 
+.schedule-entry__location a,
+.schedule-side__note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.schedule-entry__location a:hover,
+.schedule-side__note a:hover {
+  color: var(--color-accent-deep);
+}
+
 .site-footer {
   margin-top: 5rem;
   border-top: 3px solid var(--color-line);
