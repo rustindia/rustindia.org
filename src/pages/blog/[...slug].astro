@@ -1,0 +1,144 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
+---
+
+<BaseLayout
+  title={`${post.data.title} | Rust India`}
+  description={post.data.description}
+>
+  <SiteHeader currentPath="/blog/" />
+
+  <main class="site-main">
+    <article class="section-shell blog-post">
+      <header class="page-header">
+        <p class="section-label">Blog</p>
+        <h1 class="page-title">{post.data.title}</h1>
+        <p class="post-meta">
+          {dateFormat.format(post.data.pubDate)} · {post.data.author}
+        </p>
+        {
+          post.data.tags.length > 0 && (
+            <p class="post-tags">
+              {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </p>
+          )
+        }
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <p class="post-back"><a href="/blog/">Back to all posts</a></p>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    max-width: min(46rem, var(--shell-width));
+  }
+
+  .post-meta {
+    margin: 1rem 0 0;
+    color: var(--color-ink-soft);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+  }
+
+  .prose {
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  .prose :global(h2),
+  .prose :global(h3) {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.7rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.35rem;
+  }
+
+  .prose :global(p) {
+    margin: 1rem 0;
+  }
+
+  .prose :global(a) {
+    color: var(--color-accent);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin: 0.35rem 0;
+  }
+
+  .prose :global(blockquote) {
+    margin: 1.25rem 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 3px solid var(--color-line);
+    color: var(--color-ink-soft);
+  }
+
+  .prose :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.92em;
+    padding: 0.15em 0.4em;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 0.375rem;
+  }
+
+  .prose :global(pre) {
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+  }
+
+  .prose :global(pre code) {
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .prose :global(hr) {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .post-back {
+    margin: 3rem 0 0;
+  }
+</style>

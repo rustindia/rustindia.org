@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { contributors } from "../../data/contributors";
+---
+
+<BaseLayout
+  title="Contributors | Rust India"
+  description="People who keep the Rust India community running."
+>
+  <SiteHeader currentPath="/contributors/" />
+
+  <main class="site-main">
+    <section class="section-shell">
+      <header class="page-header">
+        <p class="section-label">Community</p>
+        <h1 class="page-title">Contributors</h1>
+        <p class="page-lede">People who keep the Rust India community running.</p>
+      </header>
+
+      {
+        contributors.length > 0 ? (
+          <div class="card-grid">
+            {
+              contributors.map((contributor) => (
+                <div class="card contributor-card">
+                  <h2 class="contributor-card__name">{contributor.name}</h2>
+                  <p class="contributor-card__role">{contributor.role}</p>
+                  {
+                    contributor.link && (
+                      <a href={contributor.link} target="_blank" rel="noreferrer">
+                        {contributor.link}
+                      </a>
+                    )
+                  }
+                </div>
+              ))
+            }
+          </div>
+        ) : (
+          <p class="card empty-state">
+            No contributors listed yet — add yourself with a pull request.
+            <br />
+            <a href="https://github.com/swarnimarun/rustindia.org" target="_blank" rel="noreferrer">
+              github.com/swarnimarun/rustindia.org
+            </a>
+          </p>
+        )
+      }
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .contributor-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+
+  .contributor-card__role {
+    margin: 0.35rem 0 0;
+    color: var(--color-ink-soft);
+  }
+</style>

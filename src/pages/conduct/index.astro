@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+---
+
+<BaseLayout
+  title="Code of Conduct | Rust India"
+  description="All Rust India spaces are welcoming, inclusive, and harassment-free. Report issues to team@rustindia.org."
+>
+  <SiteHeader currentPath="/conduct/" />
+
+  <main class="site-main">
+    <article class="section-shell conduct">
+      <header class="page-header">
+        <p class="section-label">Community</p>
+        <h1 class="page-title">Code of Conduct</h1>
+        <p class="page-lede">Every Rust India space — chat channels, events, meetups, and the blog — is a welcoming, harassment-free space.</p>
+      </header>
+
+      <div class="prose">
+        <h2>Our expectations</h2>
+        <p>We expect everyone in Rust India spaces to be:</p>
+        <ul>
+          <li><strong>Respectful</strong> — treat people with courtesy, even when you disagree. Disagreement is fine; personal attacks are not.</li>
+          <li><strong>Inclusive</strong> — welcome people of all backgrounds, experience levels, and identities. Beginners are the future of this community.</li>
+          <li><strong>Constructive</strong> — share feedback and criticism in good faith, focused on ideas rather than people.</li>
+        </ul>
+
+        <h2>Unacceptable behaviour</h2>
+        <p>Harassment, discrimination, intimidation, and any form of abusive behaviour are not tolerated in any Rust India space, online or in person. This includes unwelcome sexual attention, offensive language, and public or private harassment.</p>
+
+        <h2>Reporting</h2>
+        <p>If you experience or witness a violation, contact the community team at <a href="mailto:team@rustindia.org">team@rustindia.org</a>. Reports are handled confidentially and seriously. If the incident involves an event or meetup, you may also approach any organiser on site.</p>
+
+        <h2>The official Rust code of conduct</h2>
+        <p>Rust India follows the spirit of the official <a href="https://www.rust-lang.org/policies/code-of-conduct" target="_blank" rel="noreferrer">Rust Code of Conduct</a>. Where this page and the official document differ, the more protective standard applies.</p>
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .conduct {
+    max-width: min(46rem, var(--shell-width));
+  }
+
+  .prose {
+    font-size: 1.08rem;
+    line-height: 1.75;
+  }
+
+  .prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    margin: 2.25rem 0 0.75rem;
+  }
+
+  .prose p {
+    margin: 1rem 0;
+  }
+
+  .prose ul {
+    padding-left: 1.5rem;
+  }
+
+  .prose li {
+    margin: 0.35rem 0;
+  }
+
+  .prose a {
+    color: var(--color-accent);
+  }
+</style>

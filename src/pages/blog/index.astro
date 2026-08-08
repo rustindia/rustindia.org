@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
+---
+
+<BaseLayout
+  title="Blog | Rust India"
+  description="News, write-ups, and community notes from Rust India."
+>
+  <SiteHeader currentPath="/blog/" />
+
+  <main class="site-main">
+    <section class="section-shell">
+      <header class="page-header">
+        <p class="section-label">Blog</p>
+        <h1 class="page-title">Blog</h1>
+        <p class="page-lede">News, write-ups, and community notes from Rust India.</p>
+      </header>
+
+      {
+        posts.length > 0 ? (
+          <div class="card-grid">
+            {
+              posts.map((post) => (
+                <a href={`/blog/${post.id}/`} class="card post-card">
+                  <h2 class="post-card__title">{post.data.title}</h2>
+                  <p class="post-card__meta">
+                    {dateFormat.format(post.data.pubDate)} · {post.data.author}
+                  </p>
+                  <p class="post-card__desc">{post.data.description}</p>
+                  <p class="post-card__tags">
+                    {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+                  </p>
+                </a>
+              ))
+            }
+          </div>
+        ) : (
+          <p class="card empty-state">No posts yet.</p>
+        )
+      }
+
+      <p class="blog-rss">
+        Subscribe via <a href="/rss.xml">RSS</a>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-rss {
+    margin-top: 2rem;
+    color: var(--color-ink-soft);
+  }
+</style>
