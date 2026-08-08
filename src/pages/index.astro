@@ -1,20 +1,351 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import HeroCampaign from "../components/HeroCampaign.astro";
-import ConferenceSections from "../components/ConferenceSections.astro";
-import CommunityPulse from "../components/CommunityPulse.astro";
+import MailingList from "../components/MailingList.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const now = new Date();
+const upcomingEvents = (await getCollection("events"))
+  .filter((event) => event.data.date >= now)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
+  .slice(0, 3);
+
+const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
+
+function excerpt(body: string): string {
+  return body
+    .trim()
+    .split(/\n\n+/)[0]
+    .replace(/\n/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .trim();
+}
+
+const communityLinks = [
+  { name: "Discord", link: "https://discord.com/invite/p3uaTXS6NP" },
+  { name: "X", link: "https://x.com/IndiaRust" },
+  { name: "Bluesky", link: "https://bsky.app/profile/rustindia.bsky.social" },
+  { name: "Matrix", link: "https://matrix.to/#/#rustindia:matrix.org" },
+  { name: "LinkedIn", link: "https://www.linkedin.com/company/rust-india" },
+  { name: "Telegram", link: "https://t.me/RustIndia" },
+];
 ---
 
 <BaseLayout
-  title="Rust India Conference 2026 | Bengaluru"
-  description="Rust India Conference lands in Bengaluru on Saturday, April 18, 2026 with schedule previews, sponsorship, jobs, and mailing list updates."
+  title="Rust India"
+  description="The home of the Rust programming language community in India — blog, events, and ways to connect."
 >
   <SiteHeader currentPath="/" />
 
   <main class="site-main">
-    <HeroCampaign />
-    <ConferenceSections />
-    <CommunityPulse />
+    <section class="section-shell hero">
+      <p class="section-label">The Indian Rust community</p>
+      <h1 class="page-title hero__title">Rust India</h1>
+      <p class="hero__lede">
+        The home of the Rust programming language community in India — blog, events, and ways to connect.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn-primary" href="/community/">Join the Community</a>
+        <a class="btn btn-secondary" href="/blog/">Read the Blog</a>
+      </div>
+    </section>
+
+    <section class="section-shell home-section">
+      <h2 class="section-title">Install Rust</h2>
+      <p class="home-section__lede">
+        New to Rust? Install the toolchain with <code>rustup</code> — the recommended way to get going.
+      </p>
+      <div class="terminal" id="terminal-block">
+        <code class="terminal__cmd" id="install-cmd" tabindex="0">
+          <span class="terminal__prompt">$ </span>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        </code>
+        <button class="terminal__copy" id="copy-btn" type="button" aria-label="Copy to clipboard" title="Copy to clipboard">
+          <svg id="copy-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <svg id="check-icon" class="terminal__check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="section-shell home-section">
+      <div class="home-section__head">
+        <h2 class="section-title">Latest posts</h2>
+        <a class="home-section__link" href="/blog/">View all</a>
+      </div>
+      <div class="card-grid">
+        {
+          posts.map((post) => (
+            <a href={`/blog/${post.id}/`} class="card post-card">
+              <p class="post-card__meta">
+                {dateFormat.format(post.data.pubDate)} · {post.data.author}
+              </p>
+              <h3 class="post-card__title">{post.data.title}</h3>
+              <p class="post-card__desc">{post.data.description}</p>
+              <p class="post-card__tags">
+                {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-shell home-section">
+      <div class="home-section__head">
+        <h2 class="section-title">Upcoming events</h2>
+        <a class="home-section__link" href="/events/">View all</a>
+      </div>
+      {
+        upcomingEvents.length > 0 ? (
+          <div class="card-grid">
+            {
+              upcomingEvents.map((event) => (
+                <div class="card event-card">
+                  <p class="event-card__meta">
+                    {dateFormat.format(event.data.date)} · {event.data.location}
+                  </p>
+                  <h3 class="event-card__title">{event.data.title}</h3>
+                  <p class="event-card__desc">{excerpt(event.body)}</p>
+                  {
+                    event.data.url && (
+                      <p class="event-card__action">
+                        <a
+                          class="btn btn-secondary"
+                          href={event.data.url}
+                          target={event.data.url.startsWith("/") ? undefined : "_blank"}
+                          rel={event.data.url.startsWith("/") ? undefined : "noreferrer"}
+                        >
+                          Details
+                        </a>
+                      </p>
+                    )
+                  }
+                </div>
+              ))
+            }
+          </div>
+        ) : (
+          <p class="card empty-state">
+            No upcoming events right now — join the community to hear about the next one.
+            <br />
+            <a href="/community/">Join the community</a>
+          </p>
+        )
+      }
+    </section>
+
+    <section class="section-shell home-section">
+      <h2 class="section-title">Community</h2>
+      <ul class="home-links">
+        {
+          communityLinks.map((item) => (
+            <li>
+              <a href={item.link} target="_blank" rel="noreferrer">{item.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="home-mailing">
+        <MailingList />
+      </div>
+    </section>
+
+    <section class="section-shell home-section">
+      <p class="home-contributors">
+        Rust India is run by its contributors.{" "}
+        <a href="/contributors/">Meet them on the contributors page</a>.
+      </p>
+    </section>
   </main>
 </BaseLayout>
+
+<script>
+  const copyBtn = document.querySelector("#copy-btn");
+  const terminalBlock = document.querySelector("#terminal-block");
+  const copyIcon = document.querySelector("#copy-icon");
+  const checkIcon = document.querySelector("#check-icon");
+  const cmdText = "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh";
+
+  if (copyBtn && terminalBlock && copyIcon && checkIcon) {
+    checkIcon.classList.add("hidden");
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(cmdText);
+        copyIcon.classList.add("hidden");
+        checkIcon.classList.remove("hidden");
+        terminalBlock.classList.add("terminal--flash");
+        window.setTimeout(() => terminalBlock.classList.remove("terminal--flash"), 160);
+        window.setTimeout(() => {
+          copyIcon.classList.remove("hidden");
+          checkIcon.classList.add("hidden");
+        }, 2000);
+      } catch (error) {
+        console.error("Failed to copy command: ", error);
+      }
+    });
+  }
+</script>
+
+<style>
+  .hero {
+    padding-top: 3.25rem;
+    text-align: center;
+  }
+
+  .hero__title {
+    font-size: clamp(3.8rem, 8vw, 6.2rem);
+    line-height: 0.98;
+  }
+
+  .hero__lede {
+    max-width: 40rem;
+    margin: 1.25rem auto 0;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--color-ink-soft);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+
+  .home-section {
+    margin-top: 4.5rem;
+  }
+
+  .home-section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-line);
+    margin-bottom: 1.25rem;
+  }
+
+  .home-section__head .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  }
+
+  .home-section__link {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .home-section__link:hover {
+    text-decoration: underline;
+  }
+
+  .home-section__lede {
+    margin: 0.5rem 0 0;
+    color: var(--color-ink-soft);
+  }
+
+  .home-section__lede code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    padding: 0.1em 0.35em;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: 0.2rem;
+  }
+
+  .terminal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding: 1.1rem 1.25rem;
+    background: var(--color-ink);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    transition: background-color 0.15s ease;
+  }
+
+  .terminal__cmd {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-bg);
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+
+  .terminal__prompt {
+    color: #a39d93;
+    user-select: none;
+  }
+
+  .terminal__copy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--color-bg);
+    cursor: pointer;
+  }
+
+  .terminal__copy:hover {
+    color: var(--color-accent);
+  }
+
+  .terminal__copy svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .terminal--flash {
+    background: var(--color-accent);
+  }
+
+  .home-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.75rem;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-links a {
+    color: var(--color-ink);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .home-links a:hover {
+    color: var(--color-accent);
+  }
+
+  .home-mailing {
+    margin-top: 2.5rem;
+  }
+
+  .home-contributors {
+    margin: 0;
+    color: var(--color-ink-soft);
+  }
+
+  .home-contributors a {
+    color: var(--color-accent);
+  }
+</style>

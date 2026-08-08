@@ -1,14 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
-import invideoLogo from "../../assets/invideo_logo.svg";
-import aftershootLogo from "../../assets/aftershoot_logo.svg";
-import e6dataLogo from "../../assets/e6data_logo.svg";
-import pre6Logo from "../../assets/pre6_logo.svg";
-import juspayLogo from "../../assets/juspay_logo.svg";
-import laserdataLogo from "../../assets/laserdata_logo.jpg";
-import rustRoverLogo from "../../assets/rust_rover.svg";
-import noonLogo from "../../assets/noon_logo.svg";
 
 const saturdayVenueUrl = "https://maps.app.goo.gl/DjaCZYkrkxHu99W86";
 const fridayVenueUrl = "https://maps.app.goo.gl/vhyLFtvNGZx99wtM9";
@@ -342,51 +334,18 @@ const workshopDay = [
 ];
 
 const sponsorTiers = {
-  ferris: [
-    {
-      initials: "Invideo",
-      name: "Invideo",
-      tone: "#efe5df",
-      text: "#4b2217",
-      link: "https://invideo.io",
-      logo: invideoLogo.src,
-    },
-  ],
+  ferris: [{ name: "Invideo", link: "https://invideo.io" }],
   gold: [
-    {
-      initials: "Aftershoot",
-      name: "Aftershoot",
-      tone: "#232323",
-      text: "#f4f4f4",
-      link: "https://aftershoot.com/",
-      logo: aftershootLogo.src,
-      logoClass: "sponsor-logo--aftershoot",
-    },
-    { initials: "E6Data", name: "E6Data", tone: "#252525", text: "#f4f4f4", link: "https://e6data.com/", logo: e6dataLogo.src },
+    { name: "Aftershoot", link: "https://aftershoot.com/" },
+    { name: "E6Data", link: "https://e6data.com/" },
   ],
   silver: [
-    {
-      initials: "Laserdata",
-      name: "Laserdata",
-      tone: "#d9d9d9",
-      text: "#333333",
-      link: "https://laserdata.com",
-      logo: laserdataLogo.src
-    },
-    { initials: "Pre6", name: "Pre6", tone: "#d9d9d9", text: "#333333", link: "https://pre6.ai", logo: pre6Logo.src },
-    { initials: "Juspay", name: "Juspay", tone: "#d9d9d9", text: "#333333", link: "https://hyperswitch.io", logo: juspayLogo.src },
-    { initials: "Noon", name: "Noon", tone: "#d9d9d9", text: "#333333", link: "https://noon.design", logo: noonLogo.src },
+    { name: "Laserdata", link: "https://laserdata.com" },
+    { name: "Pre6", link: "https://pre6.ai" },
+    { name: "Juspay", link: "https://hyperswitch.io" },
+    { name: "Noon", link: "https://noon.design" },
   ],
-  livestream: [
-    {
-      initials: "Jetbrains",
-      name: "RustRover by JetBrains",
-      tone: "#efe5df",
-      text: "#4b2217",
-      link: "https://www.jetbrains.com/rust",
-      logo: rustRoverLogo.src,
-    },
-  ],
+  livestream: [{ name: "RustRover by JetBrains", link: "https://www.jetbrains.com/rust" }],
 };
 
 const tierLabels = {
@@ -467,11 +426,6 @@ const inviteCard = {
                 {
                   sponsors.map((sponsor) => (
                     <a href={sponsor.link} class="card sponsor-card" target="_blank" rel="noreferrer">
-                      <img
-                        src={sponsor.logo}
-                        alt={sponsor.name}
-                        class={sponsor.logoClass ? `sponsor-logo ${sponsor.logoClass}` : "sponsor-logo"}
-                      />
                       <span class="sponsor-card__name">{sponsor.name}</span>
                     </a>
                   ))
@@ -531,7 +485,7 @@ const inviteCard = {
 
   .schedule-entry__time {
     margin: 0;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-family: var(--font-mono);
     font-size: 0.9rem;
     color: var(--color-ink-soft);
   }
@@ -570,34 +524,27 @@ const inviteCard = {
 
   .sponsor-card {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    min-height: 7rem;
+    min-height: 4.5rem;
+    padding: 1rem 1.25rem;
     text-decoration: none;
     color: inherit;
   }
 
   .sponsor-card:hover {
-    border-color: var(--color-ink-soft);
+    border-color: var(--color-accent);
   }
 
-  .sponsor-logo {
-    max-height: 3.25rem;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .sponsor-logo--aftershoot {
-    padding: 0.5rem;
-    background: #232323;
-    border-radius: 0.375rem;
+  .sponsor-card:hover .sponsor-card__name {
+    color: var(--color-accent);
   }
 
   .sponsor-card__name {
-    font-size: 0.95rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-weight: 600;
+    text-align: center;
   }
 
   .jobs-card__title {
