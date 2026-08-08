@@ -32,9 +32,11 @@ Always run `pnpm build` after non-trivial edits.
   change per commit).
 - Recommended local CLI, in priority order:
   1. **jj** (Jujutsu) — the repo is a colocated jj + git repo.
-     - `jj describe` to set a commit message, `jj commit` to finalize,
+     - `jj describe -m` to set a commit message, `jj commit -m` to finalize,
        `jj squash` to merge into a parent, `jj branch create` for branches,
        `jj git push -b <branch>` to push.
+     - Always pass `-m`; the configured editor (hx) cannot run in
+       non-interactive shells, so `jj commit`/`jj describe` without `-m` fail.
   2. **git** — `git add` + `git commit` with small, focused commits.
   3. **Other alternatives** (e.g. radicle — a `rad` remote exists) — only when
      jj and git are not suitable for the task.
