@@ -9,6 +9,6 @@ tags:
 
 On Saturday, April 18, 2026, the Rust India community gathered at the NIMHANS Convention Center in Bengaluru for the first Rust India Conference. The day opened with a keynote from Niko Matsakis on the future of Rust, followed by community talks on async systems, embedded development, streaming, and safer API design — and a full day of workshops the day before.
 
-The conference was made possible by our sponsors, whose logos you can find on the [archive page](/past-events/2026), and by every attendee who showed up with questions and ideas.
+The conference was made possible by our sponsors, whose logos you can find on the [archive page](/archive/2026), and by every attendee who showed up with questions and ideas.
 
-The archive page keeps the [full schedule, speakers, and sponsors](/past-events/2026) from the day. If you have photos, write-ups, or talk feedback to share, reach out on [Discord](/community) — we would love to hear how it went for you.
+The archive page keeps the [full schedule, speakers, and sponsors](/archive/2026) from the day. If you have photos, write-ups, or talk feedback to share, reach out on [Discord](/community) — we would love to hear how it went for you.

@@ -19,7 +19,7 @@ const events = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     location: z.string(),
-    url: z.string().optional(), // external meetup link or internal path like /past-events/2026
+    url: z.string().optional(), // external meetup link or internal path like /archive/2026
   }),
 });
 

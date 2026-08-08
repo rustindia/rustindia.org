@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+
+interface Job {
+  title: string;
+  company: string;
+  posted: string;
+  tags: string[];
+  summary: string;
+  actionHref: string;
+  actionLabel: string;
+}
+
+const jobs: Job[] = [];
+
+const submitCard = {
+  title: "Want to add a role here?",
+  summary:
+    "Mail the team with the role, company, work mode, and level. We publish relevant Rust openings on the board after a quick review.",
+  tags: ["Submit a job", "Rust hiring", "Hiring"],
+  actionHref: "mailto:jobs@rustindia.org?subject=Rust%20India%20Job%20Submission",
+  actionLabel: "Submit a Job",
+};
+---
+
+<BaseLayout
+  title="Jobs | Rust India"
+  description="Rust roles from teams hiring across India, on the Rust India community jobs board."
+>
+  <SiteHeader currentPath="/jobs/" />
+
+  <main class="site-main">
+    <section class="section-shell">
+      <header class="page-header">
+        <p class="section-label">Jobs Board</p>
+        <h1 class="page-title">Jobs</h1>
+        <p class="page-lede">
+          Rust-focused roles from teams hiring across India. Know a team looking for Rust folks? Let them post it here.
+        </p>
+      </header>
+
+      {
+        jobs.length > 0 ? (
+          <div class="jobs-list">
+            {
+              jobs.map((job) => (
+                <div class="card job-card">
+                  <h2 class="job-card__title">{job.title}</h2>
+                  <p class="job-card__meta">{job.company} · {job.posted}</p>
+                  <p class="job-card__desc">{job.summary}</p>
+                  <p class="job-card__tags">
+                    {job.tags.map((tag) => <span class="tag">{tag}</span>)}
+                  </p>
+                  <p class="job-card__action">
+                    <a class="btn btn-primary" href={job.actionHref}>{job.actionLabel}</a>
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        ) : (
+          <p class="card empty-state jobs-empty">
+            No open roles right now — check back soon.
+          </p>
+        )
+      }
+
+      <div class="card jobs-submit">
+        <h2 class="jobs-submit__title">{submitCard.title}</h2>
+        <p class="jobs-submit__summary">{submitCard.summary}</p>
+        <p class="jobs-submit__tags">
+          {submitCard.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </p>
+        <p>
+          <a class="btn btn-primary" href={submitCard.actionHref}>{submitCard.actionLabel}</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .jobs-list {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .job-card__title,
+  .jobs-submit__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .job-card__meta {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+  }
+
+  .job-card__desc,
+  .jobs-submit__summary {
+    margin: 0.75rem 0 0;
+    color: var(--color-ink-soft);
+    max-width: 42rem;
+  }
+
+  .job-card__tags,
+  .jobs-submit__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0 0;
+  }
+
+  .job-card__action {
+    margin: 1.25rem 0 0;
+  }
+
+  .jobs-empty {
+    display: block;
+  }
+
+  .jobs-submit {
+    margin-top: 1.5rem;
+  }
+</style>
