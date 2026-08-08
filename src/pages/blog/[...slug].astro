@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { getCollection, render } from "astro:content";
+import heroArt from "../../assets/art/hero-post.png";
+
+const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
@@ -39,6 +42,8 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
         }
       </header>
 
+      <img class="post-hero" src={heroArtSrc} alt="" aria-hidden="true" />
+
       <div class="prose">
         <Content />
       </div>
@@ -51,6 +56,15 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 <style>
   .blog-post {
     max-width: min(46rem, var(--shell-width));
+  }
+
+  .post-hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 2rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
   }
 
   .post-meta {

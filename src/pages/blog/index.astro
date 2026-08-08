@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import { getCollection } from "astro:content";
+import heroArt from "../../assets/art/hero-blog.png";
+
+const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -18,10 +21,13 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 
   <main class="site-main">
     <section class="section-shell">
-      <header class="page-header">
-        <p class="section-label">Blog</p>
-        <h1 class="page-title">Blog</h1>
-        <p class="page-lede">News, write-ups, and community notes from Rust India.</p>
+      <header class="page-header page-header--split">
+        <div>
+          <p class="section-label">Blog</p>
+          <h1 class="page-title">Blog</h1>
+          <p class="page-lede">News, write-ups, and community notes from Rust India.</p>
+        </div>
+        <img class="page-header__art" src={heroArtSrc} alt="" aria-hidden="true" />
       </header>
 
       {
