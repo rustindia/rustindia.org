@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+
+const archiveSections = [
+  {
+    title: "2026 Recap",
+    description: "The story of the first Rust India Conference — keynotes, talks, workshops, and the people who made it happen.",
+    link: "/archive/2026/",
+    cta: "Read the recap",
+  },
+  {
+    title: "Full Schedule",
+    description: "The complete 2026 weekend, day by day: Friday workshops at e6data and the Saturday conference at NIMHANS.",
+    link: "/archive/schedule/",
+    cta: "Browse the schedule",
+  },
+  {
+    title: "Sponsors",
+    description: "The partners who powered the 2026 conference, with their logos and links.",
+    link: "/archive/sponsors/",
+    cta: "See the sponsors",
+  },
+];
+---
+
+<BaseLayout
+  title="Archive | Rust India"
+  description="The Rust India Conference 2026 site, preserved: recap, full schedule, and sponsors."
+>
+  <SiteHeader currentPath="/archive/" />
+
+  <main class="site-main">
+    <section class="section-shell">
+      <header class="page-header">
+        <p class="section-label">Archive</p>
+        <h1 class="page-title">Archive</h1>
+        <p class="page-lede">
+          The Rust India Conference 2026 site, preserved as it was. Explore the recap, the full schedule, and the sponsors.
+        </p>
+      </header>
+
+      <div class="card-grid">
+        {
+          archiveSections.map((section) => (
+            <a href={section.link} class="card post-card">
+              <h2 class="post-card__title">{section.title}</h2>
+              <p class="post-card__desc">{section.description}</p>
+              <p class="post-card__tags">
+                <span class="tag">Archive</span>
+              </p>
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="archive-note">
+        This archive preserves the 2026 conference. For what is happening now, see the <a href="/jobs/">jobs board</a> and the <a href="/community/">community</a>.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .archive-note {
+    margin: 3rem 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-ink-soft);
+  }
+
+  .archive-note a {
+    color: var(--color-accent);
+  }
+</style>
