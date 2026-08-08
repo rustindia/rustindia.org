@@ -10,10 +10,10 @@ const ferrisSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.sr
 
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/schedule", label: "Schedule" },
-  { href: "/sponsors", label: "Sponsors" },
-  { href: "/jobs", label: "Jobs" },
-  { href: "/socials", label: "Socials" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/events/", label: "Events" },
+  { href: "/community/", label: "Community" },
+  { href: "/past-events/2026/", label: "Past Events" },
 ];
 ---
 
@@ -22,8 +22,8 @@ const navItems = [
     <a href="/" class="site-header__brand">
       <img src={ferrisSrc} alt="Ferris" class="brand-mark" />
       <span class="brand-copy">
-        <strong>Rust India 2026</strong>
-        <span>Bengaluru | April 18</span>
+        <strong>Rust India</strong>
+        <span>The Indian Rust community</span>
       </span>
     </a>
 
@@ -38,7 +38,7 @@ const navItems = [
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn-primary" href="https://hasgeek.com/rustbangalore/rust-india-conference-2026/" target="_blank" rel="noreferrer">Get Tickets</a>
+      <a class="btn btn-primary" href="/community/">Join Community</a>
 
       <details class="header-menu" data-mobile-menu>
         <summary class="btn btn-secondary" aria-label="Open navigation menu">Menu</summary>
@@ -50,7 +50,7 @@ const navItems = [
               </a>
             ))
           }
-          <a href="https://hasgeek.com/rustbangalore/rust-india-conference-2026/" target="_blank" rel="noreferrer">Book Tickets</a>
+          <a href="/community/">Join Community</a>
         </div>
       </details>
     </div>

@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = "Rust India 2026",
-  description = "Rust India Conference in Bengaluru on Saturday, April 18, 2026.",
+  title = "Rust India",
+  description = "The home of the Rust programming language community in India — blog, events, and ways to connect.",
 } = Astro.props;
 
 const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBadge.src;
@@ -23,66 +23,37 @@ const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBad
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" href={ferrisBadgeSrc} type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title="Rust India Blog" href="/rss.xml" />
     <title>{title}</title>
   </head>
   <body>
-    <div class="space-backdrop" aria-hidden="true">
-      <div class="space-grid"></div>
-      <div class="metro-lines" data-parallax="4"></div>
-      <div class="city-nodes" data-parallax="-5"></div>
-      <div class="ring-road" data-parallax="6"></div>
-      <div class="urban-skyline" data-parallax="3"></div>
-      <div class="signal-haze" data-parallax="-4"></div>
-      <div class="space-orb space-orb-a" data-parallax="5"></div>
-      <div class="space-orb space-orb-b" data-parallax="-7"></div>
-      <div class="space-orb space-orb-c" data-parallax="4"></div>
-    </div>
-
-    <div class="grain-overlay" aria-hidden="true"></div>
-
     <slot />
 
     <footer class="site-footer">
       <div class="section-shell site-footer__inner">
         <div class="site-footer__brand">
           <img src={ferrisBadgeSrc} alt="Ferris" class="brand-mark" />
-          <span>Rust India 2026</span>
+          <span>Rust India</span>
         </div>
 
         <nav class="site-footer__links" aria-label="Footer">
           <a href="/">Home</a>
-          <a href="/schedule">Schedule</a>
-          <a href="/sponsors">Sponsors</a>
-          <a href="/jobs">Jobs Board</a>
-          <a href="/socials">Socials</a>
+          <a href="/blog/">Blog</a>
+          <a href="/events/">Events</a>
+          <a href="/community/">Community</a>
+          <a href="/past-events/2026/">Past Events</a>
+          <a href="/conduct/">Code of Conduct</a>
+          <a href="/contributors/">Contributors</a>
           <a href="mailto:team@rustindia.org">Contact</a>
         </nav>
 
         <p class="site-footer__note">Built with Rust love for the Indian Rust community. git@blame -> swarnimarun.com</p>
-      </div>
-      <div class="site-footer__brand site-footer__brand--disclaimer">
-        <p class="site-footer__note site-footer__note--disclaimer">This event is not sponsored or endorsed by the Rust Foundation.</p>
-      </div>
-      <style>
-        .site-footer__brand--disclaimer {
-          justify-content: center;
-          margin-top: 0.5rem;
-          margin-left: 44.5rem;
-        }
-        .site-footer__note--disclaimer {
-          opacity: 0.7;
-          font-size: 0.875rem;
-          margin: 0;
-        }
-      </style>
 
+        <p class="site-footer__note site-footer__note--disclaimer">Rust India is not sponsored or endorsed by the Rust Foundation.</p>
       </div>
     </footer>
 
     <script is:inline>
-      const parallaxNodes = Array.from(document.querySelectorAll("[data-parallax]"));
-      const finePointer = window.matchMedia("(pointer: fine)");
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
       const headerMenu = document.querySelector("[data-mobile-menu]");
 
       if (headerMenu) {
@@ -90,66 +61,6 @@ const ferrisBadgeSrc = typeof ferrisBadge === "string" ? ferrisBadge : ferrisBad
           document.body.classList.toggle("menu-open", headerMenu.open);
         });
       }
-
-      if (!prefersReducedMotion.matches && parallaxNodes.length) {
-        const controller = new AbortController();
-        const signal = controller.signal;
-        const state = {
-          targetX: 0,
-          targetY: 0,
-          currentX: 0,
-          currentY: 0,
-          scrollRatio: 0,
-        };
-        let frameId = 0;
-
-        const updateScroll = () => {
-          const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-          state.scrollRatio = window.scrollY / maxScroll - 0.5;
-        };
-
-        if (finePointer.matches) {
-          window.addEventListener(
-            "pointermove",
-            (event) => {
-              state.targetX = event.clientX / window.innerWidth - 0.5;
-              state.targetY = event.clientY / window.innerHeight - 0.5;
-            },
-            { passive: true, signal },
-          );
-        }
-
-        window.addEventListener("scroll", updateScroll, { passive: true, signal });
-        updateScroll();
-
-        const animate = (time) => {
-          state.currentX += (state.targetX - state.currentX) * 0.08;
-          state.currentY += (state.targetY - state.currentY) * 0.08;
-
-          parallaxNodes.forEach((node) => {
-            const depth = Number(node.getAttribute("data-parallax")) || 0;
-            const driftX = Math.sin(time * 0.0001 + depth) * depth * 0.06;
-            const driftY = Math.cos(time * 0.00008 + depth) * depth * 0.05;
-            const tx = state.currentX * depth * 1.5 + driftX;
-            const ty = state.currentY * depth * 1.35 + state.scrollRatio * depth * -8 + driftY;
-            node.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
-          });
-
-          frameId = window.requestAnimationFrame(animate);
-        };
-
-        frameId = window.requestAnimationFrame(animate);
-
-        window.addEventListener(
-          "pagehide",
-          () => {
-            window.cancelAnimationFrame(frameId);
-            controller.abort();
-          },
-          { once: true },
-        );
-      }
-
     </script>
 
     <Analytics />
