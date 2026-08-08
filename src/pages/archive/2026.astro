@@ -79,8 +79,22 @@ const tierLabels = {
               <div class="sponsor-grid">
                 {
                   sponsors.map((sponsor) => (
-                    <a href={sponsor.link} class="card sponsor-card" target="_blank" rel="noreferrer">
-                      <span class="sponsor-card__name">{sponsor.name}</span>
+                    <a
+                      href={sponsor.link}
+                      class={`card sponsor-card sponsor-card--${tier}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={sponsor.name}
+                    >
+                      {sponsor.logo ? (
+                        <img
+                          class="sponsor-card__logo"
+                          src={sponsor.logo}
+                          alt={`${sponsor.name} logo`}
+                        />
+                      ) : (
+                        <span class="sponsor-card__name">{sponsor.name}</span>
+                      )}
                     </a>
                   ))
                 }
@@ -171,7 +185,7 @@ const tierLabels = {
 
   .sponsor-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 1rem;
   }
 
@@ -183,6 +197,52 @@ const tierLabels = {
     padding: 1rem 1.25rem;
     text-decoration: none;
     color: inherit;
+    background: #ffffff;
+  }
+
+  .sponsor-card__logo {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 3.25rem;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .sponsor-card--platinum {
+    min-height: 7rem;
+  }
+
+  .sponsor-card--platinum .sponsor-card__logo {
+    max-height: 5rem;
+  }
+
+  .sponsor-card--gold {
+    min-height: 6rem;
+  }
+
+  .sponsor-card--gold .sponsor-card__logo {
+    max-height: 4.5rem;
+  }
+
+  .sponsor-card--silver {
+    min-height: 5rem;
+  }
+
+  .sponsor-card--silver .sponsor-card__logo {
+    max-width: 60%;
+    max-height: 2.25rem;
+  }
+
+  .sponsor-card--livestream {
+    min-height: 5.5rem;
+    justify-self: center;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .sponsor-card--livestream .sponsor-card__logo {
+    max-height: 3rem;
   }
 
   .sponsor-card:hover {

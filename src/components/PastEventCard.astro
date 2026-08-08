@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Sponsor } from "../data/2026-conference";
+
+interface Props {
+  event: CollectionEntry<"events">;
+  sponsors?: Sponsor[];
+}
+
+const { event, sponsors = [] } = Astro.props;
+
+const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
+
+function excerpt(body: string): string {
+  return body
+    .trim()
+    .split(/\n\n+/)[0]
+    .replace(/\n/g, " ")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .trim();
+}
+
+const archiveHref = event.data.url ?? "/archive/";
+---
+
+<a
+  href={archiveHref}
+  class="card past-event-card"
+  aria-label={`${event.data.title} — read the recap`}
+>
+  <div class="past-event-card__body">
+    <p class="event-card__meta">
+      {dateFormat.format(event.data.date)} · {event.data.location} ·{" "}
+      <span class="tag">Past</span>
+    </p>
+    <h3 class="event-card__title">{event.data.title}</h3>
+    <p class="event-card__desc">{excerpt(event.body)}</p>
+  </div>
+
+  {
+    sponsors.length > 0 && (
+      <div class="past-event-card__sponsors" aria-label="Sponsors">
+        {
+          sponsors.map((sponsor) =>
+            sponsor.logo ? (
+              <img src={sponsor.logo} alt={`${sponsor.name} logo`} title={sponsor.name} />
+            ) : (
+              <span class="past-event-card__sponsor-name">{sponsor.name}</span>
+            )
+          )
+        }
+      </div>
+    )
+  }
+
+  <span class="btn btn-secondary past-event-card__cta">Read the recap</span>
+</a>
+
+<style>
+  .past-event-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 1.75rem;
+    grid-column: 1 / -1;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .past-event-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .past-event-card:hover .event-card__title {
+    color: var(--color-accent);
+  }
+
+  .past-event-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .past-event-card__sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 22rem;
+  }
+
+  .past-event-card__sponsors img {
+    display: block;
+    max-height: 2.4rem;
+    max-width: 9rem;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .past-event-card__sponsor-name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+  }
+
+  .past-event-card__cta {
+    flex: none;
+  }
+
+  @media (max-width: 759px) {
+    .past-event-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .past-event-card__sponsors {
+      justify-content: flex-start;
+      max-width: none;
+    }
+
+    .past-event-card__cta {
+      justify-self: start;
+    }
+  }
+</style>
