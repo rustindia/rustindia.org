@@ -1,0 +1,516 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { confDay, workshopDay, fridayVenueUrl, saturdayVenueUrl } from "../data/2026-conference";
+---
+
+<BaseLayout
+  title="Schedule | Rust India"
+  description="Rust India 2026 schedule for the Bengaluru conference weekend on Friday, April 17 and Saturday, April 18, 2026."
+>
+  <SiteHeader currentPath="/schedule/" />
+
+  <main class="site-main">
+    <section class="jobs-header section-shell">
+      <p class="section-label">Schedule</p>
+      <h1 class="jobs-header__title">Schedule</h1>
+      <p class="jobs-header__lede">The Rust India 2026 conference weekend in Bengaluru: workshops on Friday, April 17 and the main conference on Saturday, April 18.</p>
+    </section>
+
+    <section class="schedule-page section-shell">
+      <div class="schedule-layout">
+        <aside class="schedule-side">
+          <input
+            type="search"
+            class="schedule-search"
+            data-schedule-search
+            placeholder="Search talks, speakers, tags..."
+            aria-label="Search schedule"
+          />
+
+          <div class="schedule-day-switches">
+            <button type="button" class="schedule-day-switch" data-day-switch="day-two">
+              Friday
+              <span>April 17, 2026</span>
+            </button>
+            <button type="button" class="schedule-day-switch is-active" data-day-switch="day-one">
+              Saturday
+              <span>April 18, 2026</span>
+            </button>
+          </div>
+
+          <p class="schedule-side__note">
+            The Friday workshop day runs in <a href={fridayVenueUrl} target="_blank" rel="noreferrer">e6data's 3rd floor</a>.
+            The Saturday conference day runs in <a href={saturdayVenueUrl} target="_blank" rel="noreferrer">Audi 1, NIMHANS Convention Center</a>.
+          </p>
+        </aside>
+
+        <div class="schedule-stack">
+          <div class="schedule-day" data-day-panel="day-one">
+            {
+              confDay.map((item) => (
+                <article class="schedule-entry frame-panel" style={`--speaker-bg:${item.badgeBg}; --speaker-fg:${item.badgeFg};`}>
+                  <div class="schedule-entry__time">
+                    <strong>{item.time}</strong>
+                    <span>{item.duration}</span>
+                  </div>
+
+                  <div class="schedule-entry__body">
+                    <div class="schedule-entry__tags">
+                      {item.tags.map((tag) => <span class="tag">{tag}</span>)}
+                    </div>
+
+                    <h2 class="schedule-entry__title">{item.title}</h2>
+                    <p class="schedule-entry__summary">{item.summary}</p>
+
+                    <div class="schedule-entry__footer">
+                      <div class="schedule-entry__speaker">
+                        <div class="schedule-entry__avatar">{item.initials}</div>
+                        <div>
+                          <div class="schedule-entry__speaker-name">{item.speaker}</div>
+                          <div class="schedule-entry__speaker-role">{item.role}</div>
+                        </div>
+                      </div>
+
+                      <div class="schedule-entry__location">
+                        <a href={item.locationLink} target="_blank" rel="noreferrer">{item.location}</a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <div class="schedule-day hidden" data-day-panel="day-two">
+            {
+              workshopDay.map((item) => (
+                <article class="schedule-entry frame-panel" style={`--speaker-bg:${item.badgeBg}; --speaker-fg:${item.badgeFg};`}>
+                  <div class="schedule-entry__time">
+                    <strong>{item.time}</strong>
+                    <span>{item.duration}</span>
+                  </div>
+
+                  <div class="schedule-entry__body">
+                    <div class="schedule-entry__tags">
+                      {item.tags.map((tag) => <span class="tag">{tag}</span>)}
+                    </div>
+
+                    <h2 class="schedule-entry__title">{item.title}</h2>
+                    <p class="schedule-entry__summary">{item.summary}</p>
+
+                    <div class="schedule-entry__footer">
+                      <div class="schedule-entry__speaker">
+                        <div class="schedule-entry__avatar">{item.initials}</div>
+                        <div>
+                          <div class="schedule-entry__speaker-name">{item.speaker}</div>
+                          <div class="schedule-entry__speaker-role">{item.role}</div>
+                        </div>
+                      </div>
+
+                      <div class="schedule-entry__location">
+                        <a href={item.locationLink} target="_blank" rel="noreferrer">{item.location}</a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+
+          <p class="schedule-no-match" data-schedule-empty hidden>
+            No schedule entries match your search.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const daySwitches = Array.from(document.querySelectorAll("[data-day-switch]"));
+    const dayPanels = Array.from(document.querySelectorAll("[data-day-panel]"));
+
+    if (daySwitches.length && dayPanels.length) {
+      daySwitches.forEach((button) => {
+        button.addEventListener("click", () => {
+          const selected = button.getAttribute("data-day-switch");
+
+          daySwitches.forEach((item) => item.classList.toggle("is-active", item === button));
+          dayPanels.forEach((panel) => {
+            panel.classList.toggle("hidden", panel.getAttribute("data-day-panel") !== selected);
+          });
+        });
+      });
+    }
+
+    const searchInput = document.querySelector("[data-schedule-search]");
+    const entries = Array.from(document.querySelectorAll(".schedule-entry"));
+    const noMatch = document.querySelector("[data-schedule-empty]");
+
+    if (searchInput && entries.length && noMatch) {
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visible = 0;
+
+        entries.forEach((entry) => {
+          const matches = !query || entry.textContent.toLowerCase().includes(query);
+          entry.classList.toggle("is-filtered", !matches);
+          if (matches) {
+            visible += 1;
+          }
+        });
+
+        noMatch.hidden = visible !== 0;
+      });
+    }
+  </script>
+
+  <style>
+    /* Old conference UI, ported with literal colors */
+    .section-label {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #db604a;
+    }
+
+    .frame-panel,
+    .accent-panel {
+      position: relative;
+      border: 3px solid #4b2217;
+      border-radius: 2rem;
+      box-shadow: 10px 10px 0 #ea7d63;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .frame-panel:hover,
+    .accent-panel:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 12px 12px 0 #ea7d63;
+    }
+
+    .frame-panel {
+      background: #fff8ef;
+    }
+
+    .accent-panel {
+      background: #ef745d;
+      color: #fff9f2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.95rem 1.55rem;
+      border: 3px solid #4b2217;
+      border-radius: 1.2rem;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 6px 6px 0 rgb(75 34 23 / 0.28);
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 rgb(75 34 23 / 0.24);
+    }
+
+    .btn-primary {
+      background: #ef745d;
+      color: #fffaf1;
+    }
+
+    .btn-secondary {
+      background: #fff8ef;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 0.8rem;
+      border: 2px solid #4b2217;
+      border-radius: 999px;
+      background: #fff7e8;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .jobs-header {
+      padding-top: 3rem;
+    }
+
+    .jobs-header__title {
+      margin: 0;
+      font-family: "Baloo 2", "Segoe UI", sans-serif;
+      font-size: clamp(3.4rem, 8vw, 6rem);
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+
+    .jobs-header__lede {
+      width: min(46rem, 100%);
+      margin-top: 1.5rem;
+      padding-left: 1.1rem;
+      border-left: 4px solid #ef745d;
+      font-size: clamp(1.18rem, 2.2vw, 1.5rem);
+      line-height: 1.45;
+      color: #7f584a;
+    }
+
+    .schedule-page {
+      padding-top: 3rem;
+    }
+
+    .schedule-layout {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .schedule-side__title {
+      margin: 0.3rem 0 0;
+      font-family: "Baloo 2", "Segoe UI", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 0.92;
+    }
+
+    .schedule-side__lede {
+      max-width: 16rem;
+      margin-top: 0.9rem;
+      font-size: 1.22rem;
+      color: #7f584a;
+    }
+
+    .schedule-search {
+      width: 100%;
+      margin-bottom: 1.4rem;
+      padding: 0.9rem 1rem;
+      border: 3px solid #4b2217;
+      border-radius: 1.25rem;
+      background: #fff8ef;
+      font: inherit;
+      color: #4b2217;
+      box-shadow: 4px 4px 0 rgb(75 34 23 / 0.18);
+    }
+
+    .schedule-search:focus {
+      outline: 3px solid rgb(239 116 93 / 0.85);
+      outline-offset: 3px;
+    }
+
+    .schedule-day-switches {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    .schedule-day-switch {
+      width: 100%;
+      padding: 1rem 1.1rem;
+      border: 3px solid #4b2217;
+      border-radius: 1.25rem;
+      background: #fff8ef;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      text-align: left;
+      font: inherit;
+      font-weight: 700;
+      box-shadow: 4px 4px 0 rgb(75 34 23 / 0.18);
+    }
+
+    .schedule-day-switch span {
+      display: block;
+      margin-top: 0.2rem;
+      color: #7f584a;
+    }
+
+    .schedule-day-switch.is-active {
+      background: #ef745d;
+      color: #fff9f2;
+      box-shadow: 6px 6px 0 rgb(75 34 23 / 0.18);
+    }
+
+    .schedule-day-switch:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 rgb(75 34 23 / 0.18);
+    }
+
+    .schedule-day-switch.is-active:hover {
+      box-shadow: 8px 8px 0 rgb(75 34 23 / 0.18);
+    }
+
+    .schedule-day-switch.is-active span {
+      color: rgb(255 248 240 / 0.9);
+    }
+
+    .schedule-side__note {
+      margin-top: 1.5rem;
+      font-weight: 600;
+      color: #db604a;
+    }
+
+    .schedule-day {
+      display: grid;
+      gap: 1.6rem;
+    }
+
+    .schedule-day.hidden {
+      display: none;
+    }
+
+    .schedule-entry {
+      display: grid;
+      gap: 1.25rem;
+      padding: 1.75rem 1.85rem;
+    }
+
+    .schedule-entry.is-filtered {
+      display: none;
+    }
+
+    .schedule-entry__time strong {
+      display: block;
+      font-family: "Baloo 2", "Segoe UI", sans-serif;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      line-height: 1;
+      color: #db604a;
+    }
+
+    .schedule-entry__time span {
+      font-size: 1rem;
+      color: #7f584a;
+    }
+
+    .schedule-entry__body {
+      padding-left: 1.4rem;
+      border-left: 4px solid rgb(239 116 93 / 0.18);
+    }
+
+    .schedule-entry__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .schedule-entry__title {
+      margin: 0;
+      font-family: "Baloo 2", "Segoe UI", sans-serif;
+      font-size: clamp(2rem, 3.2vw, 3rem);
+      line-height: 1.03;
+    }
+
+    .schedule-entry__summary {
+      margin: 0.9rem 0 0;
+      color: #7f584a;
+      font-size: 1.1rem;
+    }
+
+    .schedule-entry__footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 2px solid rgb(75 34 23 / 0.12);
+    }
+
+    .schedule-entry__speaker {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .schedule-entry__avatar {
+      display: grid;
+      place-items: center;
+      width: 3.2rem;
+      height: 3.2rem;
+      border: 3px solid #4b2217;
+      border-radius: 999px;
+      background: var(--speaker-bg, #ffc069);
+      color: var(--speaker-fg, #4b2217);
+      font-family: "Baloo 2", "Segoe UI", sans-serif;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .schedule-entry__speaker-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .schedule-entry__speaker-role {
+      color: #7f584a;
+      font-size: 0.95rem;
+    }
+
+    .schedule-entry__location {
+      align-self: center;
+      font-weight: 700;
+    }
+
+    .schedule-entry__location a,
+    .schedule-side__note a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+    }
+
+    .schedule-entry__location a:hover,
+    .schedule-side__note a:hover {
+      color: #db604a;
+    }
+
+    .schedule-no-match {
+      margin: 0;
+      padding: 2rem;
+      border: 3px solid #4b2217;
+      border-radius: 2rem;
+      background: #fff8ef;
+      text-align: center;
+      font-weight: 700;
+      color: #7f584a;
+    }
+
+    @media (min-width: 760px) {
+      .schedule-layout {
+        grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .schedule-side {
+        position: sticky;
+        top: 5.5rem;
+      }
+
+      .schedule-entry {
+        grid-template-columns: minmax(9rem, 10.5rem) minmax(0, 1fr);
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 759px) {
+      .jobs-header,
+      .schedule-page {
+        padding-top: 2.4rem;
+      }
+
+      .schedule-entry {
+        padding-left: 1.4rem;
+        padding-right: 1.4rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</BaseLayout>
