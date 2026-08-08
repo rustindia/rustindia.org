@@ -1,0 +1,349 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { sponsorTiers } from "../data/2026-conference";
+---
+
+<BaseLayout
+  title="Sponsors | Rust India"
+  description="The partners who powered Rust India 2026 in Bengaluru — thank you to every sponsor."
+>
+  <SiteHeader currentPath="/sponsors/" />
+
+  <main class="site-main">
+    <section class="jobs-header section-shell">
+      <p class="section-label">Sponsors</p>
+      <h1 class="jobs-header__title">Our Sponsors</h1>
+      <p class="jobs-header__lede">Thank you to the partners who powered Rust India 2026 in Bengaluru.</p>
+    </section>
+
+    <section class="sponsors-page section-shell" aria-labelledby="platinum-tier">
+      <div class="tier-heading">
+        <span id="platinum-tier">Ferris (Platinum)</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--platinum">
+        {
+          sponsorTiers.platinum.map((sponsor) => (
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--platinum">
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-slot--large sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--platinum", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot sponsor-slot--large frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="tier-heading">
+        <span>Cargo (Gold)</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--gold">
+        {
+          sponsorTiers.gold.map((sponsor) => (
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--gold">
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--gold", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="tier-heading">
+        <span>Oxide (Silver)</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--silver">
+        {
+          sponsorTiers.silver.map((sponsor) => (
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--silver">
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--silver", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="tier-heading">
+        <span>Livestream Partner</span>
+      </div>
+      <div class="sponsor-tier sponsor-tier--livestream">
+        {
+          sponsorTiers.livestream.map((sponsor) => (
+            <a href={sponsor.link} class="sponsor-tier__link sponsor-tier__link--livestream">
+              {sponsor.logo ? (
+                <article class="sponsor-slot sponsor-logo-card frame-panel" aria-label={sponsor.name}>
+                  <div class="sponsor-logo-frame">
+                    <img src={sponsor.logo} alt={`${sponsor.name} logo`} class:list={["sponsor-logo", "sponsor-logo--silver", sponsor.logoClass]} />
+                  </div>
+                </article>
+              ) : (
+                <article
+                  class="sponsor-slot frame-panel"
+                  style={`--tile-tone:${sponsor.tone}; --tile-text:${sponsor.text};`}
+                  aria-label={sponsor.name}
+                >
+                  <div class="sponsor-slot__mark">
+                    <strong>{sponsor.initials}</strong>
+                    <small>{sponsor.name}</small>
+                  </div>
+                </article>
+              )}
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .jobs-header {
+    padding-top: 3rem;
+  }
+
+  .jobs-header__title {
+    margin: 0;
+    font-family: "Baloo 2", "Segoe UI", sans-serif;
+    font-size: clamp(3.4rem, 8vw, 6rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+
+  .jobs-header__lede {
+    width: min(46rem, 100%);
+    margin-top: 1.5rem;
+    padding-left: 1.1rem;
+    border-left: 4px solid #ef745d;
+    font-size: clamp(1.18rem, 2.2vw, 1.5rem);
+    line-height: 1.45;
+    color: #7f584a;
+  }
+
+  .section-label {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #db604a;
+  }
+
+  .frame-panel {
+    position: relative;
+    border: 3px solid #4b2217;
+    border-radius: 2rem;
+    box-shadow: 10px 10px 0 #ea7d63;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .frame-panel:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 12px 12px 0 #ea7d63;
+  }
+
+  .sponsors-page {
+    padding-top: 2.5rem;
+  }
+
+  .tier-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tier-heading::before,
+  .tier-heading::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 2px;
+    background: rgb(75 34 23 / 0.14);
+  }
+
+  .tier-heading span {
+    font-family: "Baloo 2", "Segoe UI", sans-serif;
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .sponsor-tier {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.4rem;
+  }
+
+  .sponsor-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 10.5rem;
+    padding: 1.4rem;
+  }
+
+  .sponsor-slot--large {
+    min-height: 14rem;
+  }
+
+  .sponsor-slot__mark {
+    display: grid;
+    place-items: center;
+    gap: 0.25rem;
+    width: 8.8rem;
+    height: 8.8rem;
+    padding: 0.8rem;
+    background: var(--tile-tone, #222);
+    color: var(--tile-text, #f4f4f4);
+    text-align: center;
+  }
+
+  .sponsor-slot__mark strong {
+    font-family: "Baloo 2", "Segoe UI", sans-serif;
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  .sponsor-slot__mark small {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sponsor-tier__link {
+    display: block;
+    min-width: 0;
+    text-decoration: none;
+  }
+
+  .sponsor-tier__link--platinum {
+    flex: 0 1 min(28rem, 100%);
+  }
+
+  .sponsor-tier__link--gold {
+    flex: 0 1 min(24rem, calc(50% - 0.7rem));
+  }
+
+  .sponsor-tier__link--silver {
+    flex: 0 1 min(12rem, calc(33.333% - 0.95rem));
+  }
+
+  .sponsor-tier__link--livestream {
+    flex: 0 1 min(20rem, 100%);
+  }
+
+  .sponsor-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .sponsor-logo--platinum {
+    max-height: 11rem;
+  }
+
+  .sponsor-logo--gold {
+    max-height: 8rem;
+  }
+
+  .sponsor-logo--aftershoot {
+    max-height: 6.8rem;
+  }
+
+  .sponsor-logo--silver {
+    max-height: 6rem;
+  }
+
+  .sponsor-logo-card {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: #ffffff;
+  }
+
+  .sponsor-logo-frame {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sponsor-tier__link > .sponsor-slot {
+    width: 100%;
+  }
+
+  @media (max-width: 759px) {
+    .jobs-header,
+    .sponsors-page {
+      padding-top: 2.4rem;
+    }
+
+    .sponsor-tier__link--platinum,
+    .sponsor-tier__link--gold,
+    .sponsor-tier__link--silver,
+    .sponsor-tier__link--livestream {
+      flex: 1 1 100%;
+    }
+
+    .sponsor-slot {
+      padding-left: 1.4rem;
+      padding-right: 1.4rem;
+    }
+  }
+</style>
+</BaseLayout>

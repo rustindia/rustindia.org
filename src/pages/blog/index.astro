@@ -30,12 +30,20 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
         <img class="page-header__art" src={heroArtSrc} alt="" aria-hidden="true" />
       </header>
 
+      <input
+        type="search"
+        class="blog-search"
+        data-blog-search
+        placeholder="Search posts..."
+        aria-label="Search posts"
+      />
+
       {
         posts.length > 0 ? (
-          <div class="card-grid">
+          <div class="card-grid" data-blog-grid>
             {
               posts.map((post) => (
-                <a href={`/blog/${post.id}/`} class="card post-card">
+                <a href={`/blog/${post.id}/`} class="card post-card" data-post-card>
                   <h2 class="post-card__title">{post.data.title}</h2>
                   <p class="post-card__meta">
                     {dateFormat.format(post.data.pubDate)} · {post.data.author}
@@ -53,6 +61,10 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
         )
       }
 
+      <p class="card empty-state blog-search-empty" data-blog-empty hidden>
+        No posts match your search.
+      </p>
+
       <p class="blog-rss">
         Subscribe via <a href="/rss.xml">RSS</a>.
       </p>
@@ -60,7 +72,55 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
   </main>
 </BaseLayout>
 
+<script>
+  const searchInput = document.querySelector("[data-blog-search]");
+  const postCards = Array.from(document.querySelectorAll("[data-post-card]"));
+  const emptyNote = document.querySelector("[data-blog-empty]");
+
+  if (searchInput && postCards.length && emptyNote) {
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+      let visible = 0;
+
+      postCards.forEach((card) => {
+        const matches = !query || card.textContent.toLowerCase().includes(query);
+        card.classList.toggle("is-hidden", !matches);
+        if (matches) {
+          visible += 1;
+        }
+      });
+
+      emptyNote.hidden = visible !== 0;
+    });
+  }
+</script>
+
 <style>
+  .blog-search {
+    width: min(24rem, 100%);
+    margin: 0 0 1.5rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    background: var(--color-input);
+    font: inherit;
+    color: var(--color-ink);
+  }
+
+  .blog-search:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+    border-color: var(--color-accent);
+  }
+
+  .post-card.is-hidden {
+    display: none;
+  }
+
+  .blog-search-empty {
+    display: block;
+  }
+
   .blog-rss {
     margin-top: 2rem;
     color: var(--color-ink-soft);
