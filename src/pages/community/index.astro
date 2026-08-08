@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import MailingList from "../../components/MailingList.astro";
+import heroArt from "../../assets/art/hero-community.png";
+
+const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
 
 const socials = [
   {
@@ -57,10 +60,13 @@ const socials = [
 
   <main class="site-main">
     <section class="section-shell">
-      <header class="page-header">
-        <p class="section-label">Community</p>
-        <h1 class="page-title">Community</h1>
-        <p class="page-lede">The Rust India community lives on these channels.</p>
+      <header class="page-header page-header--split">
+        <div>
+          <p class="section-label">Community</p>
+          <h1 class="page-title">Community</h1>
+          <p class="page-lede">The Rust India community lives on these channels.</p>
+        </div>
+        <img class="page-header__art" src={heroArtSrc} alt="" aria-hidden="true" />
       </header>
 
       <div class="card-grid">
