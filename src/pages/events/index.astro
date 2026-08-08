@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
+import PastEventCard from "../../components/PastEventCard.astro";
 import { getCollection } from "astro:content";
+import { eventSponsors } from "../../data/2026-conference";
 import heroArt from "../../assets/art/hero-events.png";
 
 const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
@@ -92,28 +94,7 @@ function excerpt(body: string): string {
           <div class="card-grid">
             {
               past.map((event) => (
-                <div class="card event-card">
-                  <p class="event-card__meta">
-                    {dateFormat.format(event.data.date)} · {event.data.location} ·{" "}
-                    <span class="tag">Past</span>
-                  </p>
-                  <h3 class="event-card__title">{event.data.title}</h3>
-                  <p class="event-card__desc">{excerpt(event.body)}</p>
-                  {
-                    event.data.url && (
-                      <p class="event-card__action">
-                        <a
-                          class="btn btn-secondary"
-                          href={event.data.url}
-                          target={event.data.url.startsWith("/") ? undefined : "_blank"}
-                          rel={event.data.url.startsWith("/") ? undefined : "noreferrer"}
-                        >
-                          Details
-                        </a>
-                      </p>
-                    )
-                  }
-                </div>
+                <PastEventCard event={event} sponsors={eventSponsors[event.data.url]} />
               ))
             }
           </div>

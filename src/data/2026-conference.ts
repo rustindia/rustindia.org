@@ -438,3 +438,8 @@ export const sponsorTiers: Record<string, Sponsor[]> = {
     },
   ],
 };
+
+/** Sponsors shown on past-event cards, keyed by the event's archive `url`. */
+export const eventSponsors: Record<string, Sponsor[]> = {
+  "/archive/2026": Object.values(sponsorTiers).flat(),
+};

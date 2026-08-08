@@ -5,6 +5,8 @@ pubDate: 2026-08-01
 author: Rust India Team
 tags:
   - community
+pinned: true
+pinnedOrder: 1
 ---
 
 Rust India is the community for Rust programmers and enthusiasts across the country. Whether you have been writing Rust for years or you are just curious about what the language is about, there is a place for you here.

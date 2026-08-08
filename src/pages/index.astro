@@ -2,7 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import MailingList from "../components/MailingList.astro";
+import PastEventCard from "../components/PastEventCard.astro";
 import { getCollection } from "astro:content";
+import { eventSponsors } from "../data/2026-conference";
 import heroArt from "../assets/art/hero-home.png";
 
 const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
@@ -13,10 +15,15 @@ const posts = (await getCollection("blog"))
   .slice(0, 3);
 
 const now = new Date();
-const upcomingEvents = (await getCollection("events"))
+const allEvents = await getCollection("events");
+const upcomingEvents = allEvents
   .filter((event) => event.data.date >= now)
   .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
   .slice(0, 3);
+
+const pastEvents = allEvents
+  .filter((event) => event.data.date < now)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 
@@ -135,6 +142,26 @@ const communityLinks = [
             <a href="/community/">Join the community</a> ·{" "}
             <a href="/blog/add-an-event/">Add an event</a>
           </p>
+        )
+      }
+    </section>
+
+    <section class="section-shell home-section">
+      <div class="home-section__head">
+        <h2 class="section-title">Past events</h2>
+        <a class="home-section__link" href="/archive/">Archive</a>
+      </div>
+      {
+        pastEvents.length > 0 ? (
+          <div class="card-grid">
+            {
+              pastEvents.map((event) => (
+                <PastEventCard event={event} sponsors={eventSponsors[event.data.url]} />
+              ))
+            }
+          </div>
+        ) : (
+          <p class="card empty-state">No past events recorded yet.</p>
         )
       }
     </section>

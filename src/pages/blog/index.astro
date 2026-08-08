@@ -6,8 +6,14 @@ import heroArt from "../../assets/art/hero-blog.png";
 
 const heroArtSrc = typeof heroArt === "string" ? heroArt : heroArt.src;
 
-const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
+const allPosts = (await getCollection("blog")).filter((post) => !post.data.draft);
+
+const pinnedPosts = allPosts
+  .filter((post) => post.data.pinned)
+  .sort((a, b) => a.data.pinnedOrder - b.data.pinnedOrder);
+
+const posts = allPosts
+  .filter((post) => !post.data.pinned)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
@@ -30,6 +36,25 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
         <img class="page-header__art" src={heroArtSrc} alt="" aria-hidden="true" />
       </header>
 
+      {
+        pinnedPosts.length > 0 && (
+          <section class="pinned-section" aria-label="Pinned posts">
+            <h2 class="pinned-section__title">Pinned</h2>
+            <div class="pinned-list">
+              {
+                pinnedPosts.map((post) => (
+                  <a href={`/blog/${post.id}/`} class="pinned-capsule" data-post-card>
+                    <span class="pinned-capsule__mark" aria-hidden="true"></span>
+                    <span class="pinned-capsule__title">{post.data.title}</span>
+                    <span class="pinned-capsule__date">{dateFormat.format(post.data.pubDate)}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </section>
+        )
+      }
+
       <input
         type="search"
         class="blog-search"
@@ -39,7 +64,7 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
       />
 
       {
-        posts.length > 0 ? (
+        posts.length > 0 && (
           <div class="card-grid" data-blog-grid>
             {
               posts.map((post) => (
@@ -56,8 +81,14 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
               ))
             }
           </div>
-        ) : (
-          <p class="card empty-state">No posts yet.</p>
+        )
+      }
+
+      {
+        posts.length === 0 && (
+          <p class="card empty-state">
+            {pinnedPosts.length > 0 ? "No more posts." : "No posts yet."}
+          </p>
         )
       }
 
@@ -119,6 +150,70 @@ const dateFormat = new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" });
 
   .blog-search-empty {
     display: block;
+  }
+
+  .pinned-section {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .pinned-section__title {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+
+  .pinned-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .pinned-capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.9rem;
+    background: var(--color-input);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--color-ink);
+    font-size: 0.9rem;
+  }
+
+  .pinned-capsule:hover {
+    border-color: var(--color-accent);
+  }
+
+  .pinned-capsule:hover .pinned-capsule__title {
+    color: var(--color-accent);
+  }
+
+  .pinned-capsule__mark {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex: none;
+  }
+
+  .pinned-capsule__title {
+    font-weight: 600;
+  }
+
+  .pinned-capsule__date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
   }
 
   .blog-rss {

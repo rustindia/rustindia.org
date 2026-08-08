@@ -40,6 +40,14 @@
           "type": "boolean",
           "default": false
         },
+        "pinned": {
+          "type": "boolean",
+          "default": false
+        },
+        "pinnedOrder": {
+          "type": "integer",
+          "default": 0
+        },
         "$schema": {
           "type": "string"
         }
