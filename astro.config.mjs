@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://rustindia.org",
   redirects: {
-    "/events": "/archive/schedule",
+    "/jobs": "/events",
     "/schedule": "/archive/schedule",
     "/sponsors": "/archive/sponsors",
     "/past-events/2026": "/archive/2026",
