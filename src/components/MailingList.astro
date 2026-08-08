@@ -1,0 +1,97 @@
+---
+const copy = {
+  title: "Join the mailing list",
+  lede: "Occasional updates on events, meetups, and community news from Rust India. No spam, no marketing.",
+  success: "Submission received. Watch your inbox for Rust India updates.",
+  fallback: "Submission sent. If nothing arrives later, please try again.",
+};
+---
+
+<section class="section-shell mailing" data-mailing-list id="mailing-list">
+  <h2 class="section-title">{copy.title}</h2>
+  <p class="mailing-note">{copy.lede}</p>
+
+  <form
+    class="mailing-form"
+    action="https://docs.google.com/forms/d/e/1FAIpQLSf9QQD3qbXNT7pnjCFeJGM6eRfleFxVGc1_-vJSBjRxmeRb-A/formResponse"
+    method="POST"
+    target="hidden_iframe"
+  >
+    <label class="visually-hidden" for="mailing-email">Email</label>
+    <input type="text" name="honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+    <input
+      id="mailing-email"
+      type="email"
+      name="entry.2110698367"
+      required
+      placeholder="you@example.com"
+      autocomplete="email"
+    />
+    <button type="submit" data-signup-button class="btn btn-primary">Subscribe</button>
+  </form>
+
+  <p data-signup-msg aria-live="polite" class="mailing-note mailing-status hidden">
+    Submission sent. We will share only key community updates.
+  </p>
+
+  <iframe name="hidden_iframe" style="display:none;"></iframe>
+</section>
+
+<script>
+  const signupSection = document.querySelector("[data-mailing-list]");
+  const signupForm = signupSection?.querySelector("form");
+  const signupMessage = signupSection?.querySelector("[data-signup-msg]");
+  const signupButton = signupSection?.querySelector("[data-signup-button]");
+  const signupFrame = signupSection?.querySelector('iframe[name="hidden_iframe"]');
+
+  if (signupForm && signupMessage && signupButton && signupFrame) {
+    let isSubmitting = false;
+    let fallbackTimer = 0;
+
+    const finalizeSubmission = (message) => {
+      if (fallbackTimer) {
+        window.clearTimeout(fallbackTimer);
+        fallbackTimer = 0;
+      }
+
+      isSubmitting = false;
+      signupButton.disabled = false;
+      signupButton.textContent = "Subscribe";
+      signupForm.reset();
+      signupMessage.textContent = message;
+      signupMessage.classList.remove("hidden");
+    };
+
+    signupFrame.addEventListener("load", () => {
+      if (!isSubmitting) return;
+      finalizeSubmission("Submission received. Watch your inbox for Rust India updates.");
+    });
+
+    signupForm.addEventListener("submit", (event) => {
+      if (isSubmitting) {
+        event.preventDefault();
+        return;
+      }
+
+      isSubmitting = true;
+      signupButton.disabled = true;
+      signupButton.textContent = "Sending...";
+      signupMessage.classList.add("hidden");
+
+      fallbackTimer = window.setTimeout(() => {
+        if (!isSubmitting) return;
+        finalizeSubmission("Submission sent. If nothing arrives later, please try again.");
+      }, 4500);
+    });
+  }
+</script>
+
+<style>
+  .mailing {
+    padding: 2.5rem;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+</style>

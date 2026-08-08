@@ -1,0 +1,130 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import MailingList from "../../components/MailingList.astro";
+
+const socials = [
+  {
+    name: "Discord",
+    description: "Chat with attendees, speakers, and the Rust India community in real time.",
+    link: "https://discord.com/invite/p3uaTXS6NP",
+    cta: "Join Discord",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>`,
+  },
+  {
+    name: "Twitter / X",
+    description: "Follow for announcements, speaker reveals, and live conference updates.",
+    link: "https://x.com/IndiaRust",
+    cta: "Follow on X",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  },
+  {
+    name: "Bluesky",
+    description: "Follow us on Bluesky for conference news and Rust community updates.",
+    link: "https://bsky.app/profile/rustindia.bsky.social",
+    cta: "Follow on Bluesky",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.643 3.593 3.519 6.173 3.175-4.413.667-5.85 2.876-3.287 5.088 4.869 4.202 7.003-1.06 7.94-3.414.13-.326.193-.487.55-.487.356 0 .42.16.55.487.936 2.355 3.07 7.616 7.94 3.414 2.563-2.212 1.126-4.421-3.287-5.088 2.58.344 5.388-.532 6.173-3.175.246-.828.624-5.788.624-6.479 0-.688-.139-1.86-.902-2.203-.659-.3-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z"/></svg>`,
+  },
+  {
+    name: "Matrix",
+    description: "Join the Matrix space for open, decentralized community discussions.",
+    link: "https://matrix.to/#/#rustindia:matrix.org",
+    cta: "Join Matrix",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M.632.55v22.9H2.28V24H0V0h2.28v.55zm7.043 7.26v1.157h.033c.309-.443.683-.784 1.117-1.024.433-.245.936-.365 1.5-.365.54 0 1.033.107 1.488.32.45.214.773.553.96 1.016.293-.39.674-.722 1.14-.992a3.13 3.13 0 0 1 1.568-.404c.423 0 .82.058 1.19.166.37.11.69.275.96.494.27.22.48.506.636.854.154.348.23.755.23 1.217v5.075h-2.19v-4.108c0-.247-.012-.478-.035-.694a1.45 1.45 0 0 0-.164-.553.84.84 0 0 0-.383-.37c-.166-.085-.39-.128-.67-.128-.28 0-.506.057-.685.166a1.16 1.16 0 0 0-.41.44 1.793 1.793 0 0 0-.2.6 4.457 4.457 0 0 0-.048.65v4h-2.19v-4.02c0-.2-.003-.39-.013-.578a1.61 1.61 0 0 0-.118-.494.87.87 0 0 0-.34-.39c-.16-.1-.39-.15-.688-.15-.09 0-.223.02-.393.065a1.27 1.27 0 0 0-.457.222c-.15.11-.28.27-.39.478-.108.21-.163.478-.163.808v4.06h-2.19V7.81zm15.693 15.64V.55H21.72V0H24v24h-2.28v-.55z"/></svg>`,
+  },
+  {
+    name: "LinkedIn",
+    description: "Connect with us on LinkedIn for professional updates, job postings, and community news.",
+    link: "https://www.linkedin.com/company/rust-india",
+    cta: "Follow on LinkedIn",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM0 8h5v16H0V8zm7.5 0h4.8v2.2h.07c.67-1.27 2.3-2.6 4.73-2.6 5.05 0 5.98 3.33 5.98 7.66V24h-5v-8.6c0-2.05-.04-4.68-2.86-4.68-2.86 0-3.3 2.23-3.3 4.53V24h-5V8z"/></svg>`,
+  },
+  {
+    name: "Telegram",
+    description: "Join our Telegram channel for real-time announcements, event updates, and community discussions.",
+    link: "https://t.me/RustIndia",
+    cta: "Join Telegram",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.944 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>`,
+  },
+];
+---
+
+<BaseLayout
+  title="Community | Rust India"
+  description="The Rust India community lives on Discord, X, Bluesky, Matrix, LinkedIn, Telegram, and the mailing list."
+>
+  <SiteHeader currentPath="/community/" />
+
+  <main class="site-main">
+    <section class="section-shell">
+      <header class="page-header">
+        <p class="section-label">Community</p>
+        <h1 class="page-title">Community</h1>
+        <p class="page-lede">The Rust India community lives on these channels.</p>
+      </header>
+
+      <div class="card-grid">
+        {
+          socials.map((social) => (
+            <a href={social.link} class="card social-card" target="_blank" rel="noreferrer">
+              <div class="social-card__icon" set:html={social.icon} />
+              <h2 class="social-card__name">{social.name}</h2>
+              <p class="social-card__desc">{social.description}</p>
+              <span class="btn btn-secondary social-card__cta">{social.cta}</span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section-shell community-mailing">
+      <MailingList />
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .social-card:hover {
+    border-color: var(--color-ink-soft);
+  }
+
+  .social-card__icon {
+    width: 1.6rem;
+    height: 1.6rem;
+    color: var(--color-accent);
+  }
+
+  .social-card__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .social-card__name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+
+  .social-card__desc {
+    margin: 0;
+    color: var(--color-ink-soft);
+  }
+
+  .social-card__cta {
+    margin-top: auto;
+  }
+
+  .community-mailing {
+    margin-top: 3rem;
+  }
+</style>
